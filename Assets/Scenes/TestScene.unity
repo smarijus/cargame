@@ -551,6 +551,10 @@ MonoBehaviour:
   wheelFR: {fileID: 1489483598}
   wheelRL: {fileID: 1645730609}
   wheelRR: {fileID: 265120930}
+  wheelFLTrans: {fileID: 872437941}
+  wheelFRTrans: {fileID: 1674671904}
+  wheelRLTrans: {fileID: 759734734}
+  wheelRRTrans: {fileID: 1576942686}
   maxTorque: 50
 --- !u!1 &291841610
 GameObject:
