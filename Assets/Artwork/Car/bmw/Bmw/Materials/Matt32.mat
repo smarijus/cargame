@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Matt32
+  m_Shader: {fileID: 4800000, guid: 0fcafbb35d3a1374aab1b2286031edf7, type: 3}
+  m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BumpMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Cube
+        second:
+          m_Texture: {fileID: 8900000, guid: d1e36024b92cf40788c18d8e6420bdb6, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Decal
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SparkleTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Skybox
+        second:
+          m_Texture: {fileID: 8900000, guid: edceaacd9f8768640ab2fc07334485cd, type: 2}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _LightMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Illum
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _Reflection
+        second: .208571434
+      data:
+        first:
+          name: _Shininess
+        second: .072298333
+      data:
+        first:
+          name: _Gloss
+        second: .482142866
+      data:
+        first:
+          name: _FrezPow
+        second: 2
+      data:
+        first:
+          name: _FrezFalloff
+        second: 10
+      data:
+        first:
+          name: _EdgeAlpha
+        second: 0
+      data:
+        first:
+          name: _Metalics
+        second: 1
+      data:
+        first:
+          name: _FresnelPower
+        second: .75
+      data:
+        first:
+          name: _DecalIntensity
+        second: .5
+      data:
+        first:
+          name: _Sparkle
+        second: .00100000005
+      data:
+        first:
+          name: _LightmapDensity
+        second: .5
+      data:
+        first:
+          name: _DecalColoring
+        second: .428571433
+      data:
+        first:
+          name: _EmissionLM
+        second: 0
+    m_Colors:
+      data:
+        first:
+          name: _Color
+        second: {r: .360294104, g: .360294104, b: .360294104, a: 1}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: .845588207, g: .845588207, b: .845588207, a: 1}
+      data:
+        first:
+          name: _Tint
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _ReflectColor
+        second: {r: .544117689, g: .544117689, b: .544117689, a: .501960814}
+      data:
+        first:
+          name: _SpecularColor
+        second: {r: .5, g: .5, b: .5, a: 1}
+      data:
+        first:
+          name: _HighlightColor
+        second: {r: 1, g: 1, b: 1, a: 1}
