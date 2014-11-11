@@ -8,7 +8,9 @@ var wheelFRTrans : Transform;
 var wheelRLTrans : Transform;
 var wheelRRTrans : Transform;
 var maxTorque :  float = 50;
-var eulerTest : Vector3;
+var highestSpeed : float = 50;
+var lowSpeedSteerAngle : float = 10;
+var highSpeedSteerAngle : float = 1;
 
 function Start ()
 {
@@ -19,8 +21,11 @@ function FixedUpdate ()
 {
 	wheelRR.motorTorque = maxTorque * Input.GetAxis("Vertical");
 	wheelRL.motorTorque = maxTorque * Input.GetAxis("Vertical");
-	wheelFL.steerAngle = 20 * Input.GetAxis("Horizontal");
-	wheelFR.steerAngle = 20 * Input.GetAxis("Horizontal");
+	var speedFactor = rigidbody.velocity.magnitude / highestSpeed;
+	var currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle, highSpeedSteerAngle, speedFactor);
+	currentSteerAngle *= Input.GetAxis("Horizontal");
+	wheelFL.steerAngle = currentSteerAngle;
+	wheelFR.steerAngle = currentSteerAngle;
 }
 function Update(){
 	wheelFLTrans.Rotate(wheelFL.rpm/60*360*Time.deltaTime,0,0);
@@ -29,5 +34,4 @@ function Update(){
 	wheelRRTrans.Rotate(wheelRR.rpm/60*360*Time.deltaTime,0,0);
 	wheelFLTrans.localEulerAngles.y = wheelFL.steerAngle - wheelFLTrans.localEulerAngles.z;
 	wheelFRTrans.localEulerAngles.y = wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z;
-	eulerTest = wheelFLTrans.localEulerAngles;
 }

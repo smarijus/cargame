@@ -556,7 +556,9 @@ MonoBehaviour:
   wheelRLTrans: {fileID: 927499545}
   wheelRRTrans: {fileID: 1746835636}
   maxTorque: 50
-  eulerTest: {x: 0, y: 0, z: 0}
+  highestSpeed: 50
+  lowSpeedSteerAngle: 10
+  highSpeedSteerAngle: 1
 --- !u!1 &291841610
 GameObject:
   m_ObjectHideFlags: 0
