@@ -25,7 +25,8 @@ function FixedUpdate ()
 {
 	Control();
 }
-function Update(){
+function Update()
+{
 	wheelFLTrans.Rotate(wheelFL.rpm/60*360*Time.deltaTime,0,0);
 	wheelFRTrans.Rotate(wheelFR.rpm/60*360*Time.deltaTime,0,0);
 	wheelRLTrans.Rotate(wheelRL.rpm/60*360*Time.deltaTime,0,0);
@@ -34,11 +35,10 @@ function Update(){
 	wheelFRTrans.localEulerAngles.y = wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z;
 }
 
-    function OnGUI()
-    {
-      GUI.Label(Rect(0,Screen.height-50, 200,100), "Automobio greitis: "+currentSpeed.ToString());
-    }
-
+function OnGUI()
+{
+	GUI.Label(Rect(0,Screen.height-50, 200,100), "Automobio greitis: "+currentSpeed.ToString());
+}
 
 function Control()
 {
