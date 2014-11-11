@@ -56,12 +56,13 @@ function Control()
 	}
 	if (Input.GetButton("Vertical") == false)
 	{
-		wheelRR.brakeTorque = 0;
-		wheelRL.brakeTorque = 0;
+		wheelRR.brakeTorque = deaccelerationSpeed;
+		wheelRL.brakeTorque = deaccelerationSpeed;
 	}
 	else
 	{
-		
+		wheelRR.brakeTorque = 0;
+		wheelRL.brakeTorque = 0;
 	}
 	var speedFactor = rigidbody.velocity.magnitude / lowestSteerAtSpeed;
 	var currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle, highSpeedSteerAngle, speedFactor);
