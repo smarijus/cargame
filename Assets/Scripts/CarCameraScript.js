@@ -7,6 +7,9 @@ var heightDamping : float = 2.0;
 var zoomRacio : float = 0.5;
 var DefaultFOV : float = 60;
 private var rotationVector : Vector3;
+
+
+//Kamoros sciptą reikia taisyti
 function Start ()
 {
 }
