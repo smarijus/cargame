@@ -15,6 +15,7 @@ var deaccelerationSpeed : float = 30;
 
 var currentSpeed : float;
 var topSpeed : float = 150;
+var topReverseSpeed : float = 50;
 
 function Start ()
 {
@@ -44,7 +45,7 @@ function Control()
 {
 	currentSpeed = 2*22/7*wheelRL.radius*wheelRL.rpm*60/1000;
 	currentSpeed = Mathf.Round(currentSpeed);
-	if (currentSpeed < topSpeed)
+	if (currentSpeed < topSpeed && currentSpeed > -topReverseSpeed)
 	{
 		wheelRR.motorTorque = maxTorque * Input.GetAxis("Vertical");
 		wheelRL.motorTorque = maxTorque * Input.GetAxis("Vertical");
