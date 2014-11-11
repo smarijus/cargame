@@ -8,6 +8,7 @@ var wheelFRTrans : Transform;
 var wheelRLTrans : Transform;
 var wheelRRTrans : Transform;
 var maxTorque :  float = 50;
+var eulerTest : Vector3;
 
 function Start ()
 {
@@ -26,4 +27,7 @@ function Update(){
 	wheelFRTrans.Rotate(wheelFR.rpm/60*360*Time.deltaTime,0,0);
 	wheelRLTrans.Rotate(wheelRL.rpm/60*360*Time.deltaTime,0,0);
 	wheelRRTrans.Rotate(wheelRR.rpm/60*360*Time.deltaTime,0,0);
+	wheelFLTrans.localEulerAngles.y = wheelFL.steerAngle - wheelFLTrans.localEulerAngles.z;
+	wheelFRTrans.localEulerAngles.y = wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z;
+	eulerTest = wheelFLTrans.localEulerAngles;
 }
