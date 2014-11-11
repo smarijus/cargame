@@ -65,6 +65,8 @@ function Control()
 		wheelRR.brakeTorque = 0;
 		wheelRL.brakeTorque = 0;
 	}
+	
+	
 	var speedFactor = rigidbody.velocity.magnitude / lowestSteerAtSpeed;
 	var currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle, highSpeedSteerAngle, speedFactor);
 	currentSteerAngle *= Input.GetAxis("Horizontal");
