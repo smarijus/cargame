@@ -34,6 +34,12 @@ function Update(){
 	wheelFRTrans.localEulerAngles.y = wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z;
 }
 
+    function OnGUI()
+    {
+      GUI.Label(Rect(0,Screen.height-50, 200,100), "Automobio greitis: "+currentSpeed.ToString());
+    }
+
+
 function Control()
 {
 	currentSpeed = 2*22/7*wheelRL.radius*wheelRL.rpm*60/1000;
