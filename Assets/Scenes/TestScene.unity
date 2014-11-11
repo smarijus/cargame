@@ -556,10 +556,12 @@ MonoBehaviour:
   wheelRLTrans: {fileID: 927499545}
   wheelRRTrans: {fileID: 1746835636}
   maxTorque: 50
-  highestSpeed: 50
+  lowestSteerAtSpeed: 50
   lowSpeedSteerAngle: 10
   highSpeedSteerAngle: 1
   deaccelerationSpeed: 30
+  currentSpeed: 0
+  topSpeed: 150
 --- !u!1 &291841610
 GameObject:
   m_ObjectHideFlags: 0

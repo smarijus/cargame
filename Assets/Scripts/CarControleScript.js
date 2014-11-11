@@ -8,10 +8,13 @@ var wheelFRTrans : Transform;
 var wheelRLTrans : Transform;
 var wheelRRTrans : Transform;
 var maxTorque :  float = 50;
-var highestSpeed : float = 50;
+var lowestSteerAtSpeed : float = 50;
 var lowSpeedSteerAngle : float = 10;
 var highSpeedSteerAngle : float = 1;
 var deaccelerationSpeed : float = 30;
+
+var currentSpeed : float;
+var topSpeed : float = 150;
 
 function Start ()
 {
@@ -33,8 +36,18 @@ function Update(){
 
 function Control()
 {
-	wheelRR.motorTorque = maxTorque * Input.GetAxis("Vertical");
-	wheelRL.motorTorque = maxTorque * Input.GetAxis("Vertical");
+	currentSpeed = 2*22/7*wheelRL.radius*wheelRL.rpm*60/1000;
+	currentSpeed = Mathf.Round(currentSpeed);
+	if (currentSpeed < topSpeed)
+	{
+		wheelRR.motorTorque = maxTorque * Input.GetAxis("Vertical");
+		wheelRL.motorTorque = maxTorque * Input.GetAxis("Vertical");
+	}
+	else
+	{
+		wheelRR.motorTorque = 0;
+		wheelRL.motorTorque = 0;
+	}
 	if (Input.GetButton("Vertical") == false)
 	{
 		wheelRR.brakeTorque = 0;
@@ -44,7 +57,7 @@ function Control()
 	{
 		
 	}
-	var speedFactor = rigidbody.velocity.magnitude / highestSpeed;
+	var speedFactor = rigidbody.velocity.magnitude / lowestSteerAtSpeed;
 	var currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle, highSpeedSteerAngle, speedFactor);
 	currentSteerAngle *= Input.GetAxis("Horizontal");
 	wheelFL.steerAngle = currentSteerAngle;
