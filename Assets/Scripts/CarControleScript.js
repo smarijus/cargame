@@ -34,6 +34,7 @@ function Update()
 	wheelRRTrans.Rotate(wheelRR.rpm/60*360*Time.deltaTime,0,0);
 	wheelFLTrans.localEulerAngles.y = wheelFL.steerAngle - wheelFLTrans.localEulerAngles.z;
 	wheelFRTrans.localEulerAngles.y = wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z;
+	WheelPosition();
 }
 
 function OnGUI()
@@ -71,3 +72,48 @@ function Control()
 	wheelFL.steerAngle = currentSteerAngle;
 	wheelFR.steerAngle = currentSteerAngle;
 }
+
+function WheelPosition()
+{
+	var hit : RaycastHit;
+	var wheelPosition : Vector3;
+	if (Physics.Raycast(wheelFL.transform.position, -wheelFL.transform.up, hit, wheelFL.radius + wheelFL.suspensionDistance))
+	{
+		wheelPosition = hit.point + wheelFL.transform.up * wheelFL.radius;
+	}
+	else
+	{
+		wheelPosition = wheelFL.transform.position -wheelFL.transform.up* wheelFL.suspensionDistance;
+	}
+	wheelFLTrans.position = wheelPosition;
+	
+	if (Physics.Raycast(wheelFR.transform.position, -wheelFR.transform.up, hit, wheelFR.radius + wheelFR.suspensionDistance))
+	{
+		wheelPosition = hit.point + wheelFR.transform.up * wheelFR.radius;
+	}
+	else
+	{
+		wheelPosition = wheelFR.transform.position -wheelFR.transform.up* wheelFR.suspensionDistance;
+	}
+	wheelFRTrans.position = wheelPosition;
+	
+	if (Physics.Raycast(wheelFR.transform.position, -wheelFR.transform.up, hit, wheelFR.radius + wheelFR.suspensionDistance))
+	{
+		wheelPosition = hit.point + wheelFR.transform.up * wheelFR.radius;
+	}
+	else
+	{
+		wheelPosition = wheelFR.transform.position -wheelFR.transform.up* wheelFR.suspensionDistance;
+	}
+	wheelFRTrans.position = wheelPosition;
+	
+	if (Physics.Raycast(wheelRR.transform.position, -wheelRR.transform.up, hit, wheelRR.radius + wheelRR.suspensionDistance))
+	{
+		wheelPosition = hit.point + wheelRR.transform.up * wheelRR.radius;
+	}
+	else
+	{
+		wheelPosition = wheelRR.transform.position -wheelRR.transform.up* wheelRR.suspensionDistance;
+	}
+	wheelRRTrans.position = wheelPosition;
+}	
