@@ -97,15 +97,15 @@ function WheelPosition()
 	}
 	wheelFRTrans.position = wheelPosition;
 	
-	if (Physics.Raycast(wheelFR.transform.position, -wheelFR.transform.up, hit, wheelFR.radius + wheelFR.suspensionDistance))
+	if (Physics.Raycast(wheelRL.transform.position, -wheelRL.transform.up, hit, wheelRL.radius + wheelRL.suspensionDistance))
 	{
-		wheelPosition = hit.point + wheelFR.transform.up * wheelFR.radius;
+		wheelPosition = hit.point + wheelRL.transform.up * wheelRL.radius;
 	}
 	else
 	{
-		wheelPosition = wheelFR.transform.position -wheelFR.transform.up* wheelFR.suspensionDistance;
+		wheelPosition = wheelRL.transform.position -wheelRL.transform.up* wheelRL.suspensionDistance;
 	}
-	wheelFRTrans.position = wheelPosition;
+	wheelRLTrans.position = wheelPosition;
 	
 	if (Physics.Raycast(wheelRR.transform.position, -wheelRR.transform.up, hit, wheelRR.radius + wheelRR.suspensionDistance))
 	{
