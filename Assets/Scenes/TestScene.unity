@@ -563,6 +563,8 @@ MonoBehaviour:
   currentSpeed: 0
   topSpeed: 150
   topReverseSpeed: 50
+  braked: 0
+  maxBrakeTorque: 100
 --- !u!1 &291841610
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,13 +9,16 @@ var wheelRLTrans : Transform;
 var wheelRRTrans : Transform;
 var maxTorque :  float = 50;
 var lowestSteerAtSpeed : float = 50;
-var lowSpeedSteerAngle : float = 10;
+var lowSpeedSteerAngle : float = 60;
 var highSpeedSteerAngle : float = 1;
 var deaccelerationSpeed : float = 30;
 
 var currentSpeed : float;
 var topSpeed : float = 150;
 var topReverseSpeed : float = 50;
+
+var braked : boolean = false;
+var maxBrakeTorque : float = 100;
 
 function Start ()
 {
@@ -25,6 +28,7 @@ function Start ()
 function FixedUpdate ()
 {
 	Control();
+	HandBrake();
 }
 function Update()
 {
@@ -46,7 +50,7 @@ function Control()
 {
 	currentSpeed = 2*22/7*wheelRL.radius*wheelRL.rpm*60/1000;
 	currentSpeed = Mathf.Round(currentSpeed);
-	if (currentSpeed < topSpeed && currentSpeed > -topReverseSpeed)
+	if (currentSpeed < topSpeed && currentSpeed > -topReverseSpeed && !braked)
 	{
 		wheelRR.motorTorque = maxTorque * Input.GetAxis("Vertical");
 		wheelRL.motorTorque = maxTorque * Input.GetAxis("Vertical");
@@ -117,3 +121,23 @@ function WheelPosition()
 	}
 	wheelRRTrans.position = wheelPosition;
 }	
+
+function HandBrake()
+{
+	if (Input.GetKey(KeyCode.Space))
+	{
+		braked = true;
+	}
+	else
+	{
+		braked = false;
+	}
+	
+	if (braked)
+	{
+		wheelRR.brakeTorque = maxBrakeTorque;
+		wheelRL.brakeTorque = maxBrakeTorque;
+		wheelRR.motorTorque = 0;
+		wheelRL.motorTorque = 0;
+	}
+}
