@@ -16,13 +16,13 @@ function Start ()
 
 function LateUpdate ()
 {
-	var wantedAngel = rotationVector.y;
+	var wantedAngle = rotationVector.y;
 	var wantedHeight = car.position.y + height;
-	var myAngel = transform.eulerAngles.y;
+	var myAngle = transform.eulerAngles.y;
 	var myHeight = transform.position.y;
-	myAngel = Mathf.LerpAngle(myAngel,wantedAngel,rotationDamping*Time.deltaTime);
+	myAngle = Mathf.LerpAngle(myAngle,wantedAngle,rotationDamping*Time.deltaTime);
 	myHeight = Mathf.Lerp(myHeight,wantedHeight,heightDamping*Time.deltaTime);
-	var currentRotation = Quaternion.Euler(0,myAngel,0);
+	var currentRotation = Quaternion.Euler(0,myAngle,0);
 	transform.position = car.position;
 	transform.position -= currentRotation*Vector3.forward*distance;
 	transform.position.y = myHeight;
