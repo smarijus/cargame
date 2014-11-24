@@ -31,7 +31,7 @@ function LateUpdate ()
 function FixedUpdate ()
 {
 	var localVilocity = car.InverseTransformDirection(car.rigidbody.velocity);
-	if (localVilocity.z<-0.5)
+	if (localVilocity.z< 0.5)
 	{
 		rotationVector.y = car.eulerAngles.y + 180;
 	}
