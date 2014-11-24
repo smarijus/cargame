@@ -25,6 +25,9 @@ private var myForwardFriction : float;
 private var slipSidewayFriction : float;
 private var slipForwardFriction : float;
 
+var gearRatio : int[];
+//var gear : int;
+
 function Start ()
 {
 	rigidbody.centerOfMass.y = -0.9;
@@ -46,6 +49,7 @@ function Update()
 	wheelFLTrans.localEulerAngles.y = wheelFL.steerAngle - wheelFLTrans.localEulerAngles.z;
 	wheelFRTrans.localEulerAngles.y = wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z;
 	WheelPosition();
+	EngineSound();
 }
 
 function OnGUI()
@@ -182,4 +186,31 @@ function SetSlip(currentForwardFriction : float, currentSidewayFriction : float)
 	wheelRL.sidewaysFriction.stiffness = currentSidewayFriction;
 	//wheelFR.sidewaysFriction.stiffness = currentSidewayFriction;
 	//wheelFL.sidewaysFriction.stiffness = currentSidewayFriction;
+}
+
+function EngineSound()
+{
+	
+	for (var i = 0; i < gearRatio.Length; i++)
+	{
+		if (gearRatio[i] > currentSpeed)
+		{
+			//gear = i;
+			break;
+		}
+	}
+	var gearMinValue : float = 0.00;
+	var gearMaxValue : float = 0.00;
+	if (i == 0)
+	{
+		gearMinValue = 0;
+		gearMaxValue = gearRatio[i];
+	}
+	else
+	{
+		gearMinValue = gearRatio[i-1];
+		gearMaxValue = gearRatio[i];	
+	}
+	var enginePitch : float = ((currentSpeed - gearMinValue) / (gearMaxValue - gearMinValue)) + 1;
+	audio.pitch = enginePitch;
 }
