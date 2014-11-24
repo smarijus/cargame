@@ -28,6 +28,7 @@ private var slipForwardFriction : float;
 function Start ()
 {
 	rigidbody.centerOfMass.y = -0.9;
+	rigidbody.centerOfMass.z = 0.5;
 	SetValues();
 }
 
