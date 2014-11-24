@@ -507,11 +507,11 @@ MonoBehaviour:
   highSpeedSteerAngle: 1
   deaccelerationSpeed: 30
   currentSpeed: 0
-  topSpeed: 150
+  topSpeed: 250
   topReverseSpeed: 50
   braked: 1
   maxBrakeTorque: 100
-  gearRatio: 1400000032000000500000006e0000009b000000
+  gearRatio: 320000006e000000a0000000c8000000f0000000ff000000
 --- !u!82 &268633627
 AudioSource:
   m_ObjectHideFlags: 0

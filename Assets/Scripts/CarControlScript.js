@@ -14,7 +14,7 @@ var highSpeedSteerAngle : float = 1;
 var deaccelerationSpeed : float = 30;
 
 var currentSpeed : float;
-var topSpeed : float = 150;
+var topSpeed : float = 250;
 var topReverseSpeed : float = 50;
 
 var braked : boolean = false;
