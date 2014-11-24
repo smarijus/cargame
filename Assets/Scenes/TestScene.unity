@@ -489,7 +489,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 268633623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4245838a56598df4e8c23ee8b90dfd43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3229f7e564c9bf469cef2dabf823b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wheelFL: {fileID: 903652408}
@@ -508,7 +508,7 @@ MonoBehaviour:
   currentSpeed: 0
   topSpeed: 150
   topReverseSpeed: 50
-  braked: 0
+  braked: 1
   maxBrakeTorque: 100
 --- !u!1 &291841610
 GameObject:
