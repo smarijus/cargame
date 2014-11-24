@@ -935,9 +935,9 @@ WheelCollider:
     stiffnessFactor: 1
   m_SidewaysFriction:
     extremumSlip: 1
-    extremumValue: 20000
+    extremumValue: 30000
     asymptoteSlip: 2
-    asymptoteValue: 10000
+    asymptoteValue: 20000
     stiffnessFactor: 1
   m_Enabled: 1
 --- !u!1 &958701591
@@ -1049,9 +1049,9 @@ WheelCollider:
     stiffnessFactor: 1
   m_SidewaysFriction:
     extremumSlip: 1
-    extremumValue: 20000
+    extremumValue: 30000
     asymptoteSlip: 2
-    asymptoteValue: 10000
+    asymptoteValue: 20000
     stiffnessFactor: 1
   m_Enabled: 1
 --- !u!1 &1041710681
@@ -1327,9 +1327,9 @@ WheelCollider:
     stiffnessFactor: 1
   m_SidewaysFriction:
     extremumSlip: 1
-    extremumValue: 20000
+    extremumValue: 30000
     asymptoteSlip: 2
-    asymptoteValue: 10000
+    asymptoteValue: 20000
     stiffnessFactor: 1
   m_Enabled: 1
 --- !u!1 &1262673458
@@ -1715,9 +1715,9 @@ WheelCollider:
     stiffnessFactor: 1
   m_SidewaysFriction:
     extremumSlip: 1
-    extremumValue: 20000
+    extremumValue: 30000
     asymptoteSlip: 2
-    asymptoteValue: 10000
+    asymptoteValue: 20000
     stiffnessFactor: 1
   m_Enabled: 1
 --- !u!1 &1687299862

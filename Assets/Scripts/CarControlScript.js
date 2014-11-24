@@ -20,9 +20,15 @@ var topReverseSpeed : float = 50;
 var braked : boolean = false;
 var maxBrakeTorque : float = 100;
 
+private var mySidewayFriction : float;
+private var myForwardFriction : float;
+private var slipSidewayFriction : float;
+private var slipForwardFriction : float;
+
 function Start ()
 {
 	rigidbody.centerOfMass.y = -0.9;
+	SetValues();
 }
 
 function FixedUpdate ()
@@ -135,9 +141,44 @@ function HandBrake()
 	
 	if (braked)
 	{
-		wheelRR.brakeTorque = maxBrakeTorque;
-		wheelRL.brakeTorque = maxBrakeTorque;
+		wheelFR.brakeTorque = maxBrakeTorque;
+		wheelFL.brakeTorque = maxBrakeTorque;
 		wheelRR.motorTorque = 0;
 		wheelRL.motorTorque = 0;
+		if (rigidbody.velocity.magnitude > 1)
+		{
+			SetSlip(slipForwardFriction, slipSidewayFriction);
+		}
+		else
+		{
+			wheelFR.brakeTorque = 0;
+			wheelFL.brakeTorque = 0;
+			SetSlip(1, 1);
+		}
 	}
+	else
+	{
+		SetSlip(myForwardFriction, mySidewayFriction);
+	}
+}
+
+function SetValues()
+{
+	myForwardFriction = wheelRR.forwardFriction.stiffness;
+	mySidewayFriction = wheelRR.sidewaysFriction.stiffness;
+	slipForwardFriction = 0.04;
+	slipSidewayFriction = 0.08;
+}
+
+function SetSlip(currentForwardFriction : float, currentSidewayFriction : float)
+{
+	wheelRR.forwardFriction.stiffness = currentForwardFriction;
+	wheelRL.forwardFriction.stiffness = currentForwardFriction;
+	//wheelFR.forwardFriction.stiffness = currentForwardFriction;
+	//wheelFL.forwardFriction.stiffness = currentForwardFriction;
+	
+	wheelRR.sidewaysFriction.stiffness = currentSidewayFriction;
+	wheelRL.sidewaysFriction.stiffness = currentSidewayFriction;
+	//wheelFR.sidewaysFriction.stiffness = currentSidewayFriction;
+	//wheelFL.sidewaysFriction.stiffness = currentSidewayFriction;
 }
