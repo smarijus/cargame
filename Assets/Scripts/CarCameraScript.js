@@ -36,7 +36,7 @@ function FixedUpdate ()
 		rotationVector.y = car.eulerAngles.y + 180;
 		if (Input.GetKey(KeyCode.B))
 		{
-			rotationVector.y = car.eulerAngles.y;// + 180;
+			rotationVector.y = car.eulerAngles.y;
 		}
 	}
 	else

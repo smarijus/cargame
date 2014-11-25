@@ -190,27 +190,33 @@ function SetSlip(currentForwardFriction : float, currentSidewayFriction : float)
 
 function EngineSound()
 {
-	
-	for (var i = 0; i < gearRatio.Length; i++)
+	if (currentSpeed >= 0)
 	{
-		if (gearRatio[i] > currentSpeed)
+		for (var i = 0; i < gearRatio.Length; i++)
 		{
-			//gear = i;
-			break;
+			if (gearRatio[i] > currentSpeed)
+			{
+				//gear = i;
+				break;
+			}
 		}
-	}
-	var gearMinValue : float = 0.00;
-	var gearMaxValue : float = 0.00;
-	if (i == 0)
-	{
-		gearMinValue = 0;
-		gearMaxValue = gearRatio[i];
+		var gearMinValue : float = 0.00;
+		var gearMaxValue : float = 0.00;
+		if (i == 0)
+		{
+			gearMinValue = 0;
+			gearMaxValue = gearRatio[i];
+		}
+		else
+		{
+			gearMinValue = gearRatio[i-1];
+			gearMaxValue = gearRatio[i];	
+		}
+		var enginePitch : float = ((currentSpeed - gearMinValue) / (gearMaxValue - gearMinValue)) + 1;
 	}
 	else
 	{
-		gearMinValue = gearRatio[i-1];
-		gearMaxValue = gearRatio[i];	
+		enginePitch = Mathf.Abs(currentSpeed / 100) + 1;
 	}
-	var enginePitch : float = ((currentSpeed - gearMinValue) / (gearMaxValue - gearMinValue)) + 1;
 	audio.pitch = enginePitch;
 }
