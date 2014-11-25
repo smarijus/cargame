@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{5CF6B40E-473E-E48C-60C4-66617A2A2901}") = "cargame", "Assembly-CSharp.csproj", "{F243AB06-ED49-062C-6D80-64A5979AAED7}"
+EndProject
 Project("{5CF6B40E-473E-E48C-60C4-66617A2A2901}") = "cargame", "Assembly-UnityScript.unityproj", "{9B6AA73A-5002-D915-A2D4-2DFC89386F74}"
 EndProject
 Global
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F243AB06-ED49-062C-6D80-64A5979AAED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F243AB06-ED49-062C-6D80-64A5979AAED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F243AB06-ED49-062C-6D80-64A5979AAED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F243AB06-ED49-062C-6D80-64A5979AAED7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9B6AA73A-5002-D915-A2D4-2DFC89386F74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9B6AA73A-5002-D915-A2D4-2DFC89386F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B6AA73A-5002-D915-A2D4-2DFC89386F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -17,7 +23,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																													GlobalSection(MonoDevelopProperties) = preSolution
+																																	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
