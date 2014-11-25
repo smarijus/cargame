@@ -34,11 +34,20 @@ function FixedUpdate ()
 	if (localVilocity.z< 0.5)
 	{
 		rotationVector.y = car.eulerAngles.y + 180;
+		if (Input.GetKey(KeyCode.B))
+		{
+			rotationVector.y = car.eulerAngles.y;// + 180;
+		}
 	}
 	else
 	{
 		rotationVector.y = car.eulerAngles.y;
+		if (Input.GetKey(KeyCode.B))
+		{
+			rotationVector.y = car.eulerAngles.y + 180;
+		}
 	}
+	
 	var acc = car.rigidbody.velocity.magnitude;
 	camera.fieldOfView = DefaultFOV + acc*zoomRacio;
 }
