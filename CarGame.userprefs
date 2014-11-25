@@ -1,10 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SkiddingScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CarCameraScript.js">
     <Files>
-      <File FileName="Assets\Scripts\SkiddingScript.cs" Line="28" Column="47" />
-      <File FileName="Assets\Scripts\CarControlScript.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CarCameraScript.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\SkiddingScript.cs" Line="12" Column="20" />
+      <File FileName="Assets\Scripts\CarControlScript.js" Line="214" Column="3" />
+      <File FileName="Assets\Scripts\CarCameraScript.js" Line="52" Column="2" />
+      <File FileName="Assets\Scripts\DestroyTimerScript.cs" Line="10" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
