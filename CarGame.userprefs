@@ -1,10 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CarCameraScript.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CarControlScript.js">
     <Files>
       <File FileName="Assets\Scripts\CarControlScript.js" Line="213" Column="26" />
       <File FileName="Assets\Scripts\SkiddingScript.cs" Line="88" Column="41" />
-      <File FileName="Assets\Scripts\CarCameraScript.js" Line="22" Column="29" />
+      <File FileName="Assets\Scripts\CarCameraScript.js" Line="40" Column="4" />
       <File FileName="Assets\Scripts\DestroyTimerScript.cs" Line="13" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
