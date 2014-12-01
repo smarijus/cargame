@@ -9,6 +9,11 @@ public class SkiddingScript : MonoBehaviour
 	public GameObject skidSound;
 	public float soundEmittion = 15;
 	private float soundWait;
+	public float markWidth = 0.2F;
+	private int skidding;
+	private Vector3[] lastPos = new Vector3[2];
+
+
 	// Use this for initialization
 	void Start () {
 	
@@ -26,5 +31,55 @@ public class SkiddingScript : MonoBehaviour
 			soundWait = 1;
 		}
 		soundWait -= Time.deltaTime * soundEmittion;
+
+		if (skidAt <= currentFrictionValue)
+		{
+			SkidMesh();
+		}
+		else
+		{
+			skidding = 0;
+		}
+	}
+
+	void SkidMesh()
+	{
+		WheelHit hit;
+		transform.GetComponent<WheelCollider>().GetGroundHit(out hit);
+		GameObject mark = new GameObject("Mark");
+		MeshFilter filter = mark.AddComponent<MeshFilter>();
+		mark.AddComponent<MeshRenderer>();
+		Mesh markMesh = new Mesh();
+		Vector3[] vertices = new Vector3[4];
+		int[] triangles = new int[6];
+		if (skidding == 0)
+		{
+			vertices[0] = hit.point + Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z) * new Vector3(markWidth, 0.01F, 0F);
+			vertices[1] = hit.point + Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z) * new Vector3(-markWidth, 0.01F, 0F);
+			vertices[2] = hit.point + Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z) * new Vector3(-markWidth, 0.01F, 0F);
+			vertices[3] = hit.point + Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z) * new Vector3(markWidth, 0.01F, 0F);
+			lastPos[0] = vertices[2];
+			lastPos[1] = vertices[3];
+;			skidding = 1;
+		}
+		else
+		{
+			vertices[1] = lastPos[0];
+			vertices[0] = lastPos[1];
+			vertices[2] = hit.point + Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z) * new Vector3(-markWidth, 0.01F, 0F);
+			vertices[3] = hit.point + Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z) * new Vector3(markWidth, 0.01F, 0F);
+			lastPos[0] = vertices[2];
+			lastPos[1] = vertices[3];
+		}
+		triangles = new int[]{0,1,2,2,3,0};
+		markMesh.vertices = vertices;
+		markMesh.triangles = triangles;
+		Vector2[] uvm = new Vector2[markMesh.vertices.Length];
+		for (int i=0; i < uvm.Length; i++)
+		{
+			uvm[i] = new Vector2(markMesh.vertices[i].x, markMesh.vertices[i].z);
+		}
+		markMesh.uv = uvm;
+		filter.mesh = markMesh;
 	}
 }
