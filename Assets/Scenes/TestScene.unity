@@ -1161,6 +1161,7 @@ MonoBehaviour:
   skidSound: {fileID: 100000, guid: 185234952a751d6449f0139df3dd4756, type: 2}
   soundEmittion: 15
   markWidth: .200000003
+  skidMaterial: {fileID: 2100000, guid: 6700645452a3b4e41ac4524ba0cbb53a, type: 2}
 --- !u!1 &958701591
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,6 +1292,7 @@ MonoBehaviour:
   skidSound: {fileID: 100000, guid: 185234952a751d6449f0139df3dd4756, type: 2}
   soundEmittion: 15
   markWidth: .200000003
+  skidMaterial: {fileID: 2100000, guid: 6700645452a3b4e41ac4524ba0cbb53a, type: 2}
 --- !u!1 &1041710681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,6 +1587,7 @@ MonoBehaviour:
   skidSound: {fileID: 100000, guid: 185234952a751d6449f0139df3dd4756, type: 2}
   soundEmittion: 15
   markWidth: .200000003
+  skidMaterial: {fileID: 2100000, guid: 6700645452a3b4e41ac4524ba0cbb53a, type: 2}
 --- !u!1 &1262673458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,6 +1992,7 @@ MonoBehaviour:
   skidSound: {fileID: 100000, guid: 185234952a751d6449f0139df3dd4756, type: 2}
   soundEmittion: 15
   markWidth: .200000003
+  skidMaterial: {fileID: 2100000, guid: 6700645452a3b4e41ac4524ba0cbb53a, type: 2}
 --- !u!1 &1687299862
 GameObject:
   m_ObjectHideFlags: 0

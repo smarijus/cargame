@@ -13,6 +13,8 @@ public class SkiddingScript : MonoBehaviour
 	private int skidding;
 	private Vector3[] lastPos = new Vector3[2];
 
+	public Material skidMaterial;
+
 
 	// Use this for initialization
 	void Start () {
@@ -74,12 +76,15 @@ public class SkiddingScript : MonoBehaviour
 		triangles = new int[]{0,1,2,2,3,0};
 		markMesh.vertices = vertices;
 		markMesh.triangles = triangles;
-		Vector2[] uvm = new Vector2[markMesh.vertices.Length];
-		for (int i=0; i < uvm.Length; i++)
-		{
-			uvm[i] = new Vector2(markMesh.vertices[i].x, markMesh.vertices[i].z);
-		}
+		markMesh.RecalculateNormals();
+		Vector2[] uvm = new Vector2[4];
+		uvm [0] = new Vector2 (1, 0);
+		uvm [1] = new Vector2 (0, 0);
+		uvm [2] = new Vector2 (0, 1);
+		uvm [3] = new Vector2 (1, 1);
 		markMesh.uv = uvm;
 		filter.mesh = markMesh;
+		mark.renderer.material = skidMaterial;
+		mark.AddComponent("DestroyTimerScript");
 	}
 }
