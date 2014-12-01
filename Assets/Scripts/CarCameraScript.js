@@ -34,7 +34,7 @@ function FixedUpdate ()
 	if (localVilocity.z< 0.5)
 	{
 		rotationVector.y = car.eulerAngles.y + 180;
-		if (Input.GetKey(KeyCode.B))
+		if (Input.GetButton("Backward Camera"))
 		{
 			rotationVector.y = car.eulerAngles.y;
 		}
@@ -42,7 +42,7 @@ function FixedUpdate ()
 	else
 	{
 		rotationVector.y = car.eulerAngles.y;
-		if (Input.GetKey(KeyCode.B))
+		if (Input.GetButton("Backward Camera"))
 		{
 			rotationVector.y = car.eulerAngles.y + 180;
 		}
