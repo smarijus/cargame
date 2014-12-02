@@ -33,7 +33,7 @@ public class CarControl : MonoBehaviour
 
 	
 	public int[] gearRatio;
-	//var gear : int;
+
 	// Use this for initialization
 	void Start ()
 	{
