@@ -470,7 +470,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 268633624}
   - 54: {fileID: 268633625}
-  - 114: {fileID: 268633626}
+  - 114: {fileID: 268633628}
   - 82: {fileID: 268633627}
   m_Layer: 0
   m_Name: BMW E60 M5 Pref
@@ -530,36 +530,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &268633626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 268633623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3229f7e564c9bf469cef2dabf823b96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wheelFL: {fileID: 903652408}
-  wheelFR: {fileID: 1030338755}
-  wheelRL: {fileID: 1565988783}
-  wheelRR: {fileID: 1231368768}
-  wheelFLTrans: {fileID: 1296624215}
-  wheelFRTrans: {fileID: 654942002}
-  wheelRLTrans: {fileID: 432591409}
-  wheelRRTrans: {fileID: 1511378344}
-  maxTorque: 50
-  lowestSteerAtSpeed: 50
-  lowSpeedSteerAngle: 10
-  highSpeedSteerAngle: 1
-  deaccelerationSpeed: 30
-  currentSpeed: 0
-  topSpeed: 250
-  topReverseSpeed: 50
-  braked: 1
-  maxBrakeTorque: 100
-  gearRatio: 320000006e000000a0000000c8000000f0000000ff000000
 --- !u!82 &268633627
 AudioSource:
   m_ObjectHideFlags: 0
@@ -618,6 +588,36 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &268633628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 268633623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6353e2dc7faa84b8c83e659dfd11f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelFL: {fileID: 903652408}
+  wheelFR: {fileID: 1030338755}
+  wheelRL: {fileID: 1565988783}
+  wheelRR: {fileID: 1231368768}
+  wheelFLTrans: {fileID: 1296624215}
+  wheelFRTrans: {fileID: 654942002}
+  wheelRLTrans: {fileID: 432591409}
+  wheelRRTrans: {fileID: 1511378344}
+  maxTorque: 50
+  lowestSteerAtSpeed: 50
+  lowSpeedSteerAngle: 10
+  highSpeedSteerAngle: 1
+  deaccelerationSpeed: 30
+  currentSpeed: 0
+  topSpeed: 250
+  topReverseSpeed: 50
+  braked: 0
+  maxBrakeTorque: 100
+  gearRatio: 320000006e000000a0000000c8000000f0000000ff000000
 --- !u!1 &291841610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2603,7 +2603,7 @@ GameObject:
   - 92: {fileID: 1840586265}
   - 124: {fileID: 1840586264}
   - 81: {fileID: 1840586263}
-  - 114: {fileID: 1840586268}
+  - 114: {fileID: 1840586269}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2676,7 +2676,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &1840586268
+--- !u!114 &1840586269
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2684,7 +2684,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1840586262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc9b46352709e314096e19a20b78ef97, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fe79279edc025b4da56a101d843a8a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   car: {fileID: 268633624}

@@ -25,6 +25,9 @@ private var myForwardFriction : float;
 private var slipSidewayFriction : float;
 private var slipForwardFriction : float;
 
+var speedOMeterDial : Texture2D;
+var speedOMeterPointer : Texture2D;
+
 var gearRatio : int[];
 //var gear : int;
 

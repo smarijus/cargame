@@ -46,8 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\CarCameraScript.js" />
-     <Compile Include="Assets\Scripts\CarControlScript.js" />
+     <Compile Include="Assets\Scripts\CarCameraScript_old.js" />
+     <Compile Include="Assets\Scripts\CarControlScript_old.js" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
      <None Include="Assets\Resources\Shaders\HardSurface Shaders\HardSurface Free Opaque.shader" />
