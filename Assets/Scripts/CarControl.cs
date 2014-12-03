@@ -34,6 +34,9 @@ public class CarControl : MonoBehaviour
 	
 	public int[] gearRatio;
 
+    public GameObject spark;
+    public GameObject collisionSound;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -247,4 +250,16 @@ public class CarControl : MonoBehaviour
 		}
 		audio.pitch = enginePitch;
 	}
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.collider != collider && other.contacts.Length != 0)
+        {
+            for (int i = 0; i < other.contacts.Length; i++)
+            {
+                Instantiate(spark, other.contacts[i].point, Quaternion.identity);
+                Instantiate(collisionSound, other.contacts[i].point, Quaternion.identity);
+            }
+        }
+    }
 }
