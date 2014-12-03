@@ -23,7 +23,7 @@ public class CarControl : MonoBehaviour
 	public float topSpeed  = 250F;
 	public float topReverseSpeed = 50F;
 	
-	public bool braked = false;
+	public bool handbraked = false;
 	public float maxBrakeTorque = 100;
 	
 	private float mySidewayFriction;
@@ -50,7 +50,7 @@ public class CarControl : MonoBehaviour
 	void FixedUpdate ()
 	{
 		Control();
-		HandBrake();
+        Brake();
 	}
 
 	void Update()
@@ -76,15 +76,22 @@ public class CarControl : MonoBehaviour
 	{
 		currentSpeed = 2*22/7*wheelRL.radius*wheelRL.rpm*60/1000;
 		currentSpeed = Mathf.Round(currentSpeed);
-		if (currentSpeed < topSpeed && currentSpeed > -topReverseSpeed && !braked)
+		if (currentSpeed < topSpeed && currentSpeed > -topReverseSpeed && !handbraked)
 		{
+            wheelFR.brakeTorque = 0;
+            wheelFL.brakeTorque = 0;
+            wheelRR.brakeTorque = 0;
+            wheelRL.brakeTorque = 0;
 			wheelRR.motorTorque = maxTorque * Input.GetAxis("Vertical");
 			wheelRL.motorTorque = maxTorque * Input.GetAxis("Vertical");
+
 		}
 		else
 		{
-			wheelRR.motorTorque = 0;
-			wheelRL.motorTorque = 0;
+            wheelRR.motorTorque = 0;
+            wheelRL.motorTorque = 0;
+            //wheelRR.brakeTorque = 0;
+            //wheelRL.brakeTorque = 0;
 		}
 		if (Input.GetButton("Vertical") == false)
 		{
@@ -93,8 +100,10 @@ public class CarControl : MonoBehaviour
 		}
 		else
 		{
-			wheelRR.brakeTorque = 0;
-			wheelRL.brakeTorque = 0;
+            wheelFR.brakeTorque = 0;
+            wheelFL.brakeTorque = 0;
+            wheelRR.brakeTorque = 0;
+            wheelRL.brakeTorque = 0;
 		}
 		var speedFactor = rigidbody.velocity.magnitude / lowestSteerAtSpeed;
 		var currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle, highSpeedSteerAngle, speedFactor);
@@ -148,40 +157,85 @@ public class CarControl : MonoBehaviour
 		wheelRRTrans.position = wheelPosition;
 	}
 
+    bool MainBraked()
+    {
+        if (currentSpeed > 0 && Input.GetAxis("Vertical") < 0)
+            return true;
+        if (currentSpeed < 0 && Input.GetAxis("Vertical") > 0)
+            return true;
+        return false;
+    }
+
+    bool HandBraked()
+    {
+        if (Input.GetButton("Handbrake"))
+        {
+            //handbraked = true;
+            return true;
+        }
+        //else
+        //{
+            //handbraked = false;
+        //    return true;
+        //}
+        return false;
+    }
+
+    void Brake()
+    {
+        if (MainBraked())
+        {
+            MainBrake();
+        }
+        else if (HandBraked())
+        {
+            HandBrake();
+        }
+        else
+        {
+            SetSlip(myForwardFriction, mySidewayFriction);
+        }
+    }
+
+    void MainBrake()
+    {
+            wheelFR.brakeTorque = maxBrakeTorque;
+            wheelFL.brakeTorque = maxBrakeTorque;
+            wheelRR.brakeTorque = maxBrakeTorque-40;
+            wheelRL.brakeTorque = maxBrakeTorque-40;
+
+            wheelRR.motorTorque = 0;
+            wheelRL.motorTorque = 0;
+            if (rigidbody.velocity.magnitude > 1)
+            {
+                SetSlip(1F, 1F);
+            }
+            else
+            {
+                wheelFR.brakeTorque = 0;
+                wheelFL.brakeTorque = 0;
+                wheelRR.brakeTorque = 0;
+                wheelRL.brakeTorque = 0;
+                SetSlip(1, 1);
+            }
+    }
+
 	void HandBrake()
 	{
-        if (Input.GetButton("Handbrake"))
-		{
-			braked = true;
-		}
-		else
-		{
-			braked = false;
-		}
-		
-		if (braked)
-		{
-			//wheelFR.brakeTorque = maxBrakeTorque;
-			//wheelFL.brakeTorque = maxBrakeTorque;
-            wheelRR.brakeTorque = maxBrakeTorque;
-            wheelRL.brakeTorque = maxBrakeTorque;
+        wheelRR.brakeTorque = maxBrakeTorque;
+        wheelRL.brakeTorque = maxBrakeTorque;
 
-			wheelRR.motorTorque = 0;
-			wheelRL.motorTorque = 0;
-			if (rigidbody.velocity.magnitude > 1)
-			{
-				SetSlip(slipForwardFriction, slipSidewayFriction);
-			}
-			else
-			{
-				wheelFR.brakeTorque = 0;
-				wheelFL.brakeTorque = 0;
-				SetSlip(1, 1);
-			}
+		wheelRR.motorTorque = 0;
+		wheelRL.motorTorque = 0;
+		if (rigidbody.velocity.magnitude > 1)
+		{
+			SetSlip(slipForwardFriction, slipSidewayFriction);
 		}
 		else
 		{
-			SetSlip(myForwardFriction, mySidewayFriction);
+			wheelFR.brakeTorque = 0;
+			wheelFL.brakeTorque = 0;
+			SetSlip(1, 1);
 		}
 	}
 
