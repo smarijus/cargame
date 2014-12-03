@@ -150,7 +150,7 @@ public class CarControl : MonoBehaviour
 
 	void HandBrake()
 	{
-		if (Input.GetKey(KeyCode.Space))
+        if (Input.GetButton("Handbrake"))
 		{
 			braked = true;
 		}
@@ -161,8 +161,11 @@ public class CarControl : MonoBehaviour
 		
 		if (braked)
 		{
-			wheelFR.brakeTorque = maxBrakeTorque;
-			wheelFL.brakeTorque = maxBrakeTorque;
+			//wheelFR.brakeTorque = maxBrakeTorque;
+			//wheelFL.brakeTorque = maxBrakeTorque;
+            wheelRR.brakeTorque = maxBrakeTorque;
+            wheelRL.brakeTorque = maxBrakeTorque;
+
 			wheelRR.motorTorque = 0;
 			wheelRL.motorTorque = 0;
 			if (rigidbody.velocity.magnitude > 1)
