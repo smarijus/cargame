@@ -15,7 +15,7 @@ public class CarControl : MonoBehaviour
 	public Transform wheelRRTrans;
 	public float maxTorque = 50F;
 	public float lowestSteerAtSpeed = 50F;
-	public float lowSpeedSteerAngle = 60F;
+	public float lowSpeedSteerAngle = 100F;
 	public float highSpeedSteerAngle = 1F;
 	public float deaccelerationSpeed = 30F;
 	
@@ -69,7 +69,8 @@ public class CarControl : MonoBehaviour
 
 	void OnGUI()
 	{
-		GUI.Label(new Rect(0,Screen.height-50, 200,100), "Automobio greitis: "+currentSpeed.ToString());
+		UserInterface ui =new UserInterface();
+        ui.showSpeed(currentSpeed);
 	}
 
 	void Control()
@@ -212,10 +213,10 @@ public class CarControl : MonoBehaviour
             }
             else
             {
-                wheelFR.brakeTorque = 0;
-                wheelFL.brakeTorque = 0;
-                wheelRR.brakeTorque = 0;
-                wheelRL.brakeTorque = 0;
+               // wheelFR.brakeTorque = 0;
+                //wheelFL.brakeTorque = 0;
+                //wheelRR.brakeTorque = 0;
+                //wheelRL.brakeTorque = 0;
                 SetSlip(1, 1);
             }
     }
@@ -318,5 +319,16 @@ public class CarControl : MonoBehaviour
                 Instantiate(collisionSound, other.contacts[i].point, Quaternion.identity);
             }
         }
+        if (other.gameObject.name != "Terrain")
+        {
+            ObjectDeformation physics = new ObjectDeformation();
+
+
+            //Norint išjungti deformacijų eksperimentą reikia užkomenuoti šia eilutes
+            physics.DeformObject(other);
+            physics.DeformCar(gameObject);
+        }
     }
+
+    
 }
