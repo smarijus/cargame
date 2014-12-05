@@ -731,6 +731,7 @@ GameObject:
   - 4: {fileID: 291841611}
   - 33: {fileID: 291841613}
   - 23: {fileID: 291841612}
+  - 64: {fileID: 291841614}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -792,6 +793,19 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 291841610}
+  m_Mesh: {fileID: 4300030, guid: 3cea4c62418bd7f4cb64a52e5535906f, type: 3}
+--- !u!64 &291841614
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 291841610}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
   m_Mesh: {fileID: 4300030, guid: 3cea4c62418bd7f4cb64a52e5535906f, type: 3}
 --- !u!1 &337800589
 GameObject:
@@ -2964,6 +2978,7 @@ GameObject:
   - 4: {fileID: 2059968918}
   - 33: {fileID: 2059968920}
   - 23: {fileID: 2059968919}
+  - 64: {fileID: 2059968921}
   m_Layer: 0
   m_Name: bump_front
   m_TagString: Untagged
@@ -3014,6 +3029,19 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2059968917}
+  m_Mesh: {fileID: 4300012, guid: 3cea4c62418bd7f4cb64a52e5535906f, type: 3}
+--- !u!64 &2059968921
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2059968917}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
   m_Mesh: {fileID: 4300012, guid: 3cea4c62418bd7f4cb64a52e5535906f, type: 3}
 --- !u!1 &2132908563
 GameObject:

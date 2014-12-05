@@ -309,24 +309,31 @@ public class CarControl : MonoBehaviour
 		audio.pitch = enginePitch;
 	}
 
-    void OnCollisionEnter(Collision other)
+    void OnCollisionEnter(Collision obj)
     {
-        if (other.collider != collider && other.contacts.Length != 0)
+        if (obj.collider != collider && obj.contacts.Length != 0)
         {
-            for (int i = 0; i < other.contacts.Length; i++)
+            for (int i = 0; i < obj.contacts.Length; i++)
             {
-                Instantiate(spark, other.contacts[i].point, Quaternion.identity);
-                Instantiate(collisionSound, other.contacts[i].point, Quaternion.identity);
+                Instantiate(spark, obj.contacts[i].point, Quaternion.identity);
+                Instantiate(collisionSound, obj.contacts[i].point, Quaternion.identity);
             }
         }
-        if (other.gameObject.name != "Terrain")
+
+        for (int i = 0; i < obj.contacts.Length; i++ )
+        {
+            Debug.Log("This collider: " + obj.contacts[i].thisCollider.name);
+            Debug.Log("Other collider: " + obj.contacts[i].otherCollider.name);
+        }
+        //Debug.Log("Smūgis: " + obj.relativeVelocity.ToString());
+
+        if (obj.gameObject.name != "Terrain")
         {
             ObjectDeformation physics = new ObjectDeformation();
 
-
             //Norint išjungti deformacijų eksperimentą reikia užkomenuoti šia eilutes
-            physics.DeformObject(other);
-            physics.DeformCar(gameObject);
+            physics.DeformObject(obj);
+            physics.DeformCar(gameObject, obj);
         }
     }
 
