@@ -6,7 +6,7 @@ public class ObjectDeformation// : MonoBehaviour
 
     public void DeformObject(Collision obj, Transform transf)
     {
-        //Debug.Log("Deformuojamas objektas" + obj.contacts.Length);
+        Debug.Log(obj.relativeVelocity/5);
         MeshFilter mf = obj.collider.GetComponent<MeshFilter>();
         ///MeshFilter mf = obj.contacts[0].thisCollider.GetComponent<MeshFilter>();
         Mesh mesh = mf.mesh;
@@ -17,18 +17,18 @@ public class ObjectDeformation// : MonoBehaviour
         while (p < vertices.Length)
         {
             //float distance = Vector3.Distance(vertices[p], transf.InverseTransformPoint(obj.contacts[0].point));
-            float distance = Vector3.Distance(transf.InverseTransformDirection(vertices[p]), transf.InverseTransformPoint(obj.contacts[0].point));
+            float distance = Vector3.Distance(vertices[p], transf.InverseTransformPoint(obj.contacts[0].point));
             Debug.Log(distance);
             if (distance < 2.5F)
             {
-               Vector3 tempVertice = transf.TransformDirection(vertices[p]);
+               //Vector3 tempVertice = transf.TransformDirection(vertices[p]);
                 //Vector3 tempVertice = transf.InverseTransformPoint(vertices[p]);
                 //tempVertice += new Vector3(Random.Range(0F, 0.3F), 0, 0);
-               tempVertice += new Vector3(0, 0.3F, 0);
+               //tempVertice += (obj.relativeVelocity/10);
                // Debug.Log(tempVertice);
-                //vertices[p] += new Vector3(Random.Range(0F, 0.3F), 0, 0);
+                vertices[p] += (obj.relativeVelocity/5);
                 //vertices[p] += new Vector3(0, Random.Range(0F, 0.3F), 0);
-                vertices[p] = transf.InverseTransformDirection(tempVertice);
+                //vertices[p] = transf.InverseTransformDirection(tempVertice);
                 //vertices[p] = transf.TransformPoint(tempVertice);
                 //vertices[p] = tempVertice;
             }
@@ -40,13 +40,7 @@ public class ObjectDeformation// : MonoBehaviour
 
     public void DeformCar(GameObject gameObject, Collision obj)
     {
-        //Debug.Log("Deformuojamas automoiblis");
-        //gameObject.GetComponents<Mesh>("Body");
-        //gameObject.transform.DetachChildren();
-        //Destroy(gameObject.);
-        //MeshFilter mf = other.collider.GetComponent<MeshFilter>();
-        //Mesh mesh = mf.mesh;
-        //Mesh mesh = gameObject.GetComponentInChildren<MeshFilter>().mesh;
+
         MeshFilter[] mf = gameObject.GetComponentsInChildren<MeshFilter>();
         //for (int z = 0; z < obj.contacts.Length; z++)
         {
@@ -63,7 +57,6 @@ public class ObjectDeformation// : MonoBehaviour
                     {
                         float distance = Vector3.Distance(gameObject.transform.InverseTransformDirection(vertices[p]), gameObject.transform.InverseTransformPoint(obj.contacts[0].point));
                         Debug.Log(distance);
-                        //vertices[p] += new Vector3(0, 0, Random.Range(-0.01F, 0.3F));
                         p++;
                     }
                     mesh.vertices = vertices;
