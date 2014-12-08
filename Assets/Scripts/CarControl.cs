@@ -37,6 +37,8 @@ public class CarControl : MonoBehaviour
     public GameObject spark;
     public GameObject collisionSound;
 
+    public Transform transf;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -320,20 +322,13 @@ public class CarControl : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < obj.contacts.Length; i++ )
-        {
-            Debug.Log("This collider: " + obj.contacts[i].thisCollider.name);
-            Debug.Log("Other collider: " + obj.contacts[i].otherCollider.name);
-        }
-        //Debug.Log("Smūgis: " + obj.relativeVelocity.ToString());
 
         if (obj.gameObject.name != "Terrain")
         {
             ObjectDeformation physics = new ObjectDeformation();
-
             //Norint išjungti deformacijų eksperimentą reikia užkomenuoti šia eilutes
-            physics.DeformObject(obj);
-            physics.DeformCar(gameObject, obj);
+            physics.DeformObject(obj, transform);
+            //physics.DeformCar(gameObject, obj);
         }
     }
 

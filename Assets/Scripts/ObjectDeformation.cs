@@ -4,57 +4,34 @@ using System.Collections;
 public class ObjectDeformation// : MonoBehaviour
 {
 
-    public void DeformObject(Collision obj)
+    public void DeformObject(Collision obj, Transform transf)
     {
         //Debug.Log("Deformuojamas objektas" + obj.contacts.Length);
         MeshFilter mf = obj.collider.GetComponent<MeshFilter>();
         ///MeshFilter mf = obj.contacts[0].thisCollider.GetComponent<MeshFilter>();
         Mesh mesh = mf.mesh;
         Vector3[] vertices = mesh.vertices;
-        //Collider test =new Collider;
-        
-        //Debug.Log("Viršūnoų skaičius: " +vertices.Length);
+        Debug.Log(obj.contacts.Length);
 
-        
-        //Collider coll = obj.collider;
-        //Vector3[] vertices = new Vector3[obj.contacts.Length];
-        //for (int i=0; i<obj.contacts.Length; i++)
-        //{
-        //    vertices[i] = obj.contacts[i].point;
-        //}
-        //Debug.Log("VEktorius: " + obj.relativeVelocity.ToString());
         int p = 1;
         while (p < vertices.Length)
         {
-            //for (int i = 0; i < obj.contacts.Length; i++)
-            //{
-                //if (vertices[p] == obj.contacts[i].point)
-                //{
-                    //Debug.Log("Sutampa vektoriaus koordintatės");
-            //Vector3[] tempVertices = new Vector3[vertices.Length];
-            //for (int i = 0; i < vertices.Length; i++ )
-            //{
-            //    tempVertices[i] = vertices[i];
-            //}
-            //vertices = tempVertices;
-            //vertices[vertices.Length - 1] = obj.relativeVelocity;
-            //vertices[p] += obj.relativeVelocity;
-            vertices[p] += new Vector3(Random.Range(-0.3F, 0.3F), 0, Random.Range(-0.3F, 0.3F));
-            //vertices[p] += obj.impactForceSum;
-                    //vertices[p] += new Vector3(obj.contacts[0].point.x, obj.contacts[0].point.y, obj.contacts[0].point.z);
-                   
-                //}
-            //}
-            //vertices[p] = new Vector3(obj.contacts[0].point.x, obj.contacts[0].point.y, obj.contacts[0].point.z);
+            float distance = Vector3.Distance(vertices[p], transf.InverseTransformPoint(obj.contacts[0].point));
+            //Debug.Log(distance);
+            if (distance < 2.5F)
+            {
+                //Vector3 tempVertice = transf.TransformPoint(vertices[p]);
+                Vector3 tempVertice = transf.InverseTransformPoint(vertices[p]);
+                tempVertice += new Vector3(Random.Range(0F, 0.3F), 0, 0);
+               // Debug.Log(tempVertice);
+                //vertices[p] += new Vector3(Random.Range(0F, 0.3F), 0, 0);
+                //vertices[p] = transf.InverseTransformPoint(tempVertice);
+                vertices[p] = transf.TransformPoint(tempVertice);
+            }
             p++;
         }
-        //obj.contacts[i].otherCollider.
         mesh.vertices = vertices;
         mesh.RecalculateNormals();
-
-        //Colliderio pertvarkymas pagal mesh formą. 
-        //obj.collider.GetComponent<MeshCollider>().sharedMesh = null;
-        //obj.collider.GetComponent<MeshCollider>().sharedMesh = mesh; 
     }
 
     public void DeformCar(GameObject gameObject, Collision obj)
@@ -78,7 +55,7 @@ public class ObjectDeformation// : MonoBehaviour
                 {
                     if (mf[i].mesh.bounds.Contains(obj.contacts[j].point))
                     {
-                        Debug.Log("Boo");
+                        //Debug.Log("Boo");
                         o = false;
                     }
                 }
