@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Threading;
 
 public class ObjectDeformation// : MonoBehaviour
 {
@@ -38,31 +39,43 @@ public class ObjectDeformation// : MonoBehaviour
         mesh.RecalculateNormals();
     }
 
-    public void DeformCar(GameObject gameObject, Collision obj)
+    //public void DeformCar(Collider gameObject, Collision obj)
+    public void DeformCar(Collider gameObject, Collision obj)
+    //public void DeformCar(object obj)
     {
-
-        MeshFilter[] mf = gameObject.GetComponentsInChildren<MeshFilter>();
+        //for (int i=0; i<10000; i++)
+        //{
+        //    Debug.Log("Test");
+        //}
+        MeshFilter mf = gameObject.GetComponent<MeshFilter>();
+        //MeshFilter[] mf = gameObject.GetComponentsInChildren<MeshFilter>();
         //for (int z = 0; z < obj.contacts.Length; z++)
-        {
+        //{
             //MeshFilter[] mf = obj.contacts[z].thisCollider.GetComponents<MeshFilter>();
 
-            for (int i = 0; i < mf.Length; i++)
-            {
-                if (mf[i].name != "Wheel")
+            //for (int i = 0; i < mf.Length; i++)
+            //{
+                if (mf.name != "Wheel")
                 {
-                    Mesh mesh = mf[i].mesh;
+                    Mesh mesh = mf.mesh;
                     Vector3[] vertices = mesh.vertices;
                     int p = 0;
                     while (p < vertices.Length)
                     {
                         float distance = Vector3.Distance(gameObject.transform.InverseTransformDirection(vertices[p]), gameObject.transform.InverseTransformPoint(obj.contacts[0].point));
                         Debug.Log(distance);
+
+                        if (distance < 0.7F)
+                        {
+                            vertices[p] += (obj.relativeVelocity / 50);
+                        }
+
                         p++;
                     }
                     mesh.vertices = vertices;
                     mesh.RecalculateNormals();
                 }
-            }
-        }
+            //}
+        //}
     }
 }

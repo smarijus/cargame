@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Threading;
 
 public class CarControl : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class CarControl : MonoBehaviour
     public GameObject collisionSound;
 
     public Transform transf;
+    private ObjectDeformation physics;
 
 	// Use this for initialization
 	void Start ()
@@ -45,6 +47,7 @@ public class CarControl : MonoBehaviour
 		rigidbody.centerOfMass = new Vector3(rigidbody.centerOfMass.x, -0.9F, 0.5F);
 		//rigidbody.centerOfMass.y = -0.9;
 		//rigidbody.centerOfMass.z = 0.5;
+        physics = new ObjectDeformation();
 		SetValues();
 	}
 	
@@ -315,20 +318,29 @@ public class CarControl : MonoBehaviour
     {
         if (obj.collider != collider && obj.contacts.Length != 0)
         {
-            for (int i = 0; i < obj.contacts.Length; i++)
-            {
-                Instantiate(spark, obj.contacts[i].point, Quaternion.identity);
-                Instantiate(collisionSound, obj.contacts[i].point, Quaternion.identity);
-            }
+            //for (int i = 0; i < obj.contacts.Length; i++)
+            //{
+                Instantiate(spark, obj.contacts[0].point, Quaternion.identity);
+                Instantiate(collisionSound, obj.contacts[0].point, Quaternion.identity);
+            //}
         }
-
-
         if (obj.gameObject.name != "Terrain")
         {
-            ObjectDeformation physics = new ObjectDeformation();
-            //Norint išjungti deformacijų eksperimentą reikia užkomenuoti šia eilutes
-            physics.DeformObject(obj, transform);
-            //physics.DeformCar(gameObject, obj);
+            if (obj.contacts[0].thisCollider.name != obj.gameObject.name)
+            {
+                physics.DeformCar(obj.contacts[0].thisCollider, obj);
+                //MeshFilter mf = obj.contacts[0].thisCollider.GetComponent<MeshFilter>();
+                ////Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].thisCollider, obj));
+                //Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].thisCollider, mf, obj));
+                //oThread.Start();
+            }
+            if (obj.contacts[0].otherCollider.name != obj.gameObject.name)
+            {
+                physics.DeformCar(obj.contacts[0].otherCollider, obj);
+                //MeshFilter mf = obj.contacts[0].otherCollider.GetComponent<MeshFilter>();
+                //Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].otherCollider, mf, obj));
+                //oThread.Start();
+            }
         }
     }
 
