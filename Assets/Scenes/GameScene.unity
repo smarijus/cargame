@@ -898,6 +898,7 @@ MonoBehaviour:
   spark: {fileID: 100000, guid: 7a598717ded698c4dbdd57c2260fa1e1, type: 2}
   collisionSound: {fileID: 100000, guid: 05444ce8d6a4b08419616e7304968924, type: 2}
   transf: {fileID: 268633624}
+  menuStatus: 0
 --- !u!1 &291841610
 GameObject:
   m_ObjectHideFlags: 0

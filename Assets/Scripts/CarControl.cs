@@ -41,6 +41,8 @@ public class CarControl : MonoBehaviour
     public Transform transf;
     private ObjectDeformation physics;
 
+    public bool menuStatus = false;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -70,12 +72,29 @@ public class CarControl : MonoBehaviour
 		//wheelFRTrans.localEulerAngles.y = wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z;
 		WheelPosition();
 		EngineSound();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (menuStatus)
+            {
+                menuStatus = false;
+                //Time.timeScale = 1;
+            }
+            else
+            {
+                menuStatus = true;
+                //Time.timeScale = 0;
+            }
+        }
 	}
 
 	void OnGUI()
 	{
 		UserInterface ui =new UserInterface();
-        ui.showSpeed(currentSpeed);
+        if (!menuStatus)
+            ui.showSpeed(currentSpeed);
+        if (menuStatus)
+            ui.showMenu();
 	}
 
 	void Control()
