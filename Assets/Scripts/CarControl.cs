@@ -324,7 +324,7 @@ public class CarControl : MonoBehaviour
                 Instantiate(collisionSound, obj.contacts[0].point, Quaternion.identity);
             //}
         }
-        if (obj.gameObject.name != "Terrain")
+        if (!obj.contacts[0].thisCollider.name.Contains("Wheel") && !obj.contacts[0].otherCollider.name.Contains("Wheel"))
         {
             if (obj.contacts[0].thisCollider.name != obj.gameObject.name)
             {

@@ -63,7 +63,7 @@ public class ObjectDeformation// : MonoBehaviour
                     while (p < vertices.Length)
                     {
                         float distance = Vector3.Distance(gameObject.transform.InverseTransformDirection(vertices[p]), gameObject.transform.InverseTransformPoint(obj.contacts[0].point));
-                        Debug.Log(distance);
+                        //Debug.Log(distance);
 
                         if (distance < 0.7F)
                         {
