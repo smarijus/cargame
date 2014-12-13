@@ -4,6 +4,12 @@
 Temp/
 Library/
 
+# ================ #
+# Unity test tools #
+# ================ #
+UnityTestTools/
+UnityTestTools*
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
