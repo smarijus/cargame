@@ -20,7 +20,7 @@ public class CarControl : MonoBehaviour
 	public float highSpeedSteerAngle = 1F;
 	public float deaccelerationSpeed = 30F;
 	
-	public float currentSpeed;
+	//public float currentSpeed;
 	public float topSpeed  = 250F;
 	public float topReverseSpeed = 50F;
 	
@@ -43,12 +43,14 @@ public class CarControl : MonoBehaviour
 
     public bool menuStatus = false;
 
+    private Car car = new Car();
+    private UserInterface ui = new UserInterface();
+    private InputSystem inputs = new InputSystem();
+
 	// Use this for initialization
 	void Start ()
 	{
 		rigidbody.centerOfMass = new Vector3(rigidbody.centerOfMass.x, -0.9F, 0.5F);
-		//rigidbody.centerOfMass.y = -0.9;
-		//rigidbody.centerOfMass.z = 0.5;
         physics = new ObjectDeformation();
 		SetValues();
 	}
@@ -62,10 +64,10 @@ public class CarControl : MonoBehaviour
 
 	void Update()
 	{
-		wheelFLTrans.Rotate(wheelFL.rpm/60*360*Time.deltaTime,0,0);
-		wheelFRTrans.Rotate(wheelFR.rpm/60*360*Time.deltaTime,0,0);
-		wheelRLTrans.Rotate(wheelRL.rpm/60*360*Time.deltaTime,0,0);
-		wheelRRTrans.Rotate(wheelRR.rpm/60*360*Time.deltaTime,0,0);
+		wheelFLTrans.Rotate(car.getWheelRotationSpeed(wheelFL),0,0);
+        wheelFRTrans.Rotate(car.getWheelRotationSpeed(wheelFR), 0, 0);
+        wheelRLTrans.Rotate(car.getWheelRotationSpeed(wheelRL), 0, 0);
+        wheelRRTrans.Rotate(car.getWheelRotationSpeed(wheelRR), 0, 0);
 		wheelFLTrans.localEulerAngles = new Vector3(wheelFLTrans.localEulerAngles.x, wheelFL.steerAngle - wheelFLTrans.localEulerAngles.z, wheelFLTrans.localEulerAngles.z);
 		//wheelFLTrans.localEulerAngles.y = wheelFL.steerAngle - wheelFLTrans.localEulerAngles.z;
 		wheelFRTrans.localEulerAngles = new Vector3 (wheelFLTrans.localEulerAngles.x, wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z, wheelFLTrans.localEulerAngles.z);
@@ -90,25 +92,25 @@ public class CarControl : MonoBehaviour
 
 	void OnGUI()
 	{
-		UserInterface ui =new UserInterface();
+
         if (!menuStatus)
-            ui.showSpeed(currentSpeed);
+            ui.showSpeed(car.getCarSpeed(wheelRL));
         if (menuStatus)
             ui.showMenu();
 	}
 
 	void Control()
 	{
-		currentSpeed = 2*22/7*wheelRL.radius*wheelRL.rpm*60/1000;
-		currentSpeed = Mathf.Round(currentSpeed);
-		if (currentSpeed < topSpeed && currentSpeed > -topReverseSpeed && !handbraked)
+		//currentSpeed = 2*22/7*wheelRL.radius*wheelRL.rpm*60/1000;
+		//currentSpeed = Mathf.Round(currentSpeed);
+        if (car.getCarSpeed(wheelRL) < topSpeed && car.getCarSpeed(wheelRL) > -topReverseSpeed && !handbraked)
 		{
             wheelFR.brakeTorque = 0;
             wheelFL.brakeTorque = 0;
             wheelRR.brakeTorque = 0;
             wheelRL.brakeTorque = 0;
-			wheelRR.motorTorque = maxTorque * Input.GetAxis("Vertical");
-			wheelRL.motorTorque = maxTorque * Input.GetAxis("Vertical");
+            wheelRR.motorTorque = maxTorque * inputs.getVerticalAxis();
+            wheelRL.motorTorque = maxTorque * inputs.getVerticalAxis();
 
 		}
 		else
@@ -132,7 +134,7 @@ public class CarControl : MonoBehaviour
 		}
 		var speedFactor = rigidbody.velocity.magnitude / lowestSteerAtSpeed;
 		var currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle, highSpeedSteerAngle, speedFactor);
-		currentSteerAngle *= Input.GetAxis("Horizontal");
+        currentSteerAngle *= inputs.getHorizontalAxis();
 		wheelFL.steerAngle = currentSteerAngle;
 		wheelFR.steerAngle = currentSteerAngle;
 	}
@@ -184,9 +186,9 @@ public class CarControl : MonoBehaviour
 
     bool MainBraked()
     {
-        if (currentSpeed > 0 && Input.GetAxis("Vertical") < 0)
+        if (car.getCarSpeed(wheelRL) > 0 && inputs.getVerticalAxis() < 0)
             return true;
-        if (currentSpeed < 0 && Input.GetAxis("Vertical") > 0)
+        if (car.getCarSpeed(wheelRL) < 0 && inputs.getVerticalAxis() > 0)
             return true;
         return false;
     }
@@ -301,12 +303,12 @@ public class CarControl : MonoBehaviour
 	void EngineSound()
 	{
 		float enginePitch;
-		if (currentSpeed >= 0)
+        if (car.getCarSpeed(wheelRL) >= 0)
 		{
 			int i = 0;
 			for (i = 0; i < gearRatio.Length; i++)
 			{
-				if (gearRatio[i] > currentSpeed)
+                if (gearRatio[i] > car.getCarSpeed(wheelRL))
 				{
 					//gear = i;
 					break;
@@ -324,11 +326,11 @@ public class CarControl : MonoBehaviour
 				gearMinValue = gearRatio[i-1];
 				gearMaxValue = gearRatio[i];	
 			}
-			enginePitch = ((currentSpeed - gearMinValue) / (gearMaxValue - gearMinValue)) + 1;
+            enginePitch = ((car.getCarSpeed(wheelRL) - gearMinValue) / (gearMaxValue - gearMinValue)) + 1;
 		}
 		else
 		{
-			enginePitch = Mathf.Abs(currentSpeed / 100) + 1;
+            enginePitch = Mathf.Abs(car.getCarSpeed(wheelRL) / 100) + 1;
 		}
 		audio.pitch = enginePitch;
 	}

@@ -10,6 +10,13 @@ Library/
 UnityTestTools/
 UnityTestTools*
 
+# ================ #
+# Unity test cases #
+# ================ #
+
+UnityTestCases/
+UnityTestCases*
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
