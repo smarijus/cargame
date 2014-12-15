@@ -40,6 +40,7 @@ obj/
 *.user
 *.unityproj
 *.booproj
+TestResults/
 
 # ============ #
 # OS generated #

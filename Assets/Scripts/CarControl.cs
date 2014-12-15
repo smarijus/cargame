@@ -64,10 +64,10 @@ public class CarControl : MonoBehaviour
 
 	void Update()
 	{
-		wheelFLTrans.Rotate(car.getWheelRotationSpeed(wheelFL.rpm),0,0);
-        wheelFRTrans.Rotate(car.getWheelRotationSpeed(wheelFR.rpm), 0, 0);
-        wheelRLTrans.Rotate(car.getWheelRotationSpeed(wheelRL.rpm), 0, 0);
-        wheelRRTrans.Rotate(car.getWheelRotationSpeed(wheelRR.rpm), 0, 0);
+		wheelFLTrans.Rotate(car.getWheelRotationSpeed(wheelFL.rpm, Time.deltaTime),0,0);
+        wheelFRTrans.Rotate(car.getWheelRotationSpeed(wheelFR.rpm, Time.deltaTime), 0, 0);
+        wheelRLTrans.Rotate(car.getWheelRotationSpeed(wheelRL.rpm, Time.deltaTime), 0, 0);
+        wheelRRTrans.Rotate(car.getWheelRotationSpeed(wheelRR.rpm, Time.deltaTime), 0, 0);
 		wheelFLTrans.localEulerAngles = new Vector3(wheelFLTrans.localEulerAngles.x, wheelFL.steerAngle - wheelFLTrans.localEulerAngles.z, wheelFLTrans.localEulerAngles.z);
 		//wheelFLTrans.localEulerAngles.y = wheelFL.steerAngle - wheelFLTrans.localEulerAngles.z;
 		wheelFRTrans.localEulerAngles = new Vector3 (wheelFLTrans.localEulerAngles.x, wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z, wheelFLTrans.localEulerAngles.z);

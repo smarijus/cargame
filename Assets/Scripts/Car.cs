@@ -19,9 +19,10 @@ public class Car
 
     // Funkcja grąžina rato sukimosi greitį.
     // Parametrai (WheelCollider)
-    public float getWheelRotationSpeed(float wheelSpeed)
+    public float getWheelRotationSpeed(float wheelSpeed, float deltaTime)
     {
-        return wheelSpeed / 60 * 360 * Time.deltaTime;
+        float rotation = wheelSpeed / 60 * 360 * deltaTime;
+        return rotation;
     }
 
     // Funkcija grąžina, ar naudojamas rankinis stabdis.
