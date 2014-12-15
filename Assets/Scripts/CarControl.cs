@@ -109,8 +109,8 @@ public class CarControl : MonoBehaviour
             wheelFL.brakeTorque = 0;
             wheelRR.brakeTorque = 0;
             wheelRL.brakeTorque = 0;
-            wheelRR.motorTorque = maxTorque * inputs.getVerticalAxis();
-            wheelRL.motorTorque = maxTorque * inputs.getVerticalAxis();
+            wheelRR.motorTorque = maxTorque * inputs.getVerticalAxisValue();
+            wheelRL.motorTorque = maxTorque * inputs.getVerticalAxisValue();
 
 		}
 		else
@@ -120,7 +120,7 @@ public class CarControl : MonoBehaviour
             //wheelRR.brakeTorque = 0;
             //wheelRL.brakeTorque = 0;
 		}
-		if (Input.GetButton("Vertical") == false)
+		if (inputs.getVerticalAxis() == false)
 		{
 			wheelRR.brakeTorque = deaccelerationSpeed;
 			wheelRL.brakeTorque = deaccelerationSpeed;
@@ -134,7 +134,7 @@ public class CarControl : MonoBehaviour
 		}
 		var speedFactor = rigidbody.velocity.magnitude / lowestSteerAtSpeed;
 		var currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle, highSpeedSteerAngle, speedFactor);
-        currentSteerAngle *= inputs.getHorizontalAxis();
+        currentSteerAngle *= inputs.getHorizontalAxisValue();
 		wheelFL.steerAngle = currentSteerAngle;
 		wheelFR.steerAngle = currentSteerAngle;
 	}
@@ -186,27 +186,21 @@ public class CarControl : MonoBehaviour
 
     bool MainBraked()
     {
-        if (car.getCarSpeed(wheelRL) > 0 && inputs.getVerticalAxis() < 0)
+        if (car.getCarSpeed(wheelRL) > 0 && inputs.getVerticalAxisValue() < 0)
             return true;
-        if (car.getCarSpeed(wheelRL) < 0 && inputs.getVerticalAxis() > 0)
+        if (car.getCarSpeed(wheelRL) < 0 && inputs.getVerticalAxisValue() > 0)
             return true;
         return false;
     }
 
-    bool HandBraked()
-    {
-        if (Input.GetButton("Handbrake"))
-        {
-            //handbraked = true;
-            return true;
-        }
-        //else
-        //{
-            //handbraked = false;
-        //    return true;
-        //}
-        return false;
-    }
+    //bool HandBraked()
+    //{
+    //    if (Input.GetButton("Handbrake"))
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
 
     void Brake()
     {
@@ -214,7 +208,7 @@ public class CarControl : MonoBehaviour
         {
             MainBrake();
         }
-        else if (HandBraked())
+        else if (car.HandBraked())
         {
             HandBrake();
         }

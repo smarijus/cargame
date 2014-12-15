@@ -5,6 +5,8 @@ public class Car
 
 {
 
+    private InputSystem inputs = new InputSystem();
+
     // Funkcija grąžina automobilio greitį, paskaičiuodama pagal rato sukimosi greitį.
     // Parametrai (WheelCollider)
     public float getCarSpeed(WheelCollider wheel)
@@ -20,5 +22,15 @@ public class Car
     public float getWheelRotationSpeed(WheelCollider wheel)
     {
         return wheel.rpm / 60 * 360 * Time.deltaTime;
+    }
+
+    // Funkcija grąžina, ar naudojamas rankinis stabdis.
+    public bool HandBraked()
+    {
+        if (inputs.getHandbrake())
+        {
+            return true;
+        }
+        return false;
     }
 }
