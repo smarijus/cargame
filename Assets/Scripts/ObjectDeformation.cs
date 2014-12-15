@@ -59,7 +59,7 @@ public class ObjectDeformation// : MonoBehaviour
                 {
                     Mesh mesh = mf.mesh;
                     Vector3[] vertices = mesh.vertices;
-                    int p = 0;
+                    //int p = 0;
                     //while (p < vertices.Length)
                     //{
                     //    float distance = Vector3.Distance(gameObject.transform.InverseTransformDirection(vertices[p]), gameObject.transform.InverseTransformPoint(obj.contacts[0].point));

@@ -5,6 +5,15 @@ using System.Threading;
 public class CarControl : MonoBehaviour
 {
 
+    //public struct Wheel
+    //{
+    //    public WheelCollider wheelFL;
+    //    public WheelCollider wheelFR;
+    //    public WheelCollider wheelRL;
+    //    public WheelCollider wheelRR;
+    //}
+
+    //public Wheel wheels;
 
 	public WheelCollider wheelFL;
 	public WheelCollider wheelFR;
@@ -46,6 +55,7 @@ public class CarControl : MonoBehaviour
     private Car car = new Car();
     private UserInterface ui = new UserInterface();
     private InputSystem inputs = new InputSystem();
+    Sound sounds = new Sound();
 
 	// Use this for initialization
 	void Start ()
@@ -70,10 +80,11 @@ public class CarControl : MonoBehaviour
         wheelRRTrans.Rotate(car.getWheelRotationSpeed(wheelRR.rpm, Time.deltaTime), 0, 0);
 		wheelFLTrans.localEulerAngles = new Vector3(wheelFLTrans.localEulerAngles.x, wheelFL.steerAngle - wheelFLTrans.localEulerAngles.z, wheelFLTrans.localEulerAngles.z);
 		//wheelFLTrans.localEulerAngles.y = wheelFL.steerAngle - wheelFLTrans.localEulerAngles.z;
-		wheelFRTrans.localEulerAngles = new Vector3 (wheelFLTrans.localEulerAngles.x, wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z, wheelFLTrans.localEulerAngles.z);
+		wheelFRTrans.localEulerAngles = new Vector3(wheelRLTrans.localEulerAngles.x, wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z, wheelFRTrans.localEulerAngles.z);
 		//wheelFRTrans.localEulerAngles.y = wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z;
 		WheelPosition();
 		EngineSound();
+        
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -101,8 +112,6 @@ public class CarControl : MonoBehaviour
 
 	void Control()
 	{
-		//currentSpeed = 2*22/7*wheelRL.radius*wheelRL.rpm*60/1000;
-		//currentSpeed = Mathf.Round(currentSpeed);
         if (car.getCarSpeed(wheelRL.radius, wheelRL.rpm) < topSpeed && car.getCarSpeed(wheelRL.radius, wheelRL.rpm) > -topReverseSpeed && !handbraked)
 		{
             wheelFR.brakeTorque = 0;
@@ -294,40 +303,10 @@ public class CarControl : MonoBehaviour
 		//wheelFL.sidewaysFriction.stiffness = currentSidewayFriction;
 	}
 
-	void EngineSound()
-	{
-		float enginePitch;
-        if (car.getCarSpeed(wheelRL.radius, wheelRL.rpm) >= 0)
-		{
-			int i = 0;
-			for (i = 0; i < gearRatio.Length; i++)
-			{
-                if (gearRatio[i] > car.getCarSpeed(wheelRL.radius, wheelRL.rpm))
-				{
-					//gear = i;
-					break;
-				}
-			}
-			float gearMinValue = 0.00F;
-			float gearMaxValue = 0.00F;
-			if (i == 0)
-			{
-				gearMinValue = 0;
-				gearMaxValue = gearRatio[i];
-			}
-			else
-			{
-				gearMinValue = gearRatio[i-1];
-				gearMaxValue = gearRatio[i];	
-			}
-            enginePitch = ((car.getCarSpeed(wheelRL.radius, wheelRL.rpm) - gearMinValue) / (gearMaxValue - gearMinValue)) + 1;
-		}
-		else
-		{
-            enginePitch = Mathf.Abs(car.getCarSpeed(wheelRL.radius, wheelRL.rpm) / 100) + 1;
-		}
-		audio.pitch = enginePitch;
-	}
+    void EngineSound()
+    {
+        audio.pitch = sounds.getEngineSoundPitch(gearRatio, car.getCarSpeed(wheelRL.radius, wheelRL.rpm));
+    }
 
     void OnCollisionEnter(Collision obj)
     {
@@ -339,24 +318,25 @@ public class CarControl : MonoBehaviour
                 Instantiate(collisionSound, obj.contacts[0].point, Quaternion.identity);
             //}
         }
-        if (!obj.contacts[0].thisCollider.name.Contains("Wheel") && !obj.contacts[0].otherCollider.name.Contains("Wheel"))
-        {
-            if (obj.contacts[0].thisCollider.name != obj.gameObject.name)
+        for (int i = 0; i < 1; i++ )
+            if (!obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Wheel"))
             {
-                physics.DeformCar(obj.contacts[0].thisCollider, obj);
-                //MeshFilter mf = obj.contacts[0].thisCollider.GetComponent<MeshFilter>();
-                ////Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].thisCollider, obj));
-                //Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].thisCollider, mf, obj));
-                //oThread.Start();
+                if (obj.contacts[i].thisCollider.name != obj.gameObject.name)
+                {
+                    physics.DeformCar(obj.contacts[i].thisCollider, obj);
+                    //MeshFilter mf = obj.contacts[0].thisCollider.GetComponent<MeshFilter>();
+                    ////Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].thisCollider, obj));
+                    //Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].thisCollider, mf, obj));
+                    //oThread.Start();
+                }
+                if (obj.contacts[i].otherCollider.name != obj.gameObject.name)
+                {
+                    physics.DeformCar(obj.contacts[i].otherCollider, obj);
+                    //MeshFilter mf = obj.contacts[0].otherCollider.GetComponent<MeshFilter>();
+                    //Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].otherCollider, mf, obj));
+                    //oThread.Start();
+                }
             }
-            if (obj.contacts[0].otherCollider.name != obj.gameObject.name)
-            {
-                physics.DeformCar(obj.contacts[0].otherCollider, obj);
-                //MeshFilter mf = obj.contacts[0].otherCollider.GetComponent<MeshFilter>();
-                //Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].otherCollider, mf, obj));
-                //oThread.Start();
-            }
-        }
     }
 
     
