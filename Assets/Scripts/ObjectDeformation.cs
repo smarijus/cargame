@@ -4,7 +4,7 @@ using System.Threading;
 
 public class ObjectDeformation// : MonoBehaviour
 {
-
+    //private 
     public void DeformObject(Collision obj, Transform transf)
     {
         Debug.Log(obj.relativeVelocity/5);
@@ -60,22 +60,46 @@ public class ObjectDeformation// : MonoBehaviour
                     Mesh mesh = mf.mesh;
                     Vector3[] vertices = mesh.vertices;
                     int p = 0;
-                    while (p < vertices.Length)
-                    {
-                        float distance = Vector3.Distance(gameObject.transform.InverseTransformDirection(vertices[p]), gameObject.transform.InverseTransformPoint(obj.contacts[0].point));
-                        //Debug.Log(distance);
+                    //while (p < vertices.Length)
+                    //{
+                    //    float distance = Vector3.Distance(gameObject.transform.InverseTransformDirection(vertices[p]), gameObject.transform.InverseTransformPoint(obj.contacts[0].point));
+                    //    //Debug.Log(distance);
 
-                        if (distance < 0.7F)
-                        {
-                            vertices[p] += (obj.relativeVelocity / 50);
-                        }
+                    //    if (distance < 0.7F)
+                    //    {
+                    //        vertices[p] += (obj.relativeVelocity / 50);
+                    //    }
 
-                        p++;
-                    }
-                    mesh.vertices = vertices;
+                    //    p++;
+                    //}
+
+
+
+                    //mesh.vertices = vertices;
+                    mesh.vertices = getModifiedVertices(vertices, obj.relativeVelocity, obj.contacts[0].point, gameObject);
                     mesh.RecalculateNormals();
                 }
             //}
         //}
     }
+
+    private Vector3[] getModifiedVertices(Vector3[] vertices, Vector3 impactVelocy, Vector3 impactPoint, Collider gameObject)
+    {
+
+        for (int i=0; i<vertices.Length; i++)
+        {
+            float distance = Vector3.Distance(gameObject.transform.InverseTransformDirection(vertices[i]), gameObject.transform.InverseTransformPoint(impactPoint));
+
+            if (distance < 0.7F)
+            {
+                vertices[i] += (impactVelocy / 50);
+            }
+        }
+        return vertices;
+    }
+
+    //private Vector3 getModifiedVertice(Vector3 vertice)
+    //{
+    //    return vertice;
+    //}
 }

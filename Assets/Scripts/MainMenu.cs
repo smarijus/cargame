@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     {
         GUI.skin = menuSkin;
         UserInterface ui = new UserInterface();
+        ui.showCurrentProfile();
         ui.showMainMenu();
     }
 }
