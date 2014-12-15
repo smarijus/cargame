@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Car
 {
-    // Parametrai skirti nustatyti vairo sukimo kampą skirtingais greičiais
     // Parametras nurodo, kokiam greičiui esant yra mžiausias sukimo kampas
     private float lowestSteerAtSpeed = 50F;
     // Parametras nurodo mažo greičio sukimo kampą
@@ -11,11 +10,12 @@ public class Car
     //Parametras nurodo didelio greičio sukimo kampą
 	private float highSpeedSteerAngle = 1F;
 
-
     private InputSystem inputs = new InputSystem();
 
     // Funkcija grąžina automobilio greitį, paskaičiuodama pagal rato sukimosi greitį ir rato dydį.
-    // Parametrai (WheelCollider)
+    // Parametrai:
+    //              wheelRadius - rato diametras;
+    //              wheelSpeed  - rato apsisukimai per minutę;
     public float getCarSpeed(float wheelRadius, float wheelSpeed)
     {
         float speed = 2 * 22 / 7 * wheelRadius * wheelSpeed * 60 / 1000;
@@ -25,7 +25,9 @@ public class Car
 
 
     // Funkcja grąžina rato sukimosi greitį.
-    // Parametrai (WheelCollider)
+    // Parametrai:
+    //              wheelSpeed - rato apsisukimai per minutę;
+    //              deltaTime  - laikas per kurį buvo pakeistas kadras;
     public float getWheelRotationSpeed(float wheelSpeed, float deltaTime)
     {
         float rotation = wheelSpeed / 60 * 360 * deltaTime;
@@ -33,7 +35,7 @@ public class Car
     }
 
     // Funkcija grąžina, ar naudojamas rankinis stabdis.
-    public bool HandBraked()
+    public bool getHandBrake()
     {
         if (inputs.getHandbrake())
         {
@@ -42,7 +44,22 @@ public class Car
         return false;
     }
 
+    // Funkcija grąžina ar automobilis stabdomas
+    // Parametrai:
+    //              carSpeed - automobilio greitis.
+    public bool getBrake(float carSpeed)
+    {
+        if (carSpeed > 0 && inputs.getVerticalAxisValue() < 0)
+            return true;
+        if (carSpeed < 0 && inputs.getVerticalAxisValue() > 0)
+            return true;
+        return false;
+    }
+
+
     // Funkcija grąžina automobilio priekinių ratų pasukimo kampą.
+    // Parametrai:
+    //              magnitude - objekto greičio vektoriaus ilgis.
     public float getCurrentSteerAngle(float magnitude)
     {
         float speedFactor = magnitude / lowestSteerAtSpeed;

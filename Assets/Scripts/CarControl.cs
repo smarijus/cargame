@@ -80,7 +80,7 @@ public class CarControl : MonoBehaviour
 		wheelFRTrans.localEulerAngles = new Vector3(wheelRLTrans.localEulerAngles.x, wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z, wheelFRTrans.localEulerAngles.z);
 		//wheelFRTrans.localEulerAngles.y = wheelFR.steerAngle - wheelFRTrans.localEulerAngles.z;
 		WheelPosition();
-		EngineSound();
+		playEngineSound();
         
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -187,14 +187,14 @@ public class CarControl : MonoBehaviour
 		wheelRRTrans.position = wheelPosition;
 	}
 
-    bool MainBraked()
-    {
-        if (car.getCarSpeed(wheelRL.radius, wheelRL.rpm) > 0 && inputs.getVerticalAxisValue() < 0)
-            return true;
-        if (car.getCarSpeed(wheelRL.radius, wheelRL.rpm) < 0 && inputs.getVerticalAxisValue() > 0)
-            return true;
-        return false;
-    }
+    //bool MainBraked()
+    //{
+    //    if (car.getCarSpeed(wheelRL.radius, wheelRL.rpm) > 0 && inputs.getVerticalAxisValue() < 0)
+    //        return true;
+    //    if (car.getCarSpeed(wheelRL.radius, wheelRL.rpm) < 0 && inputs.getVerticalAxisValue() > 0)
+    //        return true;
+    //    return false;
+    //}
 
     //bool HandBraked()
     //{
@@ -207,11 +207,11 @@ public class CarControl : MonoBehaviour
 
     void Brake()
     {
-        if (MainBraked())
+        if (car.getBrake(car.getCarSpeed(wheelRL.radius, wheelRL.rpm)))
         {
             MainBrake();
         }
-        else if (car.HandBraked())
+        else if (car.getHandBrake())
         {
             HandBrake();
         }
@@ -297,7 +297,7 @@ public class CarControl : MonoBehaviour
 		//wheelFL.sidewaysFriction.stiffness = currentSidewayFriction;
 	}
 
-    void EngineSound()
+    void playEngineSound()
     {
         audio.pitch = sounds.getEngineSoundPitch(gearRatio, car.getCarSpeed(wheelRL.radius, wheelRL.rpm));
     }
