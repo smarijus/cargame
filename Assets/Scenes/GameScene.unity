@@ -889,7 +889,6 @@ MonoBehaviour:
   lowSpeedSteerAngle: 10
   highSpeedSteerAngle: 1
   deaccelerationSpeed: 30
-  currentSpeed: 0
   topSpeed: 250
   topReverseSpeed: 50
   handbraked: 0

@@ -24,9 +24,6 @@ public class CarControl : MonoBehaviour
 	public Transform wheelRLTrans;
 	public Transform wheelRRTrans;
 	public float maxTorque = 50F;
-	public float lowestSteerAtSpeed = 50F;
-	public float lowSpeedSteerAngle = 100F;
-	public float highSpeedSteerAngle = 1F;
 	public float deaccelerationSpeed = 30F;
 	
 	//public float currentSpeed;
@@ -141,11 +138,8 @@ public class CarControl : MonoBehaviour
             wheelRR.brakeTorque = 0;
             wheelRL.brakeTorque = 0;
 		}
-		var speedFactor = rigidbody.velocity.magnitude / lowestSteerAtSpeed;
-		var currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle, highSpeedSteerAngle, speedFactor);
-        currentSteerAngle *= inputs.getHorizontalAxisValue();
-		wheelFL.steerAngle = currentSteerAngle;
-		wheelFR.steerAngle = currentSteerAngle;
+        wheelFL.steerAngle = car.getCurrentSteerAngle(rigidbody.velocity.magnitude);
+        wheelFR.steerAngle = car.getCurrentSteerAngle(rigidbody.velocity.magnitude);
 	}
 
 	void WheelPosition()

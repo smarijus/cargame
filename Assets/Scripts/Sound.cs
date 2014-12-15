@@ -16,7 +16,6 @@ public class Sound
             {
                 if (gearRatio[i] > carSpeed)
                 {
-                    //gear = i;
                     break;
                 }
             }
@@ -37,6 +36,7 @@ public class Sound
         {
             enginePitch = Mathf.Abs(carSpeed / 100) + 1;
         }
+
         return enginePitch;
     }
 
