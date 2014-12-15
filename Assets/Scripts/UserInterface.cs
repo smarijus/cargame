@@ -3,6 +3,8 @@ using System.Collections;
 
 public class UserInterface
 {
+    private Game game = new Game();
+
     public void showSpeed(float speed)
     {
         GUI.Label(new Rect(0, Screen.height - 50, 200, 100), "Automobio greitis: " + speed.ToString());
@@ -28,12 +30,12 @@ public class UserInterface
 
         if (GUI.Button(new Rect(horizontalCenter - 100, verticalCenter - 25, 200, 50), "Įkrauti iš naujo"))
         {
-            Application.LoadLevel(Application.loadedLevel);
+            game.loadGameScene(Application.loadedLevelName);
         }
 
         if (GUI.Button(new Rect(horizontalCenter - 100, verticalCenter + 25, 200, 50), "Grįžti į pagrindinį meniu"))
         {
-            Application.LoadLevel("MainMenuScene");
+            game.loadGameScene("MainMenuScene");
         }
 
 
@@ -41,7 +43,6 @@ public class UserInterface
         {
             Application.Quit();
         }
-
     }
 
     public void showMainMenu()
@@ -58,7 +59,7 @@ public class UserInterface
 
         if (GUI.Button(new Rect(horizontalCenter - 100, verticalCenter - 25, 200, 50), "Pradėti žaidimą"))
         {
-            Application.LoadLevel("GameScene");
+            game.loadGameScene("GameScene");
         }
 
         if (GUI.Button(new Rect(horizontalCenter - 100, verticalCenter + 75, 200, 50), "Išjungti žaidimą"))
