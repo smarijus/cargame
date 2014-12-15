@@ -17,6 +17,15 @@ UnityTestTools*
 UnityTestCases/
 UnityTestCases*
 
+# =========== #
+# Visual Studio addons #
+# =========== #
+
+packages/
+.nuget/
+packages*
+
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #

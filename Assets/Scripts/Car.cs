@@ -7,11 +7,11 @@ public class Car
 
     private InputSystem inputs = new InputSystem();
 
-    // Funkcija grąžina automobilio greitį, paskaičiuodama pagal rato sukimosi greitį.
+    // Funkcija grąžina automobilio greitį, paskaičiuodama pagal rato sukimosi greitį ir rato dydį.
     // Parametrai (WheelCollider)
-    public float getCarSpeed(WheelCollider wheel)
+    public float getCarSpeed(float wheelRadius, float wheelSpeed)
     {
-        float speed = 2 * 22 / 7 * wheel.radius * wheel.rpm * 60 / 1000;
+        float speed = 2 * 22 / 7 * wheelRadius * wheelSpeed * 60 / 1000;
         speed = Mathf.Round(speed);
         return speed;
     }
@@ -19,9 +19,9 @@ public class Car
 
     // Funkcja grąžina rato sukimosi greitį.
     // Parametrai (WheelCollider)
-    public float getWheelRotationSpeed(WheelCollider wheel)
+    public float getWheelRotationSpeed(float wheelSpeed)
     {
-        return wheel.rpm / 60 * 360 * Time.deltaTime;
+        return wheelSpeed / 60 * 360 * Time.deltaTime;
     }
 
     // Funkcija grąžina, ar naudojamas rankinis stabdis.
