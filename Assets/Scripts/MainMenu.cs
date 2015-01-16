@@ -12,5 +12,7 @@ public class MainMenu : MonoBehaviour
         UserInterface ui = new UserInterface();
         ui.showCurrentProfile();
         ui.showMainMenu();
+        //ui.showProfileSelection();
+        //ui.showBestResults();
     }
 }

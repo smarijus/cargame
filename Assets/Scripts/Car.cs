@@ -67,4 +67,15 @@ public class Car
         currentSteerAngle *= inputs.getHorizontalAxisValue();
         return currentSteerAngle;
     }
+
+    public bool checkIfCarOutsideTerrain(Vector3 carPosition, Vector3 terrainSize)
+    {
+        if (carPosition.x < -50 || carPosition.x > terrainSize.x + 50)
+            return true;
+        if (carPosition.y < -50 || carPosition.y > terrainSize.y + 50)
+            return true;
+        if (carPosition.z < -50 || carPosition.z > terrainSize.z + 50)
+            return true;
+        return false;
+    }
 }

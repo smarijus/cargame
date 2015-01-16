@@ -60,6 +60,7 @@ public class CarControl : MonoBehaviour
 		rigidbody.centerOfMass = new Vector3(rigidbody.centerOfMass.x, -0.9F, 0.5F);
         physics = new ObjectDeformation();
 		SetValues();
+
 	}
 	
 	// Update is called once per frame
@@ -67,6 +68,19 @@ public class CarControl : MonoBehaviour
 	{
 		Control();
         Brake();
+
+
+        var ground = GameObject.Find("Terrain");
+        Terrain terrain = ground.GetComponent<Terrain>();
+        Vector3 terrainSize = terrain.terrainData.size;
+        Debug.Log(terrainSize);
+        Vector3 carPosition = transform.position;
+        if (carPosition.x < -50 || carPosition.x > terrainSize.x + 50)
+            Debug.Log("Automobilis išvažiavo iš žemėlapio su x ašimi");
+        if (carPosition.y < -50 || carPosition.y > terrainSize.y + 50)
+            Debug.Log("Automobilis išvažiavo iš žemėlapio su y ašimi");
+        if (carPosition.z < -50 || carPosition.z > terrainSize.z + 50)
+            Debug.Log("Automobilis išvažiavo iš žemėlapio su z ašimi");
 	}
 
 	void Update()
