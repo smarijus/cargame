@@ -19,7 +19,7 @@ public class InputSystem
             return Input.GetAxis("Vertical");
         }
         else
-            return getAccelerationTouchValue();
+            return getVerticalAxisTouchValue();
     }
 
     // Funkcija grąžina horizantalios ašies reikšmę.
@@ -31,7 +31,7 @@ public class InputSystem
             return Input.GetAxis("Horizontal");
         }
         else
-            return 0;
+            return getHorizontalAxisAccelerometerValue();
     }
 
     // Funkcija patikrina ir grąžina ar kuri nors ašis paspausta
@@ -68,6 +68,12 @@ public class InputSystem
     }
 
 
+    private float getHorizontalAxisAccelerometerValue()
+    {
+        return 0;
+    }
+
+
     public void getAccelerometerAxis()
     {
         lowPassValue = Input.acceleration;
@@ -81,7 +87,7 @@ public class InputSystem
     }
 
     // Funkcjija patikrina ir grąžina akseleratoriaus reikšmę iš lietimui jautraus ekrano
-    private float getAccelerationTouchValue()
+    private float getVerticalAxisTouchValue()
     {
         foreach (Touch touch in Input.touches)
         {
@@ -99,7 +105,7 @@ public class InputSystem
     }
 
     // Funkcija patirkina ir grąžina, ar paspaustas akseleratorius lietimui jautriame ekrane
-    private bool getAccelerationTouch()
+    private bool getVerticalAxisTouch()
     {
         foreach (Touch touch in Input.touches)
         {

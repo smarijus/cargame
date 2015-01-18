@@ -79,8 +79,8 @@ public class ObjectDeformation// : MonoBehaviour
 
 
                         //mesh.vertices = vertices;
-                        //mesh.vertices = getModifiedVertices(vertices, obj.relativeVelocity, obj.contacts[0].point, gameObject);
-                        //mesh.RecalculateNormals();
+                        mesh.vertices = getModifiedVertices(vertices, obj.relativeVelocity, obj.contacts[0].point, gameObject);
+                        mesh.RecalculateNormals();
                     }
                     else
                     {
