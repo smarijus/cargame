@@ -4,6 +4,12 @@ using System.Collections;
 public class InputSystem
 {
 
+    private static float AccelerometerUpdateInterval = 1.0F / 60.0F;
+    private static float LowPassKernelWidthInSeconds = 1.0F;
+    private float LowPassFilterFactor = AccelerometerUpdateInterval / LowPassKernelWidthInSeconds;
+    private Vector3 lowPassValue = Vector3.zero;
+
+
     // Funkcija grąžina vertikalios ašies reikšmę.
     public float getVerticalAxisValue()
     {
@@ -25,5 +31,20 @@ public class InputSystem
     public bool getHandbrake()
     {
         return Input.GetButton("Handbrake");
+    }
+
+
+
+
+    public void getAccelerometerAxis()
+    {
+        lowPassValue = Input.acceleration;
+    }
+
+    public Vector3 LowPassFilterAccelerometer()
+    {
+        //lowPassValue = Mathf.Lerp(lowPassValue, Input.acceleration, LowPassFilterFactor);
+        //return lowPassValue;
+        return new Vector3();
     }
 }

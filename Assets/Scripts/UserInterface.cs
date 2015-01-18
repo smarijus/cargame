@@ -10,6 +10,22 @@ public class UserInterface
         GUI.Label(new Rect(0, Screen.height - 50, 200, 100), "Automobio greitis: " + speed.ToString());
     }
 
+    private Rect getRectanglePositionAndSizeByPercentage(int widthPosition, int heightPosition,  int buttonWidth, int buttonHeight)
+    {
+        return new Rect();
+    }
+
+    public void showInGameControls()
+    {
+        float horizontalCenter = Screen.width / 2;
+        float verticalCenter = Screen.height / 2;
+        GUI.Button(new Rect(Screen.width / 50, Screen.height / 25, Screen.width / 10, Screen.height / 10), "M");
+        GUI.Button(new Rect(Screen.width / 50, verticalCenter, Screen.width / 10, Screen.height / 5), "H");
+        GUI.Button(new Rect(Screen.width / 50, Screen.height - Screen.height / 25 - Screen.height / 5, Screen.width / 10, Screen.height / 5), "B");
+        GUI.Button(new Rect((Screen.width / 10 * 9) - Screen.width / 50, (Screen.height / 3 * 2) - Screen.width / 50, Screen.width / 10, Screen.height / 3), "A");
+        //GUI.DrawTexture(new Rect(10, 10, 60, 60), aTexture, ScaleMode.ScaleToFit, true, 10.0F);
+    }
+
     public void showCurrentProfile()
     {
         float horizontalCenter = Screen.width / 2;

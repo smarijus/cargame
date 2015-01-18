@@ -3,8 +3,6 @@ using System.Collections;
 
 public class DestroyTimerScript : MonoBehaviour
 {
-
-
 	public float destroyAfter = 2;
 	private float timer;
 	// Use this for initialization

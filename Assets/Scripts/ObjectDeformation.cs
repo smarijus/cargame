@@ -57,27 +57,36 @@ public class ObjectDeformation// : MonoBehaviour
             //{
                 if (mf.name != "Wheel")
                 {
-                    Mesh mesh = mf.mesh;
-                    Vector3[] vertices = mesh.vertices;
-                    //int p = 0;
-                    //while (p < vertices.Length)
-                    //{
-                    //    float distance = Vector3.Distance(gameObject.transform.InverseTransformDirection(vertices[p]), gameObject.transform.InverseTransformPoint(obj.contacts[0].point));
-                    //    //Debug.Log(distance);
+                    if (mf.name != "windscreen")
+                    {
+                        Mesh mesh = mf.mesh;
+                        Vector3[] vertices = mesh.vertices;
+                        //int p = 0;
+                        //while (p < vertices.Length)
+                        //{
+                        //    float distance = Vector3.Distance(gameObject.transform.InverseTransformDirection(vertices[p]), gameObject.transform.InverseTransformPoint(obj.contacts[0].point));
+                        //    //Debug.Log(distance);
 
-                    //    if (distance < 0.7F)
-                    //    {
-                    //        vertices[p] += (obj.relativeVelocity / 50);
-                    //    }
+                        //    if (distance < 0.7F)
+                        //    {
+                        //        vertices[p] += (obj.relativeVelocity / 50);
+                        //    }
 
-                    //    p++;
-                    //}
+                        //    p++;
+                        //}
 
 
 
-                    //mesh.vertices = vertices;
-                    mesh.vertices = getModifiedVertices(vertices, obj.relativeVelocity, obj.contacts[0].point, gameObject);
-                    mesh.RecalculateNormals();
+                        //mesh.vertices = vertices;
+                        mesh.vertices = getModifiedVertices(vertices, obj.relativeVelocity, obj.contacts[0].point, gameObject);
+                        mesh.RecalculateNormals();
+                    }
+                    else
+                    {
+                        //CreateInstance(test);
+                        //gameObject.transform.
+                    }
+                    
                 }
             //}
         //}
@@ -92,7 +101,7 @@ public class ObjectDeformation// : MonoBehaviour
 
             if (distance < 0.7F)
             {
-                vertices[i] += (impactVelocy / 50);
+                vertices[i] -= (impactVelocy / 50);
             }
         }
         return vertices;

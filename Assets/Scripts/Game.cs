@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Game
 {
+
+    private string currentUser;
+
+
     public void loadGameScene(string sceneName)
     {
         Application.LoadLevel(sceneName);

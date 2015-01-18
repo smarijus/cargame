@@ -69,7 +69,6 @@ public class CarControl : MonoBehaviour
 		Control();
         Brake();
 
-
         var ground = GameObject.Find("Terrain");
         Terrain terrain = ground.GetComponent<Terrain>();
         Vector3 terrainSize = terrain.terrainData.size;
@@ -116,7 +115,10 @@ public class CarControl : MonoBehaviour
 	{
 
         if (!menuStatus)
+        {
             ui.showSpeed(car.getCarSpeed(wheelRL.radius, wheelRL.rpm));
+            ui.showInGameControls();
+        }
         if (menuStatus)
             ui.showInGameMenu();
 	}
@@ -326,7 +328,7 @@ public class CarControl : MonoBehaviour
                 Instantiate(collisionSound, obj.contacts[0].point, Quaternion.identity);
             //}
         }
-        for (int i = 0; i < 1; i++ )
+        for (int i = 0; i < obj.contacts.Length; i++)
             if (!obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Wheel"))
             {
                 if (obj.contacts[i].thisCollider.name != obj.gameObject.name)
