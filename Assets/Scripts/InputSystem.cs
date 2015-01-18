@@ -13,27 +13,59 @@ public class InputSystem
     // Funkcija grąžina vertikalios ašies reikšmę.
     public float getVerticalAxisValue()
     {
-        return Input.GetAxis("Vertical");
+        if (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.WP8Player)
+        {
+            Debug.Log(Input.GetAxis("Vertical"));
+            return Input.GetAxis("Vertical");
+        }
+        else
+            return getAccelerationTouchValue();
     }
 
     // Funkcija grąžina horizantalios ašies reikšmę.
     public float getHorizontalAxisValue()
     {
-        return Input.GetAxis("Horizontal");
+        if (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.WP8Player)
+        {
+            Debug.Log(Input.GetAxis("Horizontal"));
+            return Input.GetAxis("Horizontal");
+        }
+        else
+            return 0;
     }
 
+    // Funkcija patikrina ir grąžina ar kuri nors ašis paspausta
     public bool getVerticalAxis()
     {
-        return Input.GetButton("Vertical");
+        if (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.WP8Player)
+        {
+            return Input.GetButton("Vertical");
+        }
+        else
+            return false;
+    }
+
+    // Funkcija grąžina ar paspaustas meniu mygtukas
+    public bool getMenuButton()
+    {
+        if (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.WP8Player)
+        {
+            return Input.GetKeyDown(KeyCode.Escape);
+        }
+        else
+            return getMenuButtonTouch();
     }
 
     // Grąžina, ar nuspaustas rankinio stabdžio mygtukas.
     public bool getHandbrake()
     {
-        return Input.GetButton("Handbrake");
+        if (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.WP8Player)
+        {
+            return Input.GetButton("Handbrake");
+        }
+        else
+            return getHandbrakeTouch();
     }
-
-
 
 
     public void getAccelerometerAxis()
@@ -46,5 +78,72 @@ public class InputSystem
         //lowPassValue = Mathf.Lerp(lowPassValue, Input.acceleration, LowPassFilterFactor);
         //return lowPassValue;
         return new Vector3();
+    }
+
+    // Funkcjija patikrina ir grąžina akseleratoriaus reikšmę iš lietimui jautraus ekrano
+    private float getAccelerationTouchValue()
+    {
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Began)
+            {
+                Rect brakeButton = new Rect(Screen.width / 50, Screen.height - Screen.height / 25 - Screen.height / 5, Screen.width / 10, Screen.height / 5);
+                if (brakeButton.Contains(touch.position))
+                    return 1;
+                Rect accelerationButton = new Rect((Screen.width / 10 * 9) - Screen.width / 50, (Screen.height / 3 * 2) - Screen.width / 50, Screen.width / 10, Screen.height / 3);
+                if (accelerationButton.Contains(touch.position))
+                    return -1;
+            }
+        }
+        return 0;
+    }
+
+    // Funkcija patirkina ir grąžina, ar paspaustas akseleratorius lietimui jautriame ekrane
+    private bool getAccelerationTouch()
+    {
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Began)
+            {
+                Rect brakeButton = new Rect(Screen.width / 50, Screen.height - Screen.height / 25 - Screen.height / 5, Screen.width / 10, Screen.height / 5);
+                if (brakeButton.Contains(touch.position))
+                    return true;
+                Rect accelerationButton = new Rect((Screen.width / 10 * 9) - Screen.width / 50, (Screen.height / 3 * 2) - Screen.width / 50, Screen.width / 10, Screen.height / 3);
+                if (accelerationButton.Contains(touch.position))
+                    return true;
+            }
+        }
+        return false;
+    }
+    
+    // Funkcija grąžina ar nuspaustas rankinio stabdžio mygtukas lietimui jautriame ekrane
+    private bool getHandbrakeTouch()
+    {
+        float verticalCenter = Screen.height / 2;
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Began)
+            {
+                Rect handbrakeButton = new Rect(Screen.width / 50, verticalCenter, Screen.width / 10, Screen.height / 5);
+                if (handbrakeButton.Contains(touch.position))
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Funkcija grąžina ar paspaustas meniu mygtukas lietimui jautriame ekrane
+    private bool getMenuButtonTouch()
+    {
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Began)
+            {
+                Rect menuButton = new Rect(Screen.width / 50, Screen.height / 25, Screen.width / 10, Screen.height / 10);
+                if (menuButton.Contains(touch.position))
+                    return true;
+            }
+        }
+        return false;
     }
 }

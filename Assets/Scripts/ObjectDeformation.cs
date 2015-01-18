@@ -5,6 +5,12 @@ using System.Threading;
 public class ObjectDeformation// : MonoBehaviour
 {
     //private 
+
+    public ObjectDeformation()
+    {
+
+    }
+
     public void DeformObject(Collision obj, Transform transf)
     {
         Debug.Log(obj.relativeVelocity/5);
@@ -41,12 +47,7 @@ public class ObjectDeformation// : MonoBehaviour
 
     //public void DeformCar(Collider gameObject, Collision obj)
     public void DeformCar(Collider gameObject, Collision obj)
-    //public void DeformCar(object obj)
     {
-        //for (int i=0; i<10000; i++)
-        //{
-        //    Debug.Log("Test");
-        //}
         MeshFilter mf = gameObject.GetComponent<MeshFilter>();
         //MeshFilter[] mf = gameObject.GetComponentsInChildren<MeshFilter>();
         //for (int z = 0; z < obj.contacts.Length; z++)
@@ -78,8 +79,8 @@ public class ObjectDeformation// : MonoBehaviour
 
 
                         //mesh.vertices = vertices;
-                        mesh.vertices = getModifiedVertices(vertices, obj.relativeVelocity, obj.contacts[0].point, gameObject);
-                        mesh.RecalculateNormals();
+                        //mesh.vertices = getModifiedVertices(vertices, obj.relativeVelocity, obj.contacts[0].point, gameObject);
+                        //mesh.RecalculateNormals();
                     }
                     else
                     {
@@ -101,7 +102,9 @@ public class ObjectDeformation// : MonoBehaviour
 
             if (distance < 0.7F)
             {
-                vertices[i] -= (impactVelocy / 50);
+                //Debug.Log(impactVelocy/50);
+                //impactVelocy = new Vector3(impactVelocy.x, impactVelocy.y, (impactVelocy.z * -1));
+                vertices[i] += (impactVelocy / 50);
             }
         }
         return vertices;

@@ -72,7 +72,7 @@ public class CarControl : MonoBehaviour
         var ground = GameObject.Find("Terrain");
         Terrain terrain = ground.GetComponent<Terrain>();
         Vector3 terrainSize = terrain.terrainData.size;
-        Debug.Log(terrainSize);
+        //Debug.Log(terrainSize);
         Vector3 carPosition = transform.position;
         if (carPosition.x < -50 || carPosition.x > terrainSize.x + 50)
             Debug.Log("Automobilis išvažiavo iš žemėlapio su x ašimi");
@@ -96,7 +96,7 @@ public class CarControl : MonoBehaviour
 		playEngineSound();
         
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (inputs.getMenuButton())
         {
             if (menuStatus)
             {
@@ -109,6 +109,7 @@ public class CarControl : MonoBehaviour
                 //Time.timeScale = 0;
             }
         }
+       // inputs.getAccelerationButton();
 	}
 
 	void OnGUI()
