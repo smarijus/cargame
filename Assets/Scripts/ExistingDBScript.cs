@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class ExistingDBScript : MonoBehaviour {
 
-	public Text DebugText;
+	//public Text DebugText;
 
 	// Use this for initialization
 	void Start () {
@@ -32,7 +32,7 @@ public class ExistingDBScript : MonoBehaviour {
 	}
 
 	private void ToConsole(string msg){
-		DebugText.text += System.Environment.NewLine + msg;
+		//DebugText.text += System.Environment.NewLine + msg;
 		Debug.Log (msg);
 	}
 

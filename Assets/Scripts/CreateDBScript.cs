@@ -10,13 +10,14 @@ public class CreateDBScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		var ds = new DataService ("tempDatabase.db");
+		var ds = new DataService ("database.db");
 		ds.CreateDB ();
 		var people = ds.GetPersons ();
 		ToConsole (people);
 		people = ds.GetPersonsNamedRoberto ();
 		ToConsole("Searching for Roberto ...");
 		ToConsole (people);
+        DebugText.text = "Testas";
 	}
 	
 	private void ToConsole(IEnumerable<Person> people){

@@ -62,8 +62,8 @@ public class DataService  {
 		_connection.InsertAll (new[]{
 			new Person{
 				Id = 1,
-				Name = "Tom",
-				Surname = "Perez",
+				Name = "Admin",
+				Surname = "Admin",
 				Age = 56
 			},
 			new Person{
@@ -108,4 +108,9 @@ public class DataService  {
 		_connection.Insert (p);
 		return p;
 	}
+
+    internal Person getUser(string mUserName)
+    {
+        return _connection.Table<Person>().Where(x => x.Name == mUserName).FirstOrDefault();
+    }
 }
