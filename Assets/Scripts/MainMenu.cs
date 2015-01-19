@@ -17,7 +17,8 @@ public class MainMenu : MonoBehaviour
     {
         //DontDestroyOnLoad(Game.Instance);
         DontDestroyOnLoad(Game.Instance);
-        Game.Instance.startState();
+        //Game.Instance.startState();
+        //Game.Instance.setMenuItem(1);
     }
 
     void OnGUI()

@@ -12,9 +12,9 @@ using System.Collections;
 public class Game : MonoBehaviour
 {
 
-    protected Game()
-    {
-    }
+    //protected Game()
+    //{
+    //}
 
     private static Game _instance = null;
 

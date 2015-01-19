@@ -77,24 +77,23 @@ public class UserInterface
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 6, menuButtonWidth, menuButtonHeight), "Pradėti žaidimą"))
         {
+            Game.Instance.setMenuItem(0);
             Game.Instance.loadGameScene("GameScene");
-            //game.loadGameScene("GameScene");
         }
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 8, menuButtonWidth, menuButtonHeight), "Tęsti išsaugotą žaidimą"))
         {
-            //game.quitGame();
-            //Game.Instance.quitGame();
+            Game.Instance.setMenuItem(0);
         }
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 10, menuButtonWidth, menuButtonHeight), "Geriausi rezultatai"))
         {
-            //game.quitGame();
             Game.Instance.setMenuItem(2);
         }
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 12, menuButtonWidth, menuButtonHeight), "Informacija apie projektą"))
         {
+
             //game.quitGame();
             //Game.Instance.quitGame();
         }
