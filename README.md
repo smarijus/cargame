@@ -29,3 +29,6 @@ https://www.youtube.com/watch?v=c5Snsi68xzE&list=PLev1bEeEAQp2Zys_aU3SJEftpkaB7u
 
 SQLITE EXAMPLE
 https://github.com/codecoding/SQLite4Unity3d
+
+Loginas pagal
+https://www.youtube.com/watch?v=pEawrI1Dh74
