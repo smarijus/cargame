@@ -61,6 +61,9 @@ public class CarControl : MonoBehaviour
         physics = new ObjectDeformation();
 		SetValues();
 
+        Rect brakeButton = new Rect(Screen.width / 50, Screen.height - Screen.height / 25 - Screen.height / 5, Screen.width / 10, Screen.height / 5);
+        Debug.Log(brakeButton.position);
+
 	}
 	
 	// Update is called once per frame

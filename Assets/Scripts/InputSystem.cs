@@ -13,7 +13,7 @@ public class InputSystem
     // Funkcija grąžina vertikalios ašies reikšmę.
     public float getVerticalAxisValue()
     {
-        if (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.WP8Player)
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player)
         {
             Debug.Log(Input.GetAxis("Vertical"));
             return Input.GetAxis("Vertical");
@@ -25,7 +25,7 @@ public class InputSystem
     // Funkcija grąžina horizantalios ašies reikšmę.
     public float getHorizontalAxisValue()
     {
-        if (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.WP8Player)
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player)
         {
             Debug.Log(Input.GetAxis("Horizontal"));
             return Input.GetAxis("Horizontal");
@@ -37,7 +37,7 @@ public class InputSystem
     // Funkcija patikrina ir grąžina ar kuri nors ašis paspausta
     public bool getVerticalAxis()
     {
-        if (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.WP8Player)
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player)
         {
             return Input.GetButton("Vertical");
         }
@@ -48,18 +48,21 @@ public class InputSystem
     // Funkcija grąžina ar paspaustas meniu mygtukas
     public bool getMenuButton()
     {
-        if (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.WP8Player)
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player)
         {
             return Input.GetKeyDown(KeyCode.Escape);
         }
         else
-            return getMenuButtonTouch();
+            if (Input.GetKeyDown(KeyCode.Escape))
+                return Input.GetKeyDown(KeyCode.Escape);
+            else
+                return getMenuButtonTouch();
     }
 
     // Grąžina, ar nuspaustas rankinio stabdžio mygtukas.
     public bool getHandbrake()
     {
-        if (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.WP8Player)
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player)
         {
             return Input.GetButton("Handbrake");
         }
@@ -94,10 +97,10 @@ public class InputSystem
             if (touch.phase == TouchPhase.Began)
             {
                 Rect brakeButton = new Rect(Screen.width / 50, Screen.height - Screen.height / 25 - Screen.height / 5, Screen.width / 10, Screen.height / 5);
-                if (brakeButton.Contains(touch.position))
+                if (brakeButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
                     return 1;
                 Rect accelerationButton = new Rect((Screen.width / 10 * 9) - Screen.width / 50, (Screen.height / 3 * 2) - Screen.width / 50, Screen.width / 10, Screen.height / 3);
-                if (accelerationButton.Contains(touch.position))
+                if (accelerationButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
                     return -1;
             }
         }
@@ -112,10 +115,10 @@ public class InputSystem
             if (touch.phase == TouchPhase.Began)
             {
                 Rect brakeButton = new Rect(Screen.width / 50, Screen.height - Screen.height / 25 - Screen.height / 5, Screen.width / 10, Screen.height / 5);
-                if (brakeButton.Contains(touch.position))
+                if (brakeButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
                     return true;
                 Rect accelerationButton = new Rect((Screen.width / 10 * 9) - Screen.width / 50, (Screen.height / 3 * 2) - Screen.width / 50, Screen.width / 10, Screen.height / 3);
-                if (accelerationButton.Contains(touch.position))
+                if (accelerationButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
                     return true;
             }
         }
@@ -131,7 +134,7 @@ public class InputSystem
             if (touch.phase == TouchPhase.Began)
             {
                 Rect handbrakeButton = new Rect(Screen.width / 50, verticalCenter, Screen.width / 10, Screen.height / 5);
-                if (handbrakeButton.Contains(touch.position))
+                if (handbrakeButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
                 return true;
             }
         }
@@ -146,10 +149,18 @@ public class InputSystem
             if (touch.phase == TouchPhase.Began)
             {
                 Rect menuButton = new Rect(Screen.width / 50, Screen.height / 25, Screen.width / 10, Screen.height / 10);
-                if (menuButton.Contains(touch.position))
+                if (menuButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
                     return true;
             }
         }
         return false;
+    }
+
+
+    private Vector2 convertTouchScreenCordinatesToGUI(Vector2 touchScreenPosition)
+    {
+        Vector2 convertedPosition = touchScreenPosition;
+        convertedPosition = new Vector2(convertedPosition.x, Screen.height - convertedPosition.y);
+        return convertedPosition;
     }
 }
