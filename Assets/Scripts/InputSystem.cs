@@ -13,9 +13,9 @@ public class InputSystem
     // Funkcija grąžina vertikalios ašies reikšmę.
     public float getVerticalAxisValue()
     {
-        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player)
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player && Input.touchCount == 0)
         {
-            Debug.Log(Input.GetAxis("Vertical"));
+            //Debug.Log(Input.GetAxis("Vertical"));
             return Input.GetAxis("Vertical");
         }
         else
@@ -25,9 +25,9 @@ public class InputSystem
     // Funkcija grąžina horizantalios ašies reikšmę.
     public float getHorizontalAxisValue()
     {
-        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player)
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player && Input.acceleration.x == 0)
         {
-            Debug.Log(Input.GetAxis("Horizontal"));
+            //Debug.Log(Input.GetAxis("Horizontal"));
             return Input.GetAxis("Horizontal");
         }
         else
@@ -37,18 +37,18 @@ public class InputSystem
     // Funkcija patikrina ir grąžina ar kuri nors ašis paspausta
     public bool getVerticalAxis()
     {
-        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player)
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player && Input.touchCount == 0)
         {
             return Input.GetButton("Vertical");
         }
         else
-            return false;
+            return getVerticalAxisTouch();
     }
 
     // Funkcija grąžina ar paspaustas meniu mygtukas
     public bool getMenuButton()
     {
-        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player)
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player && Input.touchCount == 0)
         {
             return Input.GetKeyDown(KeyCode.Escape);
         }
@@ -62,7 +62,7 @@ public class InputSystem
     // Grąžina, ar nuspaustas rankinio stabdžio mygtukas.
     public bool getHandbrake()
     {
-        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player)
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player && Input.touchCount == 0)
         {
             return Input.GetButton("Handbrake");
         }
@@ -73,7 +73,7 @@ public class InputSystem
 
     private float getHorizontalAxisAccelerometerValue()
     {
-        return 0;
+        return Input.acceleration.x;
     }
 
 
@@ -94,14 +94,14 @@ public class InputSystem
     {
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Stationary)
             {
                 Rect brakeButton = new Rect(Screen.width / 50, Screen.height - Screen.height / 25 - Screen.height / 5, Screen.width / 10, Screen.height / 5);
                 if (brakeButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
-                    return 1;
+                    return -1;
                 Rect accelerationButton = new Rect((Screen.width / 10 * 9) - Screen.width / 50, (Screen.height / 3 * 2) - Screen.width / 50, Screen.width / 10, Screen.height / 3);
                 if (accelerationButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
-                    return -1;
+                    return 1;
             }
         }
         return 0;
@@ -112,7 +112,7 @@ public class InputSystem
     {
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Stationary)
             {
                 Rect brakeButton = new Rect(Screen.width / 50, Screen.height - Screen.height / 25 - Screen.height / 5, Screen.width / 10, Screen.height / 5);
                 if (brakeButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
@@ -131,7 +131,7 @@ public class InputSystem
         float verticalCenter = Screen.height / 2;
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Stationary)
             {
                 Rect handbrakeButton = new Rect(Screen.width / 50, verticalCenter, Screen.width / 10, Screen.height / 5);
                 if (handbrakeButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
