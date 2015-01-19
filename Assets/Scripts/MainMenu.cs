@@ -5,14 +5,22 @@ public class MainMenu : MonoBehaviour
 {
 
     public GUISkin menuSkin;
+    private bool mainMenuShown = true;
+    private bool profileSelectionShown = false;
+    private bool bestResultsShown = false;
 
     void OnGUI()
     {
         GUI.skin = menuSkin;
         UserInterface ui = new UserInterface();
-        ui.showCurrentProfile();
-        ui.showMainMenu();
-        //ui.showProfileSelection();
-        //ui.showBestResults();
+        if (mainMenuShown)
+        {
+            ui.showCurrentProfile();
+            ui.showMainMenu();
+        }
+        if (profileSelectionShown)
+            ui.showProfileSelection();
+        if (bestResultsShown)
+            ui.showBestResults();
     }
 }
