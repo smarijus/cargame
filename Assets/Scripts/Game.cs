@@ -5,7 +5,7 @@ public class Game
 {
 
     private string currentUser;
-
+    private int currentMenuItem = 0;
 
     public void loadGameScene(string sceneName)
     {

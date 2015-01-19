@@ -8,19 +8,39 @@ public class MainMenu : MonoBehaviour
     private bool mainMenuShown = true;
     private bool profileSelectionShown = false;
     private bool bestResultsShown = false;
+    private bool profileCreationMenuShown = false;
+    private int menuItem = 4;
+    private UserInterface ui = new UserInterface();
 
     void OnGUI()
     {
         GUI.skin = menuSkin;
-        UserInterface ui = new UserInterface();
-        if (mainMenuShown)
+        switch (menuItem)
         {
-            ui.showCurrentProfile();
-            ui.showMainMenu();
+            case 1:
+                ui.showCurrentProfile();
+                ui.showMainMenu();
+                break;
+            case 2:
+                ui.showProfileSelection();
+                break;
+            case 3:
+                ui.showBestResults();
+                break;
+            case 4:
+                ui.showProfileCreationMenu();
+                break;
         }
-        if (profileSelectionShown)
-            ui.showProfileSelection();
-        if (bestResultsShown)
-            ui.showBestResults();
+        //if (mainMenuShown)
+        //{
+        //    ui.showCurrentProfile();
+        //    ui.showMainMenu();
+        //}
+        //if (profileSelectionShown)
+        //    ui.showProfileSelection();
+        //if (bestResultsShown)
+        //    ui.showBestResults();
+        //if (profileCreationMenuShown)
+        //    ui.showProfileCreationMenu();
     }
 }
