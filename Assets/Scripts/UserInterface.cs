@@ -3,7 +3,7 @@ using System.Collections;
 
 public class UserInterface
 {
-    private Game game = new Game();
+    //private Game game = new Game();
 
     // Meniu mygtukų plotis, pagal ekrano dydį
     private int menuButtonWidth = (Screen.width / 10) * 6;
@@ -55,9 +55,10 @@ public class UserInterface
 
         //GUI.Box(new Rect(left, top, width, height), "Vartotojo paskyra: ");
         GUI.Box(new Rect(menuBoxLeftPosition, Screen.height / 20, menuBoxWidth, (Screen.height / 10) * 2), "Vartotojo paskyra: ");
-        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 2, menuButtonWidth, menuButtonHeight), game.getUserProfile()))
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 2, menuButtonWidth, menuButtonHeight), Game.Instance.getUserProfile()))
         {
-            showProfileSelection();
+            Game.Instance.setMenuItem(1);
+            //showProfileSelection();
         }
 
     }
@@ -76,27 +77,32 @@ public class UserInterface
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 6, menuButtonWidth, menuButtonHeight), "Pradėti žaidimą"))
         {
-            game.loadGameScene("GameScene");
+            Game.Instance.loadGameScene("GameScene");
+            //game.loadGameScene("GameScene");
         }
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 8, menuButtonWidth, menuButtonHeight), "Tęsti išsaugotą žaidimą"))
         {
             //game.quitGame();
+            //Game.Instance.quitGame();
         }
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 10, menuButtonWidth, menuButtonHeight), "Geriausi rezultatai"))
         {
             //game.quitGame();
+            Game.Instance.setMenuItem(2);
         }
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 12, menuButtonWidth, menuButtonHeight), "Informacija apie projektą"))
         {
-            game.quitGame();
+            //game.quitGame();
+            //Game.Instance.quitGame();
         }
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 14, menuButtonWidth, menuButtonHeight), "Išjungti žaidimą"))
         {
-            game.quitGame();
+            //game.quitGame();
+            Game.Instance.quitGame();
         }
     }
 
@@ -122,11 +128,11 @@ public class UserInterface
         GUI.Box(new Rect(menuBoxLeftPosition, top+height, menuBoxWidth, 125), "");
         if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 5, menuButtonWidth, menuButtonHeight), "Kurti naują paskyrą"))
         {
-            //
+            Game.Instance.setMenuItem(3);
         }
         if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 55, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
         {
-            //
+            Game.Instance.setMenuItem(0);
         }
     }
 
@@ -155,18 +161,22 @@ public class UserInterface
 
         if (GUI.Button(new Rect(horizontalCenter - 100, top + 125, 200, 50), "Įkrauti iš naujo"))
         {
-            game.restartLevel();
+            //game.restartLevel();
+            Game.Instance.restartLevel();
         }
 
         if (GUI.Button(new Rect(horizontalCenter - 100, top + 175, 200, 50), "Grįžti į pagrindinį meniu"))
         {
-            game.returnToMainMenu();
+           // game.returnToMainMenu();
+            //Game.Instance.setMenuItem(1);
+            Game.Instance.returnToMainMenu();
         }
 
 
         if (GUI.Button(new Rect(horizontalCenter - 100, top + 225, 200, 50), "Išjungti žaidimą"))
         {
-            game.quitGame();
+            //game.quitGame();
+            Game.Instance.quitGame();
         }
     }
 
@@ -197,7 +207,7 @@ public class UserInterface
         }
         if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 55, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
         {
-            //
+            Game.Instance.setMenuItem(0);
         }
     }
 
@@ -218,11 +228,11 @@ public class UserInterface
         GUI.Box(new Rect(menuBoxLeftPosition, top + height, menuBoxWidth, 125), "");
         if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 5, menuButtonWidth, menuButtonHeight), "Išsaugoti"))
         {
-            game.createNewProfile();
+            //game.createNewProfile();
         }
-        if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 55, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
+        if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 55, menuButtonWidth, menuButtonHeight), "Grįžti į paskyrų sąrašą"))
         {
-            //
+            Game.Instance.setMenuItem(1);
         }
     }
 
