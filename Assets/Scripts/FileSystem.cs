@@ -64,7 +64,8 @@ public class FileSystem
         _connection.DropTable<Person>();
         _connection.CreateTable<Person>();
 
-        _connection.InsertAll(new[]{
+        _connection.InsertAll(new[]
+        {
 			new Person{
 				Id = 1,
 				Name = "Admin",

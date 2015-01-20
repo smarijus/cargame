@@ -4,6 +4,10 @@ using System.Collections;
 public class Sound
 {
 
+    // Funkcija keičia automiblio variklio garso toną, pagal pavarą ir važiavimo greitį.
+    // Parametrai:
+    //              gearRatio - pavarų numeriai, prie tam tikro greičio;
+    //              carSpeed - dabartinis automobilio greitis;
     public float getEngineSoundPitch(int[] gearRatio, float carSpeed)
     {
         float enginePitch;

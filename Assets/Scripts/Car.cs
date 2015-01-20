@@ -68,6 +68,10 @@ public class Car
         return currentSteerAngle;
     }
 
+    // Funkcija patikrina ar autombilis išvažiavo iš žemėlapio ribų.
+    // Parametrai:
+    //              carPosition - dabartinė automobilio pozicija;
+    //              terrainSize - žemėlapio dydis
     public bool checkIfCarOutsideTerrain(Vector3 carPosition, Vector3 terrainSize)
     {
         if (carPosition.x < -50 || carPosition.x > terrainSize.x + 50)

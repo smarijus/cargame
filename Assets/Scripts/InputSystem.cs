@@ -70,6 +70,7 @@ public class InputSystem
             return getHandbrakeTouch();
     }
 
+    // Funkcija grąžina ar nuspaustas kameros mygtukas.
     public bool getBackwardCamera()
     {
         if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player && Input.touchCount == 0)
@@ -80,24 +81,24 @@ public class InputSystem
             return getBackwardCameraButtonTouch();
     }
 
-
+    // Funkcija grąžina mobilaus įrenginio akselerometro reikšmę.
     private float getHorizontalAxisAccelerometerValue()
     {
         return Input.acceleration.x;
     }
 
 
-    public void getAccelerometerAxis()
-    {
-        lowPassValue = Input.acceleration;
-    }
+    //public void getAccelerometerAxis()
+    //{
+    //    lowPassValue = Input.acceleration;
+    //}
 
-    public Vector3 LowPassFilterAccelerometer()
-    {
-        //lowPassValue = Mathf.Lerp(lowPassValue, Input.acceleration, LowPassFilterFactor);
-        //return lowPassValue;
-        return new Vector3();
-    }
+    //public Vector3 LowPassFilterAccelerometer()
+    //{
+    //    //lowPassValue = Mathf.Lerp(lowPassValue, Input.acceleration, LowPassFilterFactor);
+    //    //return lowPassValue;
+    //    return new Vector3();
+    //}
 
     // Funkcjija patikrina ir grąžina akseleratoriaus reikšmę iš lietimui jautraus ekrano
     private float getVerticalAxisTouchValue()
@@ -181,7 +182,7 @@ public class InputSystem
         return false;
     }
 
-    // Funkcija konvertuoja ekrano kooridnates į vartotojo sąsajai reikalaingas koordinates
+    // Funkcija konvertuoja ekrano lietimo kooridnates į vartotojo sąsajos koordinates
     // Parametrai:
     //              touchScreenPositin - ekrano lietimo koordinatės.
     private Vector2 convertTouchScreenCordinatesToGUI(Vector2 touchScreenPosition)
