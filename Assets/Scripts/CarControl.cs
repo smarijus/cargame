@@ -52,15 +52,18 @@ public class CarControl : MonoBehaviour
     private Car car = new Car();
     private UserInterface ui = new UserInterface();
     private InputSystem inputs = new InputSystem();
+    private Vector3 startPosition;
+    private Quaternion startRotation;
     Sound sounds = new Sound();
 
 	// Use this for initialization
 	void Start ()
 	{
 		rigidbody.centerOfMass = new Vector3(rigidbody.centerOfMass.x, -0.9F, 0.5F);
-        physics = new ObjectDeformation();
+        physics = new ObjectDeformation(transf);
 		SetValues();
-
+        startPosition = transf.position;
+        startRotation = transf.rotation;
 	}
 	
 	// Update is called once per frame
@@ -74,12 +77,14 @@ public class CarControl : MonoBehaviour
         Vector3 terrainSize = terrain.terrainData.size;
         //Debug.Log(terrainSize);
         Vector3 carPosition = transform.position;
-        if (carPosition.x < -50 || carPosition.x > terrainSize.x + 50)
-            Debug.Log("Automobilis išvažiavo iš žemėlapio su x ašimi");
-        if (carPosition.y < -50 || carPosition.y > terrainSize.y + 50)
-            Debug.Log("Automobilis išvažiavo iš žemėlapio su y ašimi");
-        if (carPosition.z < -50 || carPosition.z > terrainSize.z + 50)
-            Debug.Log("Automobilis išvažiavo iš žemėlapio su z ašimi");
+        if (car.checkIfCarOutsideTerrain(carPosition, terrainSize) || Game.Instance.getCarResetStatus())
+        {
+            transf.position = startPosition;
+            transf.rotation = startRotation;
+            transf.rigidbody.velocity = Vector3.zero;
+            Game.Instance.setCarResetStatus(false);
+        }
+
 	}
 
 	void Update()
@@ -331,7 +336,7 @@ public class CarControl : MonoBehaviour
                 Instantiate(collisionSound, obj.contacts[0].point, Quaternion.identity);
             //}
         }
-        for (int i = 0; i < obj.contacts.Length; i++)
+        for (int i = 0; i < 1; i++)
             if (!obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Wheel"))
             {
                 if (obj.contacts[i].thisCollider.name != obj.gameObject.name)

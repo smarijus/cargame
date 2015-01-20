@@ -50,6 +50,7 @@ public class Game : MonoBehaviour
     // Kintamasis, kuris nurodo ar žaidimo meniu įjungtas
     private bool inGameMenuEnabled = false;
 
+    private bool resetCarStatus = false;
     //FileSystem fileSystem = new FileSystem("database.db");
 
 
@@ -169,4 +170,13 @@ public class Game : MonoBehaviour
         inGameMenuEnabled = status;
     }
     
+    public bool getCarResetStatus()
+    {
+        return resetCarStatus;
+    }
+
+    public void setCarResetStatus(bool status)
+    {
+        resetCarStatus = status;
+    }
 }

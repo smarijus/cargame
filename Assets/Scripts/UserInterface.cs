@@ -180,7 +180,7 @@ public class UserInterface
 
         if (GUI.Button(new Rect(horizontalCenter - 100, top + 75, 200, 50), "Atstatyti automoblį"))
         {
-            //
+            Game.Instance.setCarResetStatus(true);
         }
 
         if (GUI.Button(new Rect(horizontalCenter - 100, top + 125, 200, 50), "Įkrauti iš naujo"))
