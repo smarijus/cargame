@@ -6,7 +6,8 @@ using System.IO;
 using SQLite4Unity3d;
 using System.Collections.Generic;
 
-public class DataService  {
+public class DataService 
+{
 
 	private ISQLiteConnection _connection;
 
@@ -55,7 +56,8 @@ public class DataService  {
 
 	}
 
-	public void CreateDB(){
+	public void CreateDB()
+    {
 		_connection.DropTable<Person> ();
 		_connection.CreateTable<Person> ();
 

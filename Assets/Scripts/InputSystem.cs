@@ -70,6 +70,16 @@ public class InputSystem
             return getHandbrakeTouch();
     }
 
+    public bool getBackwardCamera()
+    {
+        if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player && Input.touchCount == 0)
+        {
+            return Input.GetButton("Backward Camera");
+        }
+        else
+            return getBackwardCameraButtonTouch();
+    }
+
 
     private float getHorizontalAxisAccelerometerValue()
     {
@@ -156,7 +166,24 @@ public class InputSystem
         return false;
     }
 
+    // Funkcija grąžina ar paspaustas meniu mygtukas lietimui jautriame ekrane
+    private bool getBackwardCameraButtonTouch()
+    {
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Stationary)
+            {
+                Rect cameraButton = new Rect((Screen.width / 10 * 9) - Screen.width / 50, Screen.height / 25, Screen.width / 10, Screen.height / 10);
+                if (cameraButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
+                    return true;
+            }
+        }
+        return false;
+    }
 
+    // Funkcija konvertuoja ekrano kooridnates į vartotojo sąsajai reikalaingas koordinates
+    // Parametrai:
+    //              touchScreenPositin - ekrano lietimo koordinatės.
     private Vector2 convertTouchScreenCordinatesToGUI(Vector2 touchScreenPosition)
     {
         Vector2 convertedPosition = touchScreenPosition;

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 using System;
 
 public class CreateDBScript : MonoBehaviour {
 
-	public Text DebugText;
+	//public Text DebugText;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +17,7 @@ public class CreateDBScript : MonoBehaviour {
 		people = ds.GetPersonsNamedRoberto ();
 		ToConsole("Searching for Roberto ...");
 		ToConsole (people);
-        DebugText.text = "Testas";
+        //DebugText.text = "Testas";
 	}
 	
 	private void ToConsole(IEnumerable<Person> people){
@@ -27,7 +27,7 @@ public class CreateDBScript : MonoBehaviour {
 	}
 	
 	private void ToConsole(string msg){
-		DebugText.text += System.Environment.NewLine + msg;
+		//DebugText.text += System.Environment.NewLine + msg;
 		Debug.Log (msg);
 	}
 }

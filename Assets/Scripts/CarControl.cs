@@ -98,14 +98,16 @@ public class CarControl : MonoBehaviour
 
         if (inputs.getMenuButton())
         {
-            if (menuStatus)
+            if (Game.Instance.getInGameMenuStatus())
             {
-                menuStatus = false;
+                Game.Instance.setInGameMenuStatus(false);
+                //menuStatus = false;
                 //Time.timeScale = 1;
             }
             else
             {
-                menuStatus = true;
+                Game.Instance.setInGameMenuStatus(true);
+                //menuStatus = true;
                 //Time.timeScale = 0;
             }
         }
@@ -115,12 +117,12 @@ public class CarControl : MonoBehaviour
 	void OnGUI()
 	{
 
-        if (!menuStatus)
+        if (!Game.Instance.getInGameMenuStatus())
         {
             ui.showSpeed(car.getCarSpeed(wheelRL.radius, wheelRL.rpm));
             ui.showInGameControls();
         }
-        if (menuStatus)
+        if (Game.Instance.getInGameMenuStatus())
             ui.showInGameMenu();
 	}
 

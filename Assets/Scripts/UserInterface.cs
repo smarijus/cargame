@@ -37,6 +37,7 @@ public class UserInterface
         float horizontalCenter = Screen.width / 2;
         float verticalCenter = Screen.height / 2;
         GUI.Button(new Rect(Screen.width / 50, Screen.height / 25, Screen.width / 10, Screen.height / 10), "M");
+        GUI.Button(new Rect((Screen.width / 10 * 9) - Screen.width / 50, Screen.height / 25, Screen.width / 10, Screen.height / 10), "C");
         GUI.Button(new Rect(Screen.width / 50, verticalCenter, Screen.width / 10, Screen.height / 5), "H");
         GUI.Button(new Rect(Screen.width / 50, Screen.height - Screen.height / 25 - Screen.height / 5, Screen.width / 10, Screen.height / 5), "B");
         GUI.Button(new Rect((Screen.width / 10 * 9) - Screen.width / 50, (Screen.height / 3 * 2) - Screen.width / 50, Screen.width / 10, Screen.height / 3), "A");
@@ -55,7 +56,7 @@ public class UserInterface
 
         //GUI.Box(new Rect(left, top, width, height), "Vartotojo paskyra: ");
         GUI.Box(new Rect(menuBoxLeftPosition, Screen.height / 20, menuBoxWidth, (Screen.height / 10) * 2), "Vartotojo paskyra: ");
-        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 2, menuButtonWidth, menuButtonHeight), Game.Instance.getUserProfile()))
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 2, menuButtonWidth, menuButtonHeight), Game.Instance.getCurrentUser()))
         {
             Game.Instance.setMenuItem(1);
             //showProfileSelection();
@@ -93,7 +94,7 @@ public class UserInterface
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 12, menuButtonWidth, menuButtonHeight), "Informacija apie projektą"))
         {
-
+            Game.Instance.setMenuItem(4);
             //game.quitGame();
             //Game.Instance.quitGame();
         }
@@ -121,7 +122,8 @@ public class UserInterface
         {
             if (GUI.Button(new Rect(menuButtonLeftPosition, top + (topButton + (50 * i)), menuButtonWidth, menuButtonHeight), accounts[i]))
             {
-                //
+                Game.Instance.setCurrentUser(accounts[i]);
+                Game.Instance.setMenuItem(0);
             }
         }
         GUI.Box(new Rect(menuBoxLeftPosition, top+height, menuBoxWidth, 125), "");
@@ -129,9 +131,12 @@ public class UserInterface
         {
             Game.Instance.setMenuItem(3);
         }
-        if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 55, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
+        if (Game.Instance.getCurrentUser() != null)
         {
-            Game.Instance.setMenuItem(0);
+            if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 55, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
+            {
+                Game.Instance.setMenuItem(0);
+            }
         }
     }
 
@@ -150,7 +155,7 @@ public class UserInterface
 
         if (GUI.Button(new Rect(horizontalCenter - 100, top + 25, 200, 50), "Išjungti menu"))
         {
-            //
+            Game.Instance.setInGameMenuStatus(false);
         }
 
         if (GUI.Button(new Rect(horizontalCenter - 100, top + 75, 200, 50), "Atstatyti automoblį"))
@@ -232,6 +237,32 @@ public class UserInterface
         if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 55, menuButtonWidth, menuButtonHeight), "Grįžti į paskyrų sąrašą"))
         {
             Game.Instance.setMenuItem(1);
+        }
+    }
+
+    public void showProjectInfo()
+    {
+        float horizontalCenter = Screen.width / 2;
+        float verticalCenter = Screen.height / 2;
+        float left = horizontalCenter - 200;
+        float top = verticalCenter - 200;
+        float width = 400;
+        float height = 250;
+        GUI.Box(new Rect(menuBoxLeftPosition, top, menuBoxWidth, height), "Informacija apie projektą");
+       // GUI.Label(new Rect(left + 25, top + 25, width, 125), "Nr    Vartotojas        Rezultatas         Data");
+        //int topButton = 25;
+        //for (int i = 0; i < results.Length; i++)
+       /// {
+        //    GUI.Label(new Rect(left + 25, top + 50 + (25 * i), width, 125), (i + 1) + "     " + results[i]);
+       // }
+        GUI.Box(new Rect(menuBoxLeftPosition, top + height, menuBoxWidth, 125), "");
+        //if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 5, menuButtonWidth, menuButtonHeight), "Valyti rezultatus"))
+        //{
+        //    //
+        //}
+        if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 55, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
+        {
+            Game.Instance.setMenuItem(0);
         }
     }
 

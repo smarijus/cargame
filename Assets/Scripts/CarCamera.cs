@@ -13,6 +13,8 @@ public class CarCamera : MonoBehaviour
 	public float DefaultFOV = 60;
 	private Vector3 rotationVector;
 
+
+    private InputSystem inputs = new InputSystem();
 	// Use this for initialization
 	void Start () {
 	
@@ -39,7 +41,7 @@ public class CarCamera : MonoBehaviour
 		if (localVilocity.z< 0.5)
 		{
 			rotationVector.y = car.eulerAngles.y + 180;
-			if (Input.GetButton("Backward Camera"))
+			if (inputs.getBackwardCamera())
 			{
 				rotationVector.y = car.eulerAngles.y;
 			}
@@ -47,7 +49,7 @@ public class CarCamera : MonoBehaviour
 		else
 		{
 			rotationVector.y = car.eulerAngles.y;
-			if (Input.GetButton("Backward Camera"))
+			if (inputs.getBackwardCamera())
 			{
 				rotationVector.y = car.eulerAngles.y + 180;
 			}

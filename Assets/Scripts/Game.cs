@@ -38,13 +38,15 @@ public class Game : MonoBehaviour
 
     public void startState()
     {
-        
+        //if (currentUser == null)
+
     }
 
 
 
     private string currentUser;
     private int currentMenuItem = 0;
+    private bool inGameMenuEnabled = false;
 
     public void loadGameScene(string sceneName)
     {
@@ -87,15 +89,40 @@ public class Game : MonoBehaviour
 
     }
 
+    public string getCurrentUser()
+    {
+        return currentUser;
+    }
+
+    public void setCurrentUser(string name)
+    {
+        currentUser = name;
+    }
 
     public int getMenuItem()
     {
-        return currentMenuItem;
+        if (currentUser == null && currentMenuItem != 3)
+            return 1;
+        else
+            if (currentUser == null && currentMenuItem == 3)
+                return 3;
+            else
+                return currentMenuItem;
     }
 
     public void setMenuItem(int menuItem)
     {
         currentMenuItem = menuItem;
+    }
+
+    public bool getInGameMenuStatus()
+    {
+        return inGameMenuEnabled;
+    }
+
+    public void setInGameMenuStatus(bool status)
+    {
+        inGameMenuEnabled = status;
     }
     
 }

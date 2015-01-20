@@ -24,22 +24,39 @@ public class MainMenu : MonoBehaviour
     void OnGUI()
     {
         GUI.skin = menuSkin;
-        switch (Game.Instance.getMenuItem())
-        {
-            case 0:
-                ui.showCurrentProfile();
-                ui.showMainMenu();
-                break;
-            case 1:
-                ui.showProfileSelection();
-                break;
-            case 2:
-                ui.showBestResults();
-                break;
-            case 3:
-                ui.showProfileCreationMenu();
-                break;
-        }
+        //if (Game.Instance.getCurrentUser() != null)
+        //{
+            switch (Game.Instance.getMenuItem())
+            {
+                case 0:
+                    ui.showCurrentProfile();
+                    ui.showMainMenu();
+                    break;
+                case 1:
+                    ui.showProfileSelection();
+                    break;
+                case 2:
+                    ui.showBestResults();
+                    break;
+                case 3:
+                    ui.showProfileCreationMenu();
+                    break;
+                case 4:
+                    ui.showProjectInfo();
+                    break;
+                default:
+                    ui.showCurrentProfile();
+                    ui.showMainMenu();
+                    break;
+            }
+        //}
+        //else
+        //{
+        //    if (Game.Instance.getMenuItem() == 3)
+        //        ui.showProfileCreationMenu();
+        //    else
+        //        ui.showProfileSelection();
+        //}
         //if (mainMenuShown)
         //{
         //    ui.showCurrentProfile();
