@@ -49,7 +49,7 @@ public class Game : MonoBehaviour
     private int currentMenuItem = 0;
     // Kintamasis, kuris nurodo ar žaidimo meniu įjungtas
     private bool inGameMenuEnabled = false;
-
+    // Kintamasis, kuris nurodo, kad reikia pastatyti automobilį į pradinę padėtį.
     private bool resetCarStatus = false;
     //FileSystem fileSystem = new FileSystem("database.db");
 
@@ -169,12 +169,16 @@ public class Game : MonoBehaviour
     {
         inGameMenuEnabled = status;
     }
-    
+
+    // Funkcija kuri nurodo ar reikia nustatyti automobilį į pradinę padėtį.
     public bool getCarResetStatus()
     {
         return resetCarStatus;
     }
 
+    // Funkcija kuri nurodo naują reikšmę, parametrui, skirtam nurodyti ar reikia pastatyt atumobilį į pradinę padadėtį.
+    // Parametrai:
+    //              status - nauja būsena;
     public void setCarResetStatus(bool status)
     {
         resetCarStatus = status;
