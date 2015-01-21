@@ -3,13 +3,9 @@ using System.Collections;
 
 public class FileSystem
 {
-    DataBase db = new DataBase("database.db");// = new DataBase("database.db");
-    //public void createDB()
-    //{
-    //    //DataBase db = new DataBase("database.db");
-    //    db.CreateDB();
-    //}
+    DataBase db = new DataBase("database.db");
 
+    // Funkcija paima iš duomenų bazės vartotojų sąrašą.
     public string[] getUsersList()
     {
         string[] userList;
@@ -36,6 +32,9 @@ public class FileSystem
         return new string[0];
     }
 
+    // Funkcija sukuria naują vartotoją su pateiktu vartotojo vardu.
+    // Parametrai:
+    //              userName - naujau kuriamo vartotojo vardas;
     public void addNewUser(string userName)
     {
         db.CreatePerson(userName);

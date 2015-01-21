@@ -16,6 +16,9 @@ public class Car
     // Parametrai:
     //              wheelRadius - rato diametras;
     //              wheelSpeed  - rato apsisukimai per minutę;
+    // Grąžina:
+    //              float tipas;
+    //              Funkcija grąžina apskčiuotą automiblio greitį.
     public float getCarSpeed(float wheelRadius, float wheelSpeed)
     {
         float speed = 2 * 22 / 7 * wheelRadius * wheelSpeed * 60 / 1000;
@@ -28,13 +31,19 @@ public class Car
     // Parametrai:
     //              wheelSpeed - rato apsisukimai per minutę;
     //              deltaTime  - laikas per kurį buvo pakeistas kadras;
+    // Grąžnina:
+    //              float tipas;
+    //              Funkcija grąžina apskaičiuotą automobilio rato sukimosi greitį.
     public float getWheelRotationSpeed(float wheelSpeed, float deltaTime)
     {
         float rotation = wheelSpeed / 60 * 360 * deltaTime;
         return rotation;
     }
 
-    // Funkcija grąžina, ar naudojamas rankinis stabdis.
+    // Funkcija grąžina ar nuspaustas rankinio stabdžio mygtukas.
+    // Grąžina:
+    //              bool tipas;
+    //              Funkcija grąžina ar naudojamas rankinis stabdis.
     public bool getHandBrake()
     {
         if (inputs.getHandbrake())
@@ -44,9 +53,12 @@ public class Car
         return false;
     }
 
-    // Funkcija grąžina ar automobilis stabdomas
+    // Funkcija patikrina atsižveldma į automobilio važiavimo kryptį ar automoiblis stabdo.
     // Parametrai:
     //              carSpeed - automobilio greitis.
+    // Grąžina:
+    //              bool tipas;
+    //              Funkcija grąžina ar automiblis stabdo.
     public bool getBrake(float carSpeed)
     {
         if (carSpeed > 0 && inputs.getVerticalAxisValue() < 0)

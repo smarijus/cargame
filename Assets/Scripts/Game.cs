@@ -51,14 +51,19 @@ public class Game : MonoBehaviour
     private bool inGameMenuEnabled = false;
     // Kintamasis, kuris nurodo, kad reikia pastatyti automobilį į pradinę padėtį.
     private bool resetCarStatus = false;
+    // Kintamasis, kuriame saugomas vartotojų sąrašas.
+    string[] userList;
+
     FileSystem fileSystem = new FileSystem();
 
-
+    // Funkcija užkrauna duomenų bazę.
+    // Jei duomenų bazė neegzistuoja, sukuria naują duomenų bazę.
+    // Jei duomenų bazė egizstuoja, užkrauna vartotojų sąrašą.
     public void loadDB()
     {
         loadUserList();
     }
-    string[] userList;// = { "Vartotojas1", "Vartotojas2" };
+    // = { "Vartotojas1", "Vartotojas2" };
     
     //public void getList()
     //{
@@ -102,8 +107,10 @@ public class Game : MonoBehaviour
     }
 
     //-----------------------------------------------------------------
-    //Funkcija neuzžbaigta
-    
+    // Funkcija sukuria naują varotoją ir duomenis įterpia į duomenų bazę.
+    // Sukūrus vartotoją, funkcija atnaujina varototjų sąrašą.
+    // Parametrai:
+    //                  userName - kuriamo vartotojo vardas.
     public void createNewUserProfile(string userName)
     {
         //string[] tempList = new string[userList.Length + 1];
@@ -115,23 +122,26 @@ public class Game : MonoBehaviour
         loadUserList();
     }
 
-    public void loadUserList()
+    // Funkcija užkrauna iš duomenų bazės vartotojų sąrašą.
+    private void loadUserList()
     {
         userList = fileSystem.getUsersList();
     }
 
-    //----------------------------------------------------------------
-    // Funcija neužbaigta
     // Funkcija skirta įkrauti pasirinkto vartotojo profilio duomenis.
+    // Parametrai:
+    //                  
     public void loadUserProfile(string name)
     {
         currentUser = name;
     }
 
     // Funkcija kuri grąžina vartotojų profilių sąrašą.
+    // Grąžina:
+    //                  string[] tipas;
+    //                  Funkcija grąžina varotojų vardų masyvą.
     public string[] getUsersList()
-    {
-        
+    {   
         return userList;
     }
 

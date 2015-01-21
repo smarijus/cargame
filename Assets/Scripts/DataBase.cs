@@ -60,11 +60,16 @@ public class DataBase
 
 	}
 
+    // Funkcija grąžina vartotojų lentelės turinį iš duomenų bazės.
     public IEnumerable<User> getUsersList()
     {
         return _connection.Table<User>(); 
 	}
 
+    // Funkcija įterpia naują vartotojo į duomenų bazę.
+    // Jei vartotojų lentelė neegizstuoja, funkcija sukuria naują lentelę.
+    // Parametrai:
+    //              carPosition - dabartinė automobilio pozicija;
     public User CreatePerson(string userName)
     {
         var p = new User
