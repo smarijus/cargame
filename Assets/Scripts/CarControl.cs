@@ -337,7 +337,7 @@ public class CarControl : MonoBehaviour
             //}
         }
         for (int i = 0; i < 1; i++)
-            if (!obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Wheel"))
+            if (!obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Wheel") && !obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Terrain"))
             {
                 if (obj.contacts[i].thisCollider.name != obj.gameObject.name)
                 {
