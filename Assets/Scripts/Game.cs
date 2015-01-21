@@ -155,6 +155,12 @@ public class Game : MonoBehaviour
         return highscoresList;
     }
 
+    public void clearHigscores()
+    {
+        fileSystem.clearHighscores();
+        loadHighscoresList();
+    }
+
     // Funkcija skirta įkrauti pasirinkto vartotojo profilio duomenis.
     // Parametrai:
     //                  

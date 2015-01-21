@@ -152,4 +152,16 @@ public class DataBase
         //Debug.Log("Įrašas sukurtas");
         return h;
     }
+
+    public void clearHighscores()
+    {
+        try
+        {
+            _connection.DropTable<Highscore>();
+            _connection.CreateTable<Highscore>();
+        }
+        catch
+        {
+        }
+    }
 }

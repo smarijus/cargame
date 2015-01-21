@@ -79,4 +79,9 @@ public class FileSystem
         db.InsertHigscore(userName, score);
     }
 
+    public void clearHighscores()
+    {
+        db.clearHighscores();
+    }
+
 }
