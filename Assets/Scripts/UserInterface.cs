@@ -158,6 +158,13 @@ public class UserInterface
                 Game.Instance.setMenuItem(0);
             }
         }
+        else
+        {
+            if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 55, menuButtonWidth, menuButtonHeight), "Išjungti žaidimą"))
+            {
+                Game.Instance.quitGame();
+            }
+        }
     }
 
     // Funkcija atvaizduoja meniu žaidžiant.
