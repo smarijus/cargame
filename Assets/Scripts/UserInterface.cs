@@ -213,18 +213,22 @@ public class UserInterface
         float top = verticalCenter - 200;
         float width = 400;
         float height = 250;
-        string[] results = { "Vartotojas1          10000          2014-12-12",
-                             "Vartotojas2          90000          2014-12-12",
-                             "Vartotojas1          80000          2014-12-12",
-                             "Vartotojas1          70000          2014-12-12",
-                             "Vartotojas2          60000          2014-12-15"};
+        string[] highscores = Game.Instance.getHighscoresList();
+        //string[] results = { "Vartotojas1          10000          2014-12-12",
+        //                     "Vartotojas2          90000          2014-12-12",
+        //                     "Vartotojas1          80000          2014-12-12",
+        //                     "Vartotojas1          70000          2014-12-12",
+        //                     "Vartotojas2          60000          2014-12-15"};
         GUI.Box(new Rect(menuBoxLeftPosition, top, menuBoxWidth, height), "Geriausi rezultatai");
         GUI.Label(new Rect(left + 25, top + 25, width, 125), "Nr    Vartotojas        Rezultatas         Data");
         int topButton = 25;
-        for (int i = 0; i < results.Length; i++)
+        scrollPosition = GUI.BeginScrollView(new Rect(menuBoxLeftPosition, top+125, menuBoxWidth, height - 25), scrollPosition, new Rect(0, 0, menuBoxWidth - 20, menuButtonHeight * (highscores.Length + 1)));
+        
+        for (int i = 0; i < highscores.Length; i++)
         {
-            GUI.Label(new Rect(left+25, top+50+(25*i), width, 125), (i+1)+"     "+results[i]);
+            GUI.Label(new Rect(left+25, top+50+(25*i), width, 125), (i+1)+"     "+highscores[i]);
         }
+        GUI.EndScrollView();
         GUI.Box(new Rect(menuBoxLeftPosition, top + height, menuBoxWidth, 125), "");
         if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 5, menuButtonWidth, menuButtonHeight), "Valyti rezultatus"))
         {

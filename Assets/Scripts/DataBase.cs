@@ -6,6 +6,8 @@ using System.IO;
 using SQLite4Unity3d;
 using System.Collections.Generic;
 using System.IO;
+using System;
+using System.Globalization;
 
 public class DataBase
 {
@@ -72,7 +74,7 @@ public class DataBase
     //              carPosition - dabartinė automobilio pozicija;
     public User CreatePerson(string userName)
     {
-        var p = new User
+        var u = new User
         {
 				UserName = userName,
 		};
@@ -80,9 +82,9 @@ public class DataBase
         try
         {
             //_connection.CreateTable<User>();
-            _connection.Insert(p);
+            _connection.Insert(u);
             //Debug.Log("Įrašas sukurtas");
-            return p;
+            return u;
         }
         catch
         {
@@ -90,10 +92,10 @@ public class DataBase
         }
         //Debug.Log("Sukurit nepavyko");
         _connection.CreateTable<User>();
-        _connection.Insert(p);
-        Debug.Log(p);
+        _connection.Insert(u);
+        Debug.Log(u);
         //Debug.Log("Įrašas sukurtas");
-		return p;
+		return u;
 	}
 
     //private bool checkIfTableExist()
@@ -115,4 +117,39 @@ public class DataBase
     //{
     //    return _connection.Table<User>().Where(x => x.UserName == mUserName).FirstOrDefault();
     //}
+
+    // Funkcija grąžina vartotojų geriausius rezultatus.
+    public IEnumerable<Highscore> getHighscoresList()
+    {
+        return _connection.Table<Highscore>();
+    }
+
+    public Highscore InsertHigscore(string userName, int score)
+    {
+        Debug.Log(DateTime.Now.Date.ToString("yyyy-MM-dd HH:mm:ss"));
+        var h = new Highscore
+        {
+            UserName = userName,
+            Score = score,
+            Date = DateTime.Parse(DateTime.Now.ToString(new CultureInfo("lt-LT")))
+        };
+        //Debug.Log("Kuriamas naujas įrašas");
+        try
+        {
+            //_connection.CreateTable<User>();
+            _connection.Insert(h);
+            //Debug.Log("Įrašas sukurtas");
+            return h;
+        }
+        catch
+        {
+
+        }
+        //Debug.Log("Sukurit nepavyko");
+        _connection.CreateTable<Highscore>();
+        _connection.Insert(h);
+        Debug.Log(h);
+        //Debug.Log("Įrašas sukurtas");
+        return h;
+    }
 }

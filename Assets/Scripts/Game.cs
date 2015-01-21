@@ -52,7 +52,9 @@ public class Game : MonoBehaviour
     // Kintamasis, kuris nurodo, kad reikia pastatyti automobilį į pradinę padėtį.
     private bool resetCarStatus = false;
     // Kintamasis, kuriame saugomas vartotojų sąrašas.
-    string[] userList;
+    string[] usersList;
+    // Kintamasis, kuriame saugomi geriausi rezultatai.
+    string[] highscoresList;
 
     FileSystem fileSystem = new FileSystem();
 
@@ -61,7 +63,9 @@ public class Game : MonoBehaviour
     // Jei duomenų bazė egizstuoja, užkrauna vartotojų sąrašą.
     public void loadDB()
     {
-        loadUserList();
+        //insertNewHigscore("Testas", 10000);
+        loadUsersList();
+        loadHighscoresList();
     }
     // = { "Vartotojas1", "Vartotojas2" };
     
@@ -119,13 +123,36 @@ public class Game : MonoBehaviour
         //tempList[tempList.Length - 1] = name;
         //userList = tempList;
         fileSystem.addNewUser(userName);
-        loadUserList();
+        loadUsersList();
     }
 
     // Funkcija užkrauna iš duomenų bazės vartotojų sąrašą.
-    private void loadUserList()
+    private void loadUsersList()
     {
-        userList = fileSystem.getUsersList();
+        usersList = fileSystem.getUsersList();
+    }
+
+    public void insertNewHigscore(string userName, int score)
+    {
+        //string[] tempList = new string[userList.Length + 1];
+        //for (int i = 0; i < userList.Length; i++)
+        //    tempList[i] = userList[i];
+        //tempList[tempList.Length - 1] = name;
+        //userList = tempList;
+        fileSystem.insertNewHighscore(userName, score);
+        loadHighscoresList();
+    }
+
+
+    // Funkcija užkrauna iš duomenų bazės rezultatų sąrašą.
+    private void loadHighscoresList()
+    {
+        highscoresList = fileSystem.getHighscoresList();
+    }
+
+    public string[] getHighscoresList()
+    {
+        return highscoresList;
     }
 
     // Funkcija skirta įkrauti pasirinkto vartotojo profilio duomenis.
@@ -142,7 +169,7 @@ public class Game : MonoBehaviour
     //                  Funkcija grąžina varotojų vardų masyvą.
     public string[] getUsersList()
     {   
-        return userList;
+        return usersList;
     }
 
     // Funkcija grąžina dabartinio vartotojo vardą.
