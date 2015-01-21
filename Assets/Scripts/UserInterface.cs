@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 public class UserInterface
 {
@@ -222,21 +223,29 @@ public class UserInterface
         float width = 400;
         float height = 250;
         string[] highscores = Game.Instance.getHighscoresList();
-        GUI.Box(new Rect(menuBoxLeftPosition, Screen.height/20, menuBoxWidth, (Screen.height/20)*13), "Geriausi rezultatai");
-        GUI.Label(new Rect(menuBoxLeftPosition, (Screen.height/20)*2, menuBoxWidth, Screen.height / 20), "Nr    Vartotojas        Rezultatas         Data");
+        GUI.Box(new Rect(menuBoxLeftPosition   , Screen.height/20, menuBoxWidth, (Screen.height/20)*12), "Geriausi rezultatai");
+        GUI.Label(new Rect(menuBoxLeftPosition + (Screen.width/20)      , (Screen.height / 20) * 2 , (Screen.width/20)*2, Screen.height / 20), "Nr");
+        GUI.Label(new Rect(menuBoxLeftPosition + (Screen.width / 20) * 3, (Screen.height / 20) * 2, (Screen.width / 20) * 4, Screen.height / 20), "Vartotojas");
+        GUI.Label(new Rect(menuBoxLeftPosition + (Screen.width / 20) * 8, (Screen.height / 20) * 2, (Screen.width / 20) * 4, Screen.height / 20), "Rezultatas");
+        GUI.Label(new Rect(menuBoxLeftPosition + (Screen.width / 20) * 14, (Screen.height / 20) * 2, (Screen.width / 20) * 4, Screen.height / 20), "Data");
         int topButton = 25;
-        scrollPosition = GUI.BeginScrollView(new Rect(menuBoxLeftPosition, top+50, menuBoxWidth, height - 50), scrollPosition, new Rect(0, 0, menuBoxWidth - 20, menuButtonHeight * (highscores.Length + 1)));
+        scrollPosition = GUI.BeginScrollView(new Rect(menuBoxLeftPosition, (Screen.height / 20) * 3, menuBoxWidth, (Screen.height / 20) * 12), scrollPosition, new Rect(0, 0, menuBoxWidth, menuButtonHeight * (highscores.Length + 1)));
         for (int i = 0; i < highscores.Length; i++)
         {
-            GUI.Label(new Rect(left+25, top+50+(25*i), width, 125), (i+1)+"     "+highscores[i]);
+            string[] words = Regex.Split(highscores[i], " ");
+            //GUI.Label(new Rect(left+25, top+50+(25*i), width, 125), (i+1)+"     "+highscores[i]);
+            GUI.Label(new Rect((Screen.width / 20)     , ((Screen.height / 20) * i), (Screen.width / 20) * 2, Screen.height / 20), (i+1).ToString());
+            GUI.Label(new Rect((Screen.width / 20) * 3 , ((Screen.height / 20) * i), (Screen.width / 20) * 4, Screen.height / 20), words[0]);
+            GUI.Label(new Rect((Screen.width / 20) * 8, ((Screen.height / 20) * i), (Screen.width / 20) * 4, Screen.height / 20), words[1]);
+            GUI.Label(new Rect((Screen.width / 20) * 14, ((Screen.height / 20) * i), (Screen.width / 20) * 4, Screen.height / 20), words[2]);
         }
         GUI.EndScrollView();
-        GUI.Box(new Rect(menuBoxLeftPosition, (Screen.height/20)*14, menuBoxWidth, (Screen.height/20)*6), "");
-        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 15, menuButtonWidth, menuButtonHeight), "Valyti rezultatus"))
+        GUI.Box(new Rect(menuBoxLeftPosition, (Screen.height/20)*13, menuBoxWidth, (Screen.height/20)*6), "");
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 14, menuButtonWidth, menuButtonHeight), "Valyti rezultatus"))
         {
             Game.Instance.clearHigscores();
         }
-        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 17, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 16, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
         {
             Game.Instance.setMenuItem(0);
         }
@@ -309,5 +318,27 @@ public class UserInterface
             Game.Instance.setMenuItem(0);
         }
     }
+
+    //static string[] GetWords(string input)
+    //{
+    //    MatchCollection matches = Regex.Matches(input, @" ");
+
+    //    var words = from m in matches.Cast<Match>()
+    //                where !string.IsNullOrEmpty(m.Value)
+    //                select TrimSuffix(m.Value);
+
+    //    return words.ToArray();
+    //}
+
+    //static string TrimSuffix(string word)
+    //{
+    //    int apostropheLocation = word.IndexOf(' ');
+    //    if (apostropheLocation != -1)
+    //    {
+    //        word = word.Substring(0, apostropheLocation);
+    //    }
+
+    //    return word;
+    //}
 
 }
