@@ -5,21 +5,18 @@ public class MainMenu : MonoBehaviour
 {
 
     public GUISkin menuSkin;
-    private bool mainMenuShown = true;
-    private bool profileSelectionShown = false;
-    private bool bestResultsShown = false;
-    private bool profileCreationMenuShown = false;
-    private int menuItem = 1;
+    //private bool mainMenuShown = true;
+    //private bool profileSelectionShown = false;
+    //private bool bestResultsShown = false;
+    //private bool profileCreationMenuShown = false;
+    //private int menuItem = 1;
     private UserInterface ui = new UserInterface();
     //private Game test = new Game();
 
     void Start()
     {
-        //DontDestroyOnLoad(Game.Instance);
         DontDestroyOnLoad(Game.Instance);
-        //Game.Instance.startState();
-        //Game.Instance.setMenuItem(1);
-        //Game.Instance.createDB();
+        Game.Instance.loadDB();
     }
 
     void OnGUI()

@@ -51,19 +51,19 @@ public class Game : MonoBehaviour
     private bool inGameMenuEnabled = false;
     // Kintamasis, kuris nurodo, kad reikia pastatyti automobilį į pradinę padėtį.
     private bool resetCarStatus = false;
-    //FileSystem fileSystem = new FileSystem("database.db");
+    FileSystem fileSystem = new FileSystem();
 
 
-    //public void createDB()
-    //{
-    //    fileSystem.createDB();
-    //    getList();
-    //}
-
+    public void loadDB()
+    {
+        loadUserList();
+    }
+    string[] userList;// = { "Vartotojas1", "Vartotojas2" };
+    
     //public void getList()
     //{
-    //    var person = fileSystem.GetPersons();
-    //    Debug.Log(person);
+    //    userList = fileSystem.getUsersList();
+    //    //Debug.Log(userList);
     //}
 
 
@@ -103,14 +103,21 @@ public class Game : MonoBehaviour
 
     //-----------------------------------------------------------------
     //Funkcija neuzžbaigta
-    string[] userList = { "Vartotojas1", "Vartotojas2"};
-    public void createNewUserProfile(string name)
+    
+    public void createNewUserProfile(string userName)
     {
-        string[] tempList = new string[userList.Length + 1];
-        for (int i = 0; i < userList.Length; i++)
-            tempList[i] = userList[i];
-        tempList[tempList.Length - 1] = name;
-        userList = tempList;
+        //string[] tempList = new string[userList.Length + 1];
+        //for (int i = 0; i < userList.Length; i++)
+        //    tempList[i] = userList[i];
+        //tempList[tempList.Length - 1] = name;
+        //userList = tempList;
+        fileSystem.addNewUser(userName);
+        loadUserList();
+    }
+
+    public void loadUserList()
+    {
+        userList = fileSystem.getUsersList();
     }
 
     //----------------------------------------------------------------
@@ -122,8 +129,6 @@ public class Game : MonoBehaviour
     }
 
     // Funkcija kuri grąžina vartotojų profilių sąrašą.
-
-    
     public string[] getUsersList()
     {
         
