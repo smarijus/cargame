@@ -174,11 +174,11 @@ public class ObjectDeformation_old// : MonoBehaviour
             }
         }
         gameObject.GetComponent<MeshFilter>().mesh.vertices = meshes[id].vertices;
-        gameObject.GetComponent<MeshFilter>().mesh.RecalculateNormals();
+        //gameObject.GetComponent<MeshFilter>().mesh.RecalculateNormals();
 
-        gameObject.transform.GetComponent<MeshCollider>().sharedMesh = null;
-        //gameObject.transform.GetComponent<MeshCollider>().sharedMesh.vertices = meshes[id].vertices;
-        gameObject.transform.GetComponent<MeshCollider>().sharedMesh = gameObject.GetComponent<MeshFilter>().mesh;
+        //gameObject.transform.GetComponent<MeshCollider>().sharedMesh = null;
+        ////gameObject.transform.GetComponent<MeshCollider>().sharedMesh.vertices = meshes[id].vertices;
+        //gameObject.transform.GetComponent<MeshCollider>().sharedMesh = gameObject.GetComponent<MeshFilter>().mesh;
 
         //Debug.Log(id);
         //MeshFilter[] mf = gameObject.GetComponentsInChildren<MeshFilter>();

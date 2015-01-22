@@ -41,6 +41,7 @@ public class ObjectDeformation
                 break;
             }
         }
+        
         if (trasnform != null)
         {
             int meshID = 0;
@@ -49,17 +50,21 @@ public class ObjectDeformation
                 if (meshes[i].name == meshName)
                 {
                     meshID = i;
+                    break;
                 }
             }
             for (int i = 0; i < meshes[meshID].vertices.Length; i++)
             {
-                float impactDistnace = Vector3.Distance(trasnform.InverseTransformPoint(contactPoint).normalized, meshes[meshID].vertices[i].normalized);
-                //Debug.Log(impactDistnace);
+                float impactDistnace = Vector3.Distance(trasnform.InverseTransformPoint(contactPoint), meshes[meshID].vertices[i]);
+                //Debug.Log(meshName+" "+impactDistnace);
                 //Debug.Log(impactVelocity);
-                if (impactDistnace <= 0.35F)
+                if (impactDistnace <= 0.3F)
                 {
+                    //Debug.Log(impactDistnace);
                     //meshes[meshID].vertices[i] += ((impactVelocity / 100));
-                   meshes[meshID].vertices[i] += ((trasnform.InverseTransformDirection(impactVelocity).normalized / 100));
+                    //Debug.Log(((trasnform.InverseTransformDirection(impactVelocity)))/10);
+                    meshes[meshID].vertices[i] += ((trasnform.InverseTransformDirection(impactVelocity))/90);
+                    //meshes[meshID].vertices[i] += (impactVelocity / 50);
                 }
             }
         }
@@ -102,6 +107,7 @@ public class ObjectDeformation
 
         if (meshFilter != null && meshID != -1)
         {
+            //Debug.Log("Updating mesh");
             meshFilter.mesh.vertices = meshes[meshID].vertices;
             //meshCollider.sharedMesh = null; ;
             //meshCollider.sharedMesh = meshFilter.mesh;
