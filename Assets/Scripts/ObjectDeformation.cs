@@ -113,8 +113,6 @@ public class ObjectDeformation
             //meshCollider.sharedMesh = meshFilter.mesh;
             //meshCollider.sharedMesh.RecalculateBounds();
             //meshCollider.sharedMesh.RecalculateNormals();
-            //meshFilter.sharedMesh = null; ;
-            //meshFilter.sharedMesh = meshFilter.mesh;
         }
     }
 

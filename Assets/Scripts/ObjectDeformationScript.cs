@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ObjectDeformationScript : MonoBehaviour
 {
-
+    private struct DeformationData
+    {
+        public string partName;
+        public Vector3 impactPoint;
+    }
 
     ObjectDeformation deformation;
 
@@ -26,7 +31,19 @@ public class ObjectDeformationScript : MonoBehaviour
     {
         if (true)
         {
-            //for (int i = 0; i < 1; i++)
+            DeformationData[] collisionArray = recalculatePartsList(obj);
+
+            //for (int i = 0; i < collisionArray.Length; i++)
+            //{
+            //    if (!collisionArray[i].partName.Contains("Wheel"))
+            //        {
+            //            Debug.Log(collisionArray[i].partName);
+            //            deformation.deformObject(collisionArray[i].partName, collisionArray[i].impactPoint, obj.relativeVelocity, gameObject);
+            //            deformation.updateObjectMesh(gameObject, collisionArray[i].partName);
+            //        }
+            //}
+
+            ////for (int i = 0; i < 1; i++)
             for (int i = 0; i < obj.contacts.Length; i++)
             {
                 //Debug.Log(obj.contacts[i].thisCollider.name + " " + obj.contacts[i].otherCollider.name);
@@ -43,7 +60,7 @@ public class ObjectDeformationScript : MonoBehaviour
                             //Debug.Log("Kampas: " + obj.contacts[i].thisCollider.transform.eulerAngles);
                             //Debug.Log(obj.contacts[i].thisCollider.transform.InverseTransformDirection(obj.relativeVelocity).normalized);
                             deformation.deformObject(obj.contacts[i].thisCollider.name, obj.contacts[i].point, obj.relativeVelocity, gameObject);
-                            deformation.updateObjectMesh(gameObject, obj.contacts[i].thisCollider.name);
+                           // deformation.updateObjectMesh(gameObject, obj.contacts[i].thisCollider.name);
                         }
                         else
                         {
@@ -54,12 +71,64 @@ public class ObjectDeformationScript : MonoBehaviour
                             //Debug.Log("Kampas: " + obj.contacts[i].otherCollider.transform.eulerAngles);
                             //Debug.Log(obj.contacts[i].otherCollider.transform.InverseTransformDirection(obj.relativeVelocity).normalized);
                             deformation.deformObject(obj.contacts[i].otherCollider.name, obj.contacts[i].point, obj.relativeVelocity, gameObject);
-                            deformation.updateObjectMesh(gameObject, obj.contacts[i].otherCollider.name);
+                            //deformation.updateObjectMesh(gameObject, obj.contacts[i].otherCollider.name);
                         }
                     }
                 }
             }
+            for (int i = 0; i < collisionArray.Length; i++)
+            {
+                deformation.updateObjectMesh(gameObject, collisionArray[i].partName);
+            }
         }
 
+    }
+
+    DeformationData[] recalculatePartsList(Collision obj)
+    {
+        DeformationData[] collisionArray = new DeformationData[0];
+        for (int i = 0; i < obj.contacts.Length; i++)
+        {
+            bool alreadyExist = false;
+            for (int j = 0; j < collisionArray.Length; j++)
+            {
+                if (obj.contacts[i].thisCollider.transform.IsChildOf(gameObject.transform))
+                {
+                    if (obj.contacts[i].thisCollider.name == collisionArray[j].partName)
+                    {
+                        alreadyExist = true;
+                    }
+                }
+                if (obj.contacts[i].otherCollider.transform.IsChildOf(gameObject.transform))
+                {
+                    if (obj.contacts[i].otherCollider.name == collisionArray[j].partName)
+                    {
+                        alreadyExist = true;
+                    }
+                }
+            }
+            if (alreadyExist == false)
+            {
+                DeformationData[] tempArray = new DeformationData[collisionArray.Length + 1];
+                for (int j = 0; j < collisionArray.Length; j++)
+                {
+                    tempArray[j] = collisionArray[j];
+                }
+                if (obj.contacts[i].thisCollider.transform.IsChildOf(gameObject.transform))
+                {
+                    tempArray[tempArray.Length - 1].partName = obj.contacts[i].thisCollider.name;
+                    tempArray[tempArray.Length - 1].impactPoint = obj.contacts[i].point;
+                }
+                if (obj.contacts[i].otherCollider.transform.IsChildOf(gameObject.transform))
+                {
+                    tempArray[tempArray.Length - 1].partName = obj.contacts[i].otherCollider.name;
+                    tempArray[tempArray.Length - 1].impactPoint = obj.contacts[i].point;
+                }
+                collisionArray = tempArray;
+
+            }
+            alreadyExist = false;
+        }
+        return collisionArray;
     }
 }

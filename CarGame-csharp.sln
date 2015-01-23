@@ -1,7 +1,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{60AF2D43-C8C1-CF9F-22C7-934D78C78A91}") = "CarGame", "Assembly-CSharp-vs.csproj", "{B9981384-D117-7A12-3788-2E12349BF11D}"
+Project("{5CF6B40E-473E-E48C-60C4-66617A2A2901}") = "cargame", "Assembly-CSharp-vs.csproj", "{F243AB06-ED49-062C-6D80-64A5979AAED7}"
+EndProject
+Project("{5CF6B40E-473E-E48C-60C4-66617A2A2901}") = "cargame", "Assembly-CSharp-Editor-vs.csproj", "{5BFE5F38-607D-059A-28A7-F50224BCB5C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,18 +11,21 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B9981384-D117-7A12-3788-2E12349BF11D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9981384-D117-7A12-3788-2E12349BF11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9981384-D117-7A12-3788-2E12349BF11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9981384-D117-7A12-3788-2E12349BF11D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F243AB06-ED49-062C-6D80-64A5979AAED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F243AB06-ED49-062C-6D80-64A5979AAED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F243AB06-ED49-062C-6D80-64A5979AAED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F243AB06-ED49-062C-6D80-64A5979AAED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BFE5F38-607D-059A-28A7-F50224BCB5C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BFE5F38-607D-059A-28A7-F50224BCB5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BFE5F38-607D-059A-28A7-F50224BCB5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BFE5F38-607D-059A-28A7-F50224BCB5C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-<<<<<<< HEAD
-																																																																																																																																																																																										GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																																																																											GlobalSection(MonoDevelopProperties) = preSolution
 =======
-																																																																																																																																																																																						GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																																																																					GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> b011d36ac0b96c8856ecc4f17042e54c91f79292
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
