@@ -875,6 +875,8 @@ MonoBehaviour:
   topReverseSpeed: 50
   handbraked: 0
   maxBrakeTorque: 100
+  slipSidewayFriction: .00999999978
+  slipForwardFriction: 10.0799999
   gearRatio: 320000006e000000a0000000c8000000f0000000ff000000
   spark: {fileID: 100000, guid: 7a598717ded698c4dbdd57c2260fa1e1, type: 2}
   collisionSound: {fileID: 100000, guid: 05444ce8d6a4b08419616e7304968924, type: 2}
@@ -3483,9 +3485,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   car: {fileID: 268633624}
-  distance: 6.4000001
+  distance: 5.4000001
   height: 1.39999998
-  rotationDamping: 3
+  rotationDamping: 1
   heightDamping: 2
   zoomRacio: .5
   DefaultFOV: 60

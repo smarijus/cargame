@@ -5,7 +5,8 @@ public class SkiddingScript : MonoBehaviour
 {
 
 	public float currentFrictionValue;
-	private float skidAt = 1.5F;
+	//private float skidAt = 1.5F;
+    private float skidAt = 10.5F;
 	public GameObject skidSound;
 	public float soundEmittion = 15;
 	private float soundWait;

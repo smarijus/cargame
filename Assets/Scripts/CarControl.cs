@@ -35,8 +35,9 @@ public class CarControl : MonoBehaviour
 	
 	private float mySidewayFriction;
 	private float myForwardFriction;
-	private float slipSidewayFriction;
-	private float slipForwardFriction;
+    public float slipSidewayFriction = 0.01F;
+    public float slipForwardFriction = 10.08F;
+
 
 	
 	public int[] gearRatio;
@@ -65,8 +66,8 @@ public class CarControl : MonoBehaviour
         startPosition = transf.position;
         startRotation = transf.rotation;
 	}
-	
-	// Update is called once per frame
+
+    // FixedUpdate is called more per frame
 	void FixedUpdate ()
 	{
 		Control();
@@ -86,7 +87,7 @@ public class CarControl : MonoBehaviour
         }
 
 	}
-
+    // Update is called once per frame
 	void Update()
 	{
 		wheelFLTrans.Rotate(car.getWheelRotationSpeed(wheelFL.rpm, Time.deltaTime),0,0);
@@ -291,10 +292,9 @@ public class CarControl : MonoBehaviour
 	{
 		myForwardFriction = wheelRR.forwardFriction.stiffness;
 		mySidewayFriction = wheelRR.sidewaysFriction.stiffness;
-		slipForwardFriction = 0.04F;
-		slipSidewayFriction = 0.08F;
+		
 	}
-
+    //Masinos apsisukimas
 	void SetSlip(float currentForwardFriction, float currentSidewayFriction)
 	{
 		WheelFrictionCurve tempForwardFriction = wheelRR.forwardFriction;

@@ -7,8 +7,8 @@ public class CarCamera : MonoBehaviour
 	public Transform car;
 	public float distance = 6.4F;
 	public float height = 1.4F;
-	public float rotationDamping = 3.0F;
-	public float heightDamping = 2.0F;
+    public float rotationDamping = 3.0f;
+    public float heightDamping = 2.0F;
 	public float zoomRacio = 0.5F;
 	public float DefaultFOV = 60;
 	private Vector3 rotationVector;
@@ -26,7 +26,7 @@ public class CarCamera : MonoBehaviour
 		float wantedHeight = car.position.y + height;
 		float myAngle = transform.eulerAngles.y;
 		float myHeight = transform.position.y;
-		myAngle = Mathf.LerpAngle(myAngle,wantedAngle,rotationDamping*Time.deltaTime);
+		myAngle = Mathf.LerpAngle(myAngle,wantedAngle, this.rotationDamping*Time.deltaTime);
 		myHeight = Mathf.Lerp(myHeight,wantedHeight,heightDamping*Time.deltaTime);
 		var currentRotation = Quaternion.Euler(0,myAngle,0);
 		transform.position = car.position;
