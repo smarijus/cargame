@@ -24,31 +24,38 @@ public class ObjectDeformationScript : MonoBehaviour
 
     void OnCollisionEnter(Collision obj)
     {
-        for (int i = 0; i < obj.contacts.Length; i++)
+        if (true)
         {
-            if (!obj.contacts[i].thisCollider.name.Contains("Terrain") && !obj.contacts[i].otherCollider.name.Contains("Terrain"))
+            //for (int i = 0; i < 1; i++)
+            for (int i = 0; i < obj.contacts.Length; i++)
             {
-                if (!obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Wheel"))
+                //Debug.Log(obj.contacts[i].thisCollider.name + " " + obj.contacts[i].otherCollider.name);
+                if (!obj.contacts[i].thisCollider.name.Contains("Terrain") && !obj.contacts[i].otherCollider.name.Contains("Terrain"))
                 {
+                    if (!obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Wheel"))
+                    {
 
-                    if (obj.contacts[i].thisCollider.transform.IsChildOf(gameObject.transform))
-                    {
-                        //Debug.Log("Smūgio kažkas: " + obj.contacts[i].normal);
-                        //Debug.Log("Smūgio greitis: " + Vector3.Angle(obj.relativeVelocity, obj.contacts[i].point));
-                        //Debug.Log("Kampas: " + obj.contacts[i].thisCollider.transform.eulerAngles);
-                        Debug.Log(obj.contacts[i].thisCollider.transform.InverseTransformDirection(obj.relativeVelocity).normalized);
-                        deformation.deformObject(obj.contacts[i].thisCollider.name, obj.contacts[i].point, obj.relativeVelocity, gameObject);
-                        deformation.updateObjectMesh(gameObject, obj.contacts[i].thisCollider.name);
-                    }
-                    else
-                    {
-                        //Debug.Log("Smūgio greitis: " + Vector3.Angle(obj.relativeVelocity, obj.contacts[i].point));
-                        //Debug.Log("Smūgio kažkas: " + obj.contacts[i].normal);
-                        //Debug.Log("Smūgio greitis: " + obj.relativeVelocity);
-                        //Debug.Log("Kampas: " + obj.contacts[i].otherCollider.transform.eulerAngles);
-                        Debug.Log(obj.contacts[i].otherCollider.transform.InverseTransformDirection(obj.relativeVelocity).normalized);
-                        deformation.deformObject(obj.contacts[i].otherCollider.name, obj.contacts[i].point, obj.relativeVelocity, gameObject);
-                        deformation.updateObjectMesh(gameObject, obj.contacts[i].otherCollider.name);
+                        if (obj.contacts[i].thisCollider.transform.IsChildOf(gameObject.transform))
+                        {
+                            Debug.Log(obj.contacts[i].thisCollider.name);
+                            //Debug.Log("Smūgio kažkas: " + obj.contacts[i].normal);
+                            //Debug.Log("Smūgio greitis: " + Vector3.Angle(obj.relativeVelocity, obj.contacts[i].point));
+                            //Debug.Log("Kampas: " + obj.contacts[i].thisCollider.transform.eulerAngles);
+                            //Debug.Log(obj.contacts[i].thisCollider.transform.InverseTransformDirection(obj.relativeVelocity).normalized);
+                            deformation.deformObject(obj.contacts[i].thisCollider.name, obj.contacts[i].point, obj.relativeVelocity, gameObject);
+                            deformation.updateObjectMesh(gameObject, obj.contacts[i].thisCollider.name);
+                        }
+                        else
+                        {
+                            Debug.Log(obj.contacts[i].otherCollider.name);
+                            //Debug.Log("Smūgio greitis: " + Vector3.Angle(obj.relativeVelocity, obj.contacts[i].point));
+                            //Debug.Log("Smūgio kažkas: " + obj.contacts[i].normal);
+                            //Debug.Log("Smūgio greitis: " + obj.relativeVelocity);
+                            //Debug.Log("Kampas: " + obj.contacts[i].otherCollider.transform.eulerAngles);
+                            //Debug.Log(obj.contacts[i].otherCollider.transform.InverseTransformDirection(obj.relativeVelocity).normalized);
+                            deformation.deformObject(obj.contacts[i].otherCollider.name, obj.contacts[i].point, obj.relativeVelocity, gameObject);
+                            deformation.updateObjectMesh(gameObject, obj.contacts[i].otherCollider.name);
+                        }
                     }
                 }
             }

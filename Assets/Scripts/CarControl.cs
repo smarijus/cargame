@@ -46,7 +46,7 @@ public class CarControl : MonoBehaviour
     public GameObject collisionSound;
 
     public Transform transf;
-    private ObjectDeformation physics;
+    private ObjectDeformation_old physics;
 
     public bool menuStatus = false;
 
@@ -61,7 +61,7 @@ public class CarControl : MonoBehaviour
 	void Start ()
 	{
 		rigidbody.centerOfMass = new Vector3(rigidbody.centerOfMass.x, -0.9F, 0.5F);
-        //physics = new ObjectDeformation(transf);
+        physics = new ObjectDeformation_old(transf);
 		SetValues();
         startPosition = transf.position;
         startRotation = transf.rotation;
@@ -326,36 +326,39 @@ public class CarControl : MonoBehaviour
         audio.pitch = sounds.getEngineSoundPitch(gearRatio, car.getCarSpeed(wheelRL.radius, wheelRL.rpm));
     }
 
-    //void OnCollisionEnter(Collision obj)
-    //{
-    //    if (obj.collider != collider && obj.contacts.Length != 0)
-    //    {
-    //        //for (int i = 0; i < obj.contacts.Length; i++)
-    //        //{
-    //            Instantiate(spark, obj.contacts[0].point, Quaternion.identity);
-    //            Instantiate(collisionSound, obj.contacts[0].point, Quaternion.identity);
-    //        //}
-    //    }
-    //    for (int i = 0; i < 1; i++)
-    //        if (!obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Wheel") && !obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Terrain"))
-    //        {
-    //            if (obj.contacts[i].thisCollider.name != obj.gameObject.name)
-    //            {
-    //                physics.DeformCar(obj.contacts[i].thisCollider, obj);
-    //                //MeshFilter mf = obj.contacts[0].thisCollider.GetComponent<MeshFilter>();
-    //                ////Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].thisCollider, obj));
-    //                //Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].thisCollider, mf, obj));
-    //                //oThread.Start();
-    //            }
-    //            if (obj.contacts[i].otherCollider.name != obj.gameObject.name)
-    //            {
-    //                physics.DeformCar(obj.contacts[i].otherCollider, obj);
-    //                //MeshFilter mf = obj.contacts[0].otherCollider.GetComponent<MeshFilter>();
-    //                //Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].otherCollider, mf, obj));
-    //                //oThread.Start();
-    //            }
-    //        }
-    //}
+    void OnCollisionEnter(Collision obj)
+    {
+        if (false)
+        {
+            if (obj.collider != collider && obj.contacts.Length != 0)
+            {
+                //for (int i = 0; i < obj.contacts.Length; i++)
+                //{
+                Instantiate(spark, obj.contacts[0].point, Quaternion.identity);
+                Instantiate(collisionSound, obj.contacts[0].point, Quaternion.identity);
+                //}
+            }
+            for (int i = 0; i < 1; i++)
+                if (!obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Wheel") && !obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Terrain"))
+                {
+                    if (obj.contacts[i].thisCollider.name != obj.gameObject.name)
+                    {
+                        physics.DeformCar(obj.contacts[i].thisCollider, obj);
+                        //MeshFilter mf = obj.contacts[0].thisCollider.GetComponent<MeshFilter>();
+                        ////Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].thisCollider, obj));
+                        //Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].thisCollider, mf, obj));
+                        //oThread.Start();
+                    }
+                    if (obj.contacts[i].otherCollider.name != obj.gameObject.name)
+                    {
+                        physics.DeformCar(obj.contacts[i].otherCollider, obj);
+                        //MeshFilter mf = obj.contacts[0].otherCollider.GetComponent<MeshFilter>();
+                        //Thread oThread = new Thread(() => physics.DeformCar(obj.contacts[0].otherCollider, mf, obj));
+                        //oThread.Start();
+                    }
+                }
+        }
+    }
 
     
 }
