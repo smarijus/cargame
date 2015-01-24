@@ -30,7 +30,7 @@ public class ObjectDeformation
     public void deformObject(string meshName, Vector3 contactPoint, Vector3 impactVelocity, GameObject gameObject)
     {
         //GameObject[] childGameObject = gameObject.transform.GetComponentInParent<GameObject>;
-
+        Debug.Log(meshName);
         Transform[] transformsList = gameObject.GetComponentsInChildren<Transform>();
         Transform trasnform = null;
         for (int i = 0; i<transformsList.Length; i++)
@@ -65,6 +65,7 @@ public class ObjectDeformation
                     //Debug.Log(((trasnform.InverseTransformDirection(impactVelocity)))/10);
                     meshes[meshID].vertices[i] += ((trasnform.InverseTransformDirection(impactVelocity))/90);
                     //meshes[meshID].vertices[i] += (impactVelocity / 50);
+
                 }
             }
         }

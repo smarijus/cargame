@@ -29,9 +29,33 @@ public class ObjectDeformationScript : MonoBehaviour
 
     void OnCollisionEnter(Collision obj)
     {
-        if (true)
+        List<string> filter1 = new List<string>(new string[] { "Terrain", "Wheel" });
+
+        Debug.Log(string.Format("Susidurimas su :{0}", obj.gameObject.name));
+        List<DeformationData> impactList = recalculatePartsList(obj, new List<DeformationData>());
+        foreach (DeformationData deformationData in impactList)
         {
-            DeformationData[] collisionArray = recalculatePartsList(obj);
+            if(!filter1.Contains(deformationData.partName))
+            {
+                deformation.deformObject(deformationData.partName, deformationData.impactPoint, obj.relativeVelocity, gameObject);
+                deformation.updateObjectMesh(gameObject, deformationData.partName);
+                    
+            }
+        }
+
+        int a = 3;
+        if (2 < a)
+        {
+            return;
+        }
+
+        DeformationData[] collisionArray = recalculatePartsList(obj);
+       
+
+       // if (true)
+        //{
+            
+
 
             //for (int i = 0; i < collisionArray.Length; i++)
             //{
@@ -80,9 +104,50 @@ public class ObjectDeformationScript : MonoBehaviour
             {
                 deformation.updateObjectMesh(gameObject, collisionArray[i].partName);
             }
-        }
+       // }
 
     }
+
+    List<DeformationData> recalculatePartsList(Collision obj, List<DeformationData> default_value){
+        List<string> containsParts       = new List<string>();
+        List<ContactPoint> collisionData = new List<ContactPoint>(obj.contacts);
+
+        foreach (ContactPoint contactPoint in collisionData)
+        {
+            if(contactPoint.thisCollider.transform.IsChildOf(gameObject.transform))
+            {
+                if (!containsParts.Contains(contactPoint.thisCollider.name))
+                {
+                    DeformationData deformationData = new DeformationData();
+                    deformationData.partName        = contactPoint.thisCollider.name;
+                    deformationData.impactPoint     = contactPoint.point;
+                    default_value.Add(deformationData);
+                    containsParts.Add(deformationData.partName);
+                    
+                }
+            }
+        }
+        return default_value;
+    }
+
+    private int getFrequency(string name, List<ContactPoint> list)
+    {
+        int count = 0;
+        foreach (ContactPoint item in list)
+        {
+            if (item.thisCollider.name.Equals(name))
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /// <summary>
+    /// Funkcija suformuoja objekto paveiktas dalis
+    /// </summary>
+    /// <param name="obj">Susidurimo objektas</param>
+    /// <returns>Susidurimo kontaktuojancios dalys ir kontatuojanti vieta</returns>
 
     DeformationData[] recalculatePartsList(Collision obj)
     {
