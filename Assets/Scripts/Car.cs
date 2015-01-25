@@ -6,11 +6,39 @@ public class Car
     // Parametras nurodo, kokiam greičiui esant yra mžiausias sukimo kampas
     private float lowestSteerAtSpeed = 50F;
     // Parametras nurodo mažo greičio sukimo kampą
-	private float lowSpeedSteerAngle = 20F;
+    private float lowSpeedSteerAngle = 20F;
     //Parametras nurodo didelio greičio sukimo kampą
-	private float highSpeedSteerAngle = 1F;
+    private float highSpeedSteerAngle = 1F;
 
-    private InputSystem inputs = new InputSystem();
+    private InputSystem inputs;
+    static Car car;
+    static float currentSpeed;
+    static float maxSpeed;
+
+    Car()
+    {
+        inputs = new InputSystem();
+    }
+
+    public static Car getInstance()
+    {
+        if (car == null)
+        {
+            car = new Car();
+        }
+        return car;
+    }
+
+
+    internal float getMaxSpeed()
+    {
+        return maxSpeed;
+    }
+
+    internal float getCurrentSpeed()
+    {
+        return currentSpeed;
+    }
 
     // Funkcija grąžina automobilio greitį, paskaičiuodama pagal rato sukimosi greitį ir rato dydį.
     // Parametrai:
@@ -23,6 +51,7 @@ public class Car
     {
         float speed = 2 * 22 / 7 * wheelRadius * wheelSpeed * 60 / 1000;
         speed = Mathf.Round(speed);
+        currentSpeed = speed;
         return speed;
     }
 
@@ -84,7 +113,7 @@ public class Car
     // Parametrai:
     //              carPosition - dabartinė automobilio pozicija;
     //              terrainSize - žemėlapio dydis
-    public bool checkIfCarOutsideTerrain(Vector3 carPosition, Vector3 terrainSize)
+    internal bool checkIfCarOutsideTerrain(Vector3 carPosition, Vector3 terrainSize)
     {
         if (carPosition.x < -50 || carPosition.x > terrainSize.x + 50)
             return true;
@@ -95,3 +124,4 @@ public class Car
         return false;
     }
 }
+    

@@ -29,9 +29,14 @@ public class ObjectDeformationScript : MonoBehaviour
 
     void OnCollisionEnter(Collision obj)
     {
-        List<string> filter1 = new List<string>(new string[] { "Terrain", "Wheel" });
-
         Debug.Log(string.Format("Susidurimas su :{0}", obj.gameObject.name));
+        List<string> filter1 = new List<string>(new string[] { "Terrain", "Wheel" });
+        if (deformation == null)
+        {
+            deformation = new ObjectDeformation(this.gameObject);
+        }
+
+        
         List<DeformationData> impactList = recalculatePartsList(obj, new List<DeformationData>());
         foreach (DeformationData deformationData in impactList)
         {
@@ -42,6 +47,7 @@ public class ObjectDeformationScript : MonoBehaviour
                     
             }
         }
+
 
         int a = 3;
         if (2 < a)

@@ -50,7 +50,7 @@ public class CarControl : MonoBehaviour
 
     public bool menuStatus = false;
 
-    private Car car = new Car();
+    private Car car = Car.getInstance();
     private UserInterface ui = new UserInterface();
     private InputSystem inputs = new InputSystem();
     private Vector3 startPosition;
