@@ -177,28 +177,35 @@ public class UserInterface
 
         float left = horizontalCenter - 200;
         float top = verticalCenter - 200;
-        float width = 400;
+        //float width = 400;
         float height = 350;
 
-        GUI.Box(new Rect(left, top, width, height), "Meniu");
+        GUI.Box(new Rect(menuBoxLeftPosition, (Screen.height / 20) * 2, menuBoxWidth, (Screen.height / 20) * 14), "Meniu");
 
-        if (GUI.Button(new Rect(horizontalCenter - 100, top + 25, 200, 50), "Išjungti menu"))
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 3, menuButtonWidth, menuButtonHeight), "Išjungti menu"))
         {
             Game.Instance.setInGameMenuStatus(false);
         }
 
-        if (GUI.Button(new Rect(horizontalCenter - 100, top + 75, 200, 50), "Atstatyti automoblį"))
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 5, menuButtonWidth, menuButtonHeight), "Atstatyti automoblį"))
         {
             Game.Instance.setCarResetStatus(true);
         }
 
-        if (GUI.Button(new Rect(horizontalCenter - 100, top + 125, 200, 50), "Įkrauti iš naujo"))
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 7, menuButtonWidth, menuButtonHeight), "Įkrauti iš naujo"))
         {
             //game.restartLevel();
             Game.Instance.restartLevel();
         }
 
-        if (GUI.Button(new Rect(horizontalCenter - 100, top + 175, 200, 50), "Grįžti į pagrindinį meniu"))
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 9, menuButtonWidth, menuButtonHeight), "Išsaugoti ir grįžti į pagrindinį meniu"))
+        {
+            // game.returnToMainMenu();
+            //Game.Instance.setMenuItem(1);
+            Game.Instance.returnToMainMenu();
+        }
+
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 11, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
         {
            // game.returnToMainMenu();
             //Game.Instance.setMenuItem(1);
@@ -206,7 +213,7 @@ public class UserInterface
         }
 
 
-        if (GUI.Button(new Rect(horizontalCenter - 100, top + 225, 200, 50), "Išjungti žaidimą"))
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 13, menuButtonWidth, menuButtonHeight), "Išjungti žaidimą"))
         {
             //game.quitGame();
             Game.Instance.quitGame();

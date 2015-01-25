@@ -13,9 +13,13 @@ public class Car
     private InputSystem inputs;
     static Car car;
     static float currentSpeed;
+<<<<<<< HEAD
     static float maxSpeed = 250F;
+=======
+    static float topSpeed;
+>>>>>>> 06dad261f5a1ab23208f7b5f9b8e1544a4be6920
 
-    Car()
+    public Car()
     {
         inputs = new InputSystem();
     }
@@ -29,13 +33,17 @@ public class Car
         return car;
     }
 
-
-    internal float getMaxSpeed()
+    public void setTopSpeed(float speed)
     {
-        return maxSpeed;
+        topSpeed = speed;
     }
 
-    internal float getCurrentSpeed()
+    public float getTopSpeed()
+    {
+        return topSpeed;
+    }
+
+    public float getCurrentSpeed()
     {
         return currentSpeed;
     }
@@ -113,7 +121,7 @@ public class Car
     // Parametrai:
     //              carPosition - dabartinė automobilio pozicija;
     //              terrainSize - žemėlapio dydis
-    internal bool checkIfCarOutsideTerrain(Vector3 carPosition, Vector3 terrainSize)
+    public bool checkIfCarOutsideTerrain(Vector3 carPosition, Vector3 terrainSize)
     {
         if (carPosition.x < -50 || carPosition.x > terrainSize.x + 50)
             return true;

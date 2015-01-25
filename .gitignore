@@ -17,6 +17,13 @@ UnityTestTools*
 UnityTestCases/
 UnityTestCases*
 
+# ================ #
+# Unity VS #
+# ================ #
+
+UnityVS/
+UnityVS*
+
 # =========== #
 # Visual Studio addons #
 # =========== #
