@@ -57,23 +57,24 @@ public class ObjectDeformation
                     break;
                 }
             }
-            for (int i = 0; i < meshes[meshID].vertices.Length; i++)
-            {
-                float impactDistnace = Vector3.Distance(trasnform.InverseTransformPoint(contactPoint), meshes[meshID].vertices[i]);
-                //Debug.Log(meshName+" "+impactDistnace);
-                //Debug.Log(impactVelocity);
-                if (impactDistnace <= 0.3F)
+                for (int i = 0; i < meshes[meshID].vertices.Length; i++)
                 {
-                    //Debug.Log(impactDistnace);
-                    //meshes[meshID].vertices[i] += ((impactVelocity / 100));
-                    //Debug.Log(((trasnform.InverseTransformDirection(impactVelocity)))/10);
-                    ///meshes[meshID].vertices[i] += ((trasnform.InverseTransformDirection(impactVelocity))/90);
-                    //meshes[meshID].vertices[i] += (impactVelocity / 50);
+                    float impactDistnace = Vector3.Distance(trasnform.InverseTransformPoint(contactPoint), meshes[meshID].vertices[i]);
+                    //Debug.Log(meshName+" "+impactDistnace);
+                    //Debug.Log(impactVelocity);
+                    if (impactDistnace <= 0.3F)
+                    {
+                        //Debug.Log(impactDistnace);
+                        //meshes[meshID].vertices[i] += ((impactVelocity / 100));
+                        //Debug.Log(((trasnform.InverseTransformDirection(impactVelocity)))/10);
+                        ///meshes[meshID].vertices[i] += ((trasnform.InverseTransformDirection(impactVelocity))/90);
+                        //meshes[meshID].vertices[i] += (impactVelocity / 50);
 
-                    float kof = (currentSpeed / maxSpeed) + 0.001F;
-                    meshes[meshID].vertices[i] += (trasnform.InverseTransformDirection(impactVelocity)) * kof/100;
+                        float kof = Mathf.Abs((currentSpeed / maxSpeed) + 0.001F);
+                       meshes[meshID].vertices[i] += (trasnform.InverseTransformDirection(impactVelocity)) * kof;
+                        //meshes[meshID].vertices[i] += Vector3.up * kof;
+                    }
                 }
-            }
         }
     }
 
@@ -118,7 +119,7 @@ public class ObjectDeformation
             meshFilter.mesh.vertices = meshes[meshID].vertices;
             //meshCollider.sharedMesh = null; ;
             //meshCollider.sharedMesh = meshFilter.mesh;
-            //meshCollider.sharedMesh.RecalculateBounds();
+           meshCollider.sharedMesh.RecalculateBounds();
             //meshCollider.sharedMesh.RecalculateNormals();
         }
     }
