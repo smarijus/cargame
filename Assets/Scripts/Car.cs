@@ -13,7 +13,6 @@ public class Car
     private InputSystem inputs;
     static Car car;
     static float currentSpeed;
-
     static float topSpeed;
 
     public Car()
