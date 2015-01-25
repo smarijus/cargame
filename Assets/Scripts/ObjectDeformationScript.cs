@@ -29,88 +29,88 @@ public class ObjectDeformationScript : MonoBehaviour
 
     void OnCollisionEnter(Collision obj)
     {
-        Debug.Log(string.Format("Susidurimas su :{0}", obj.gameObject.name));
-        List<string> filter1 = new List<string>(new string[] { "Terrain", "Wheel" });
-        if (deformation == null)
-        {
-            deformation = new ObjectDeformation(this.gameObject);
-        }
+        //Debug.Log(string.Format("Susidurimas su :{0}", obj.gameObject.name));
+        //List<string> filter1 = new List<string>(new string[] { "Terrain", "Wheel" });
+        //if (deformation == null)
+        //{
+        //    deformation = new ObjectDeformation(this.gameObject);
+        //}
 
         
-        List<DeformationData> impactList = recalculatePartsList(obj, new List<DeformationData>());
-        foreach (DeformationData deformationData in impactList)
-        {
-            if(!filter1.Contains(deformationData.partName))
-            {
-                deformation.deformObject(deformationData.partName, deformationData.impactPoint, obj.relativeVelocity, gameObject);
-                deformation.updateObjectMesh(gameObject, deformationData.partName);
+        //List<DeformationData> impactList = recalculatePartsList(obj, new List<DeformationData>());
+        //foreach (DeformationData deformationData in impactList)
+        //{
+        //    if(!filter1.Contains(deformationData.partName))
+        //    {
+        //        deformation.deformObject(deformationData.partName, deformationData.impactPoint, obj.relativeVelocity, gameObject);
+        //        deformation.updateObjectMesh(gameObject, deformationData.partName);
                     
-            }
-        }
+        //    }
+        //}
 
 
-        int a = 3;
-        if (2 < a)
-        {
-            return;
-        }
+        //int a = 3;
+        //if (2 < a)
+        //{
+        //    return;
+        //}
 
         DeformationData[] collisionArray = recalculatePartsList(obj);
        
 
-       // if (true)
-        //{
-            
+        if (true)
+        {
 
 
-            //for (int i = 0; i < collisionArray.Length; i++)
-            //{
-            //    if (!collisionArray[i].partName.Contains("Wheel"))
-            //        {
-            //            Debug.Log(collisionArray[i].partName);
-            //            deformation.deformObject(collisionArray[i].partName, collisionArray[i].impactPoint, obj.relativeVelocity, gameObject);
-            //            deformation.updateObjectMesh(gameObject, collisionArray[i].partName);
-            //        }
-            //}
 
-            ////for (int i = 0; i < 1; i++)
-            for (int i = 0; i < obj.contacts.Length; i++)
+            for (int i = 0; i < collisionArray.Length; i++)
             {
-                //Debug.Log(obj.contacts[i].thisCollider.name + " " + obj.contacts[i].otherCollider.name);
-                if (!obj.contacts[i].thisCollider.name.Contains("Terrain") && !obj.contacts[i].otherCollider.name.Contains("Terrain"))
+                if (!collisionArray[i].partName.Contains("Wheel"))
                 {
-                    if (!obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Wheel"))
-                    {
-
-                        if (obj.contacts[i].thisCollider.transform.IsChildOf(gameObject.transform))
-                        {
-                            Debug.Log(obj.contacts[i].thisCollider.name);
-                            //Debug.Log("Smūgio kažkas: " + obj.contacts[i].normal);
-                            //Debug.Log("Smūgio greitis: " + Vector3.Angle(obj.relativeVelocity, obj.contacts[i].point));
-                            //Debug.Log("Kampas: " + obj.contacts[i].thisCollider.transform.eulerAngles);
-                            //Debug.Log(obj.contacts[i].thisCollider.transform.InverseTransformDirection(obj.relativeVelocity).normalized);
-                            deformation.deformObject(obj.contacts[i].thisCollider.name, obj.contacts[i].point, obj.relativeVelocity, gameObject);
-                           // deformation.updateObjectMesh(gameObject, obj.contacts[i].thisCollider.name);
-                        }
-                        else
-                        {
-                            Debug.Log(obj.contacts[i].otherCollider.name);
-                            //Debug.Log("Smūgio greitis: " + Vector3.Angle(obj.relativeVelocity, obj.contacts[i].point));
-                            //Debug.Log("Smūgio kažkas: " + obj.contacts[i].normal);
-                            //Debug.Log("Smūgio greitis: " + obj.relativeVelocity);
-                            //Debug.Log("Kampas: " + obj.contacts[i].otherCollider.transform.eulerAngles);
-                            //Debug.Log(obj.contacts[i].otherCollider.transform.InverseTransformDirection(obj.relativeVelocity).normalized);
-                            deformation.deformObject(obj.contacts[i].otherCollider.name, obj.contacts[i].point, obj.relativeVelocity, gameObject);
-                            //deformation.updateObjectMesh(gameObject, obj.contacts[i].otherCollider.name);
-                        }
-                    }
+                    //Debug.Log(collisionArray[i].partName);
+                    deformation.deformObject(collisionArray[i].partName, collisionArray[i].impactPoint, obj.relativeVelocity, gameObject);
+                    deformation.updateObjectMesh(gameObject, collisionArray[i].partName);
                 }
             }
+
+            ////for (int i = 0; i < 1; i++)
+            //for (int i = 0; i < obj.contacts.Length; i++)
+            //{
+            //    //Debug.Log(obj.contacts[i].thisCollider.name + " " + obj.contacts[i].otherCollider.name);
+            //    if (!obj.contacts[i].thisCollider.name.Contains("Terrain") && !obj.contacts[i].otherCollider.name.Contains("Terrain"))
+            //    {
+            //        if (!obj.contacts[i].thisCollider.name.Contains("Wheel") && !obj.contacts[i].otherCollider.name.Contains("Wheel"))
+            //        {
+
+            //            if (obj.contacts[i].thisCollider.transform.IsChildOf(gameObject.transform))
+            //            {
+            //                //Debug.Log(obj.contacts[i].thisCollider.name);
+            //                //Debug.Log("Smūgio kažkas: " + obj.contacts[i].normal);
+            //                //Debug.Log("Smūgio greitis: " + Vector3.Angle(obj.relativeVelocity, obj.contacts[i].point));
+            //                //Debug.Log("Kampas: " + obj.contacts[i].thisCollider.transform.eulerAngles);
+            //                //Debug.Log(obj.contacts[i].thisCollider.transform.InverseTransformDirection(obj.relativeVelocity).normalized);
+            //                deformation.deformObject(obj.contacts[i].thisCollider.name, obj.contacts[i].point, obj.relativeVelocity, gameObject);
+            //               // deformation.updateObjectMesh(gameObject, obj.contacts[i].thisCollider.name);
+            //            }
+            //            else
+            //            {
+            //                //Debug.Log(obj.contacts[i].otherCollider.name);
+            //                //Debug.Log("Smūgio greitis: " + Vector3.Angle(obj.relativeVelocity, obj.contacts[i].point));
+            //                //Debug.Log("Smūgio kažkas: " + obj.contacts[i].normal);
+            //                //Debug.Log("Smūgio greitis: " + obj.relativeVelocity);
+            //                //Debug.Log("Kampas: " + obj.contacts[i].otherCollider.transform.eulerAngles);
+            //                //Debug.Log(obj.contacts[i].otherCollider.transform.InverseTransformDirection(obj.relativeVelocity).normalized);
+            //                deformation.deformObject(obj.contacts[i].otherCollider.name, obj.contacts[i].point, obj.relativeVelocity, gameObject);
+            //                //deformation.updateObjectMesh(gameObject, obj.contacts[i].otherCollider.name);
+            //            }
+            //        }
+            //    }
+            //}
             for (int i = 0; i < collisionArray.Length; i++)
             {
                 deformation.updateObjectMesh(gameObject, collisionArray[i].partName);
             }
-       // }
+        }
 
     }
 

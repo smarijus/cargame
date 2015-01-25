@@ -5,6 +5,7 @@ public class FileSystem
 {
     DataBase db = new DataBase("database.db");
 
+
     // Funkcija paima iš duomenų bazės vartotojų sąrašą.
     // Grąžina:
     //              string[] tipas;
@@ -84,4 +85,8 @@ public class FileSystem
         db.clearHighscores();
     }
 
+    public void saveMeshToFile(MeshData[] meshData)
+    {
+
+    }
 }

@@ -5,12 +5,6 @@ public class ObjectDeformation
 {
     //private 
 
-    private struct MeshData
-    {
-        public string name;
-        public Vector3[] vertices;
-        public int[] triangles;
-    }
 
 
     private MeshData[] meshes;
@@ -27,13 +21,18 @@ public class ObjectDeformation
         }
     }
 
+    public MeshData[] getMeshData()
+    {
+        return meshes;
+    }
+
     public void deformObject(string meshName, Vector3 contactPoint, Vector3 impactVelocity, GameObject gameObject)
     {
         //GameObject[] childGameObject = gameObject.transform.GetComponentInParent<GameObject>;
         Car car = Car.getInstance();
         float currentSpeed = car.getCurrentSpeed();
-        float maxSpeed = car.getMaxSpeed();
-        Debug.Log(string.Format("Deformuojamas objektas:{0} Jega:{1}", meshName, currentSpeed));
+        float maxSpeed = car.getTopSpeed();
+        //Debug.Log(string.Format("Deformuojamas objektas:{0} Jega:{1}", meshName, currentSpeed));
 
         Transform[] transformsList = gameObject.GetComponentsInChildren<Transform>();
         Transform trasnform = null;
@@ -62,16 +61,16 @@ public class ObjectDeformation
                 float impactDistnace = Vector3.Distance(trasnform.InverseTransformPoint(contactPoint), meshes[meshID].vertices[i]);
                 //Debug.Log(meshName+" "+impactDistnace);
                 //Debug.Log(impactVelocity);
-                if (impactDistnace <= 0.3F)
+                if (impactDistnace <= 0.75F)
                 {
                     //Debug.Log(impactDistnace);
                     //meshes[meshID].vertices[i] += ((impactVelocity / 100));
                     //Debug.Log(((trasnform.InverseTransformDirection(impactVelocity)))/10);
-                    ///meshes[meshID].vertices[i] += ((trasnform.InverseTransformDirection(impactVelocity))/90);
+                    meshes[meshID].vertices[i] += ((trasnform.InverseTransformDirection(impactVelocity)) / ((maxSpeed - Mathf.Abs(currentSpeed)) + 50));
                     //meshes[meshID].vertices[i] += (impactVelocity / 50);
 
-                    float kof = (currentSpeed / maxSpeed) + 0.001F;
-                    meshes[meshID].vertices[i] += (trasnform.InverseTransformDirection(impactVelocity)) * kof/100;
+                    //float kof = (currentSpeed / maxSpeed) + 0.001F;
+                    //meshes[meshID].vertices[i] += (trasnform.InverseTransformDirection(impactVelocity)) * kof/100;
                 }
             }
         }

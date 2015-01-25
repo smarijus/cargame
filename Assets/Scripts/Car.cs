@@ -13,7 +13,7 @@ public class Car
     private InputSystem inputs;
     static Car car;
     static float currentSpeed;
-    static float maxSpeed;
+    static float topSpeed;
 
     public Car()
     {
@@ -29,10 +29,14 @@ public class Car
         return car;
     }
 
-
-    public float getMaxSpeed()
+    public void setTopSpeed(float speed)
     {
-        return maxSpeed;
+        topSpeed = speed;
+    }
+
+    public float getTopSpeed()
+    {
+        return topSpeed;
     }
 
     public float getCurrentSpeed()
