@@ -56,25 +56,6 @@ public class ObjectDeformation
                     break;
                 }
             }
-<<<<<<< HEAD
-                for (int i = 0; i < meshes[meshID].vertices.Length; i++)
-                {
-                    float impactDistnace = Vector3.Distance(trasnform.InverseTransformPoint(contactPoint), meshes[meshID].vertices[i]);
-                    //Debug.Log(meshName+" "+impactDistnace);
-                    //Debug.Log(impactVelocity);
-                    if (impactDistnace <= 0.3F)
-                    {
-                        //Debug.Log(impactDistnace);
-                        //meshes[meshID].vertices[i] += ((impactVelocity / 100));
-                        //Debug.Log(((trasnform.InverseTransformDirection(impactVelocity)))/10);
-                        ///meshes[meshID].vertices[i] += ((trasnform.InverseTransformDirection(impactVelocity))/90);
-                        //meshes[meshID].vertices[i] += (impactVelocity / 50);
-
-                        float kof = Mathf.Abs((currentSpeed / maxSpeed) + 0.001F);
-                       meshes[meshID].vertices[i] += (trasnform.InverseTransformDirection(impactVelocity)) * kof;
-                        //meshes[meshID].vertices[i] += Vector3.up * kof;
-                    }
-=======
             for (int i = 0; i < meshes[meshID].vertices.Length; i++)
             {
                 float impactDistnace = Vector3.Distance(trasnform.InverseTransformPoint(contactPoint), meshes[meshID].vertices[i]);
@@ -90,8 +71,8 @@ public class ObjectDeformation
 
                     //float kof = (currentSpeed / maxSpeed) + 0.001F;
                     //meshes[meshID].vertices[i] += (trasnform.InverseTransformDirection(impactVelocity)) * kof/100;
->>>>>>> 06dad261f5a1ab23208f7b5f9b8e1544a4be6920
                 }
+            }
         }
     }
 
