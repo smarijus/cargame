@@ -105,7 +105,7 @@ public class InputSystem
     {
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Stationary)
+            if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
             {
                 Rect brakeButton = new Rect(Screen.width / 50, Screen.height - Screen.height / 25 - Screen.height / 5, Screen.width / 10, Screen.height / 5);
                 if (brakeButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
@@ -123,7 +123,7 @@ public class InputSystem
     {
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Stationary)
+            if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
             {
                 Rect brakeButton = new Rect(Screen.width / 50, Screen.height - Screen.height / 25 - Screen.height / 5, Screen.width / 10, Screen.height / 5);
                 if (brakeButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
@@ -142,7 +142,7 @@ public class InputSystem
         float verticalCenter = Screen.height / 2;
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Stationary)
+            if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
             {
                 Rect handbrakeButton = new Rect(Screen.width / 50, verticalCenter, Screen.width / 10, Screen.height / 5);
                 if (handbrakeButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))
@@ -172,7 +172,7 @@ public class InputSystem
     {
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Stationary)
+            if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
             {
                 Rect cameraButton = new Rect((Screen.width / 10 * 9) - Screen.width / 50, Screen.height / 25, Screen.width / 10, Screen.height / 10);
                 if (cameraButton.Contains(convertTouchScreenCordinatesToGUI(touch.position)))

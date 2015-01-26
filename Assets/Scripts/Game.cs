@@ -55,6 +55,8 @@ public class Game : MonoBehaviour
     string[] usersList;
     // Kintamasis, kuriame saugomi geriausi rezultatai.
     string[] highscoresList;
+    //
+    private bool accurateDeformationMode = false;
 
     FileSystem fileSystem = new FileSystem();
 
@@ -230,5 +232,20 @@ public class Game : MonoBehaviour
     public void setCarResetStatus(bool status)
     {
         resetCarStatus = status;
+    }
+
+    public void enableAccurateDeformationMode()
+    {
+        accurateDeformationMode = true;
+    }
+
+    public void disableAccurateDeformationMode()
+    {
+        accurateDeformationMode = false;
+    }
+
+    public bool getAccurateDeformationModeStatus()
+    {
+        return accurateDeformationMode;
     }
 }

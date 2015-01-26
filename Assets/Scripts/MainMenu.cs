@@ -42,6 +42,9 @@ public class MainMenu : MonoBehaviour
                 case 4:
                     ui.showProjectInfo();
                     break;
+                case 5:
+                    ui.showGameTypeSelection();
+                    break;
                 default:
                     ui.showCurrentProfile();
                     ui.showMainMenu();

@@ -84,8 +84,8 @@ public class UserInterface
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 7, menuButtonWidth, menuButtonHeight), "Pradėti žaidimą"))
         {
-            Game.Instance.setMenuItem(0);
-            Game.Instance.loadGameScene("GameScene");
+            Game.Instance.setMenuItem(5);
+            //Game.Instance.loadGameScene("GameScene");
         }
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 9, menuButtonWidth, menuButtonHeight), "Tęsti išsaugotą žaidimą"))
@@ -321,6 +321,66 @@ public class UserInterface
         //    //
         //}
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height/20)*17, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
+        {
+            Game.Instance.setMenuItem(0);
+        }
+    }
+
+    // Funkcija atvaizduoja informaciją apie projektą.
+    public void showGameTypeSelection()
+    {
+        float horizontalCenter = Screen.width / 2;
+        float verticalCenter = Screen.height / 2;
+        float left = horizontalCenter - 200;
+        float top = verticalCenter - 200;
+        float width = 400;
+        float height = 250;
+        //GUI.Box(new Rect(menuBoxLeftPosition, Screen.height / 20, menuBoxWidth, (Screen.height / 20) * 15), "Informacija apie projektą");
+
+
+        //scrollPosition = GUI.BeginScrollView(new Rect(menuBoxLeftPosition, top + 50, 100, 100), scrollPosition, new Rect(0, 0, 100, 400));
+        //GUI.Button(new Rect(0, 0, 100, 20), "Top-left");
+        //GUI.Button(new Rect(120, 0, 100, 20), "Top-right");
+        //GUI.Button(new Rect(0, 180, 100, 20), "Bottom-left");
+        //GUI.Button(new Rect(120, 240, 100, 20), "Bottom-right");
+        //GUI.Button(new Rect(120, 300, 100, 20), "Bottom-right");
+        //GUI.Button(new Rect(120, 360, 100, 20), "Bottom-right");
+        //GUI.Button(new Rect(120, 400, 100, 20), "Bottom-right");
+        //GUI.EndScrollView();
+
+        // GUI.Label(new Rect(left + 25, top + 25, width, 125), "Nr    Vartotojas        Rezultatas         Data");
+        //int topButton = 25;
+        //for (int i = 0; i < results.Length; i++)
+        /// {
+        //    GUI.Label(new Rect(left + 25, top + 50 + (25 * i), width, 125), (i + 1) + "     " + results[i]);
+        // }
+
+
+        GUI.Box(new Rect(menuBoxLeftPosition, (Screen.height / 20) * 1, menuBoxWidth, (Screen.height / 20) * 8), "Deformacijų tipas");
+        //if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 5, menuButtonWidth, menuButtonHeight), "Valyti rezultatus"))
+        //{
+        //    //
+        //}
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 2, menuButtonWidth, menuButtonHeight), "Tiksli deformacija"))
+        {
+            //Game.Instance.setMenuItem(0);
+            Game.Instance.enableAccurateDeformationMode();
+            Game.Instance.loadGameScene("GameScene");
+        }
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 4, menuButtonWidth, menuButtonHeight), "Netiksli deformacija"))
+        {
+            //Game.Instance.setMenuItem(0);
+            Game.Instance.disableAccurateDeformationMode();
+            Game.Instance.loadGameScene("GameScene");
+        }
+
+
+        GUI.Box(new Rect(menuBoxLeftPosition, (Screen.height / 20) * 16, menuBoxWidth, (Screen.height / 20) * 4), "");
+        //if (GUI.Button(new Rect(menuButtonLeftPosition, top + height + 5, menuButtonWidth, menuButtonHeight), "Valyti rezultatus"))
+        //{
+        //    //
+        //}
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 17, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
         {
             Game.Instance.setMenuItem(0);
         }
