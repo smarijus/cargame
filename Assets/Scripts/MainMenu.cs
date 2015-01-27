@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(Game.Instance);
+        //ui = new UserInterface();
         Game.Instance.loadDB();
     }
 
@@ -41,6 +42,12 @@ public class MainMenu : MonoBehaviour
                     break;
                 case 4:
                     ui.showProjectInfo();
+                    break;
+                case 5:
+                    ui.showGameTypeSelection();
+                    break;
+                case 6:
+                    ui.showProfileOptions();
                     break;
                 default:
                     ui.showCurrentProfile();

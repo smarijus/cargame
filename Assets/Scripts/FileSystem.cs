@@ -41,7 +41,22 @@ public class FileSystem
     //              userName - naujau kuriamo vartotojo vardas;
     public void addNewUser(string userName)
     {
-        db.CreatePerson(userName);
+        db.CreateUser(userName);
+    }
+
+    public void updateUserInfo(string userName, bool accurateDeformation, int highScore)
+    {
+        //var user = db.getUser(userName);
+        db.updateUser(userName, accurateDeformation, highScore);
+        //db.CreateUser(userName, accurateDeformation);
+    }
+
+    public User loadUserInfo(string userName)
+    {
+        //var user = db.getUser(userName);
+        var userData = db.getUser(userName);
+        return userData;
+        //db.CreateUser(userName, accurateDeformation);
     }
 
 

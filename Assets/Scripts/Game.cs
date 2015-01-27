@@ -55,6 +55,12 @@ public class Game : MonoBehaviour
     string[] usersList;
     // Kintamasis, kuriame saugomi geriausi rezultatai.
     string[] highscoresList;
+    //
+    private bool accurateDeformationMode = false;
+
+    private int currentScore = 0;
+
+    private int highScore = 0;
 
     FileSystem fileSystem = new FileSystem();
 
@@ -166,7 +172,11 @@ public class Game : MonoBehaviour
     //                  
     public void loadUserProfile(string name)
     {
+        User userData = fileSystem.loadUserInfo(name);
         currentUser = name;
+        //Debug.Log(userData.AccurateDeformation);
+        accurateDeformationMode = userData.AccurateDeformation;
+        highScore = userData.HighScore;
     }
 
     // Funkcija kuri grąžina vartotojų profilių sąrašą.
@@ -230,5 +240,58 @@ public class Game : MonoBehaviour
     public void setCarResetStatus(bool status)
     {
         resetCarStatus = status;
+    }
+
+    public void enableAccurateDeformationMode()
+    {
+        accurateDeformationMode = true;
+    }
+
+    public void disableAccurateDeformationMode()
+    {
+        accurateDeformationMode = false;
+    }
+
+    public bool getAccurateDeformationModeStatus()
+    {
+        return accurateDeformationMode;
+    }
+
+    public void updateUser()
+    {
+        int score = 0;
+        if (currentScore > highScore)
+        {
+            score = currentScore;
+            highScore = currentScore;
+            fileSystem.insertNewHighscore(currentUser, highScore);
+            this.loadHighscoresList();
+        }
+        else
+        {
+            score = highScore;
+        }
+        resetCurrentSore();
+        fileSystem.updateUserInfo(currentUser, accurateDeformationMode, score);
+    }
+
+    public void updateCurrentScore(int additionalScore)
+    {
+        currentScore = currentScore + additionalScore;
+    }
+
+    public int getCurrentScore()
+    {
+        return currentScore;
+    }
+
+    public void resetCurrentSore()
+    {
+        currentScore = 0;
+    }
+
+    public int getUserHigscore()
+    {
+        return highScore;
     }
 }
