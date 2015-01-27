@@ -8,7 +8,7 @@ public class ObjectDeformation
         public string name;
         public Vector3[] vertices;
         public int[] triangles;
-        public Vector3[][] nearVerticesCoordinates;
+        //public Vector3[][] nearVerticesCoordinates;
         public int[][] nearVerticesIndexes;
         public float damperForce;
     }
@@ -33,77 +33,80 @@ public class ObjectDeformation
             meshes[i].damperForce = 1000F;
             if (Game.Instance.getAccurateDeformationModeStatus())
             {
-                Vector3[][] tempNearVerticesCoordinates = new Vector3[meshes[i].vertices.Length][];
-                int[][] tempNearVerticesIndexes = new int[meshes[i].vertices.Length][];
-                for (int j = 0; j < meshes[i].vertices.Length; j++)
+                if (!meshes[i].name.Contains("Wheel") || !meshes[i].name.Contains("Interior"))
                 {
-                    int neighbourdsCount = 0;
-                    for (int k = 0; k < meshes[i].triangles.Length; k = k + 3)
+                    Vector3[][] tempNearVerticesCoordinates = new Vector3[meshes[i].vertices.Length][];
+                    int[][] tempNearVerticesIndexes = new int[meshes[i].vertices.Length][];
+                    for (int j = 0; j < meshes[i].vertices.Length; j++)
                     {
-                        //int tempNumber = 0;
-                        if (meshes[i].triangles[k] == j)
+                        int neighbourdsCount = 0;
+                        for (int k = 0; k < meshes[i].triangles.Length; k = k + 3)
                         {
-                            neighbourdsCount = neighbourdsCount + 2;
+                            //int tempNumber = 0;
+                            if (meshes[i].triangles[k] == j)
+                            {
+                                neighbourdsCount = neighbourdsCount + 2;
+                            }
+                            if (meshes[i].triangles[k + 1] == j)
+                            {
+                                neighbourdsCount = neighbourdsCount + 2;
+                            }
+                            if (meshes[i].triangles[k + 2] == j)
+                            {
+                                neighbourdsCount = neighbourdsCount + 2;
+                            }
                         }
-                        if (meshes[i].triangles[k + 1] == j)
-                        {
-                            neighbourdsCount = neighbourdsCount + 2;
-                        }
-                        if (meshes[i].triangles[k + 2] == j)
-                        {
-                            neighbourdsCount = neighbourdsCount + 2;
-                        }
-                    }
 
 
-                    Vector3[] tempArrayCoordinates = new Vector3[neighbourdsCount];
-                    int[] tempArrayIndexes = new int[neighbourdsCount];
-                    for (int k = 0; k < meshes[i].triangles.Length; k = k + 3)
-                    {
-                        int tempNumber = 0;
-                        if (meshes[i].triangles[k] == j)
+                        //Vector3[] tempArrayCoordinates = new Vector3[neighbourdsCount];
+                        int[] tempArrayIndexes = new int[neighbourdsCount];
+                        for (int k = 0; k < meshes[i].triangles.Length; k = k + 3)
                         {
-                            //neighbourdsCount = neighbourdsCount + 2;
-                            tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k + 1]];
-                            tempArrayIndexes[tempNumber] = meshes[i].triangles[k + 1];
-                            //Debug.Log(meshes[i].vertices[meshes[i].triangles[k + 1]]);
-                            tempNumber++;
-                            //Debug.Log(meshes[i].vertices[meshes[i].triangles[k + 2]]);
-                            tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k + 2]];
-                            tempArrayIndexes[tempNumber] = meshes[i].triangles[k + 2];
-                            tempNumber++;
+                            int tempNumber = 0;
+                            if (meshes[i].triangles[k] == j)
+                            {
+                                //neighbourdsCount = neighbourdsCount + 2;
+                                //tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k + 1]];
+                                tempArrayIndexes[tempNumber] = meshes[i].triangles[k + 1];
+                                //Debug.Log(meshes[i].vertices[meshes[i].triangles[k + 1]]);
+                                tempNumber++;
+                                //Debug.Log(meshes[i].vertices[meshes[i].triangles[k + 2]]);
+                                //tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k + 2]];
+                                tempArrayIndexes[tempNumber] = meshes[i].triangles[k + 2];
+                                tempNumber++;
+                            }
+                            if (meshes[i].triangles[k + 1] == j)
+                            {
+                                //neighbourdsCount = neighbourdsCount + 2;
+                                //Debug.Log(meshes[i].vertices[meshes[i].triangles[k]]);
+                                //tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k]];
+                                tempArrayIndexes[tempNumber] = meshes[i].triangles[k];
+                                tempNumber++;
+                                //Debug.Log(meshes[i].vertices[meshes[i].triangles[k + 2]]);
+                                //tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k + 2]];
+                                tempArrayIndexes[tempNumber] = meshes[i].triangles[k + 2];
+                                tempNumber++;
+                            }
+                            if (meshes[i].triangles[k + 2] == j)
+                            {
+                                //neighbourdsCount = neighbourdsCount + 2;
+                                //Debug.Log(meshes[i].vertices[meshes[i].triangles[k]]);
+                                //tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k]];
+                                tempArrayIndexes[tempNumber] = meshes[i].triangles[k];
+                                tempNumber++;
+                                //Debug.Log(meshes[i].vertices[meshes[i].triangles[k + 1]]);
+                                //tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k + 1]];
+                                tempArrayIndexes[tempNumber] = meshes[i].triangles[k + 1];
+                                tempNumber++;
+                            }
                         }
-                        if (meshes[i].triangles[k + 1] == j)
-                        {
-                            //neighbourdsCount = neighbourdsCount + 2;
-                            //Debug.Log(meshes[i].vertices[meshes[i].triangles[k]]);
-                            tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k]];
-                            tempArrayIndexes[tempNumber] = meshes[i].triangles[k];
-                            tempNumber++;
-                            //Debug.Log(meshes[i].vertices[meshes[i].triangles[k + 2]]);
-                            tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k + 2]];
-                            tempArrayIndexes[tempNumber] = meshes[i].triangles[k + 2];
-                            tempNumber++;
-                        }
-                        if (meshes[i].triangles[k + 2] == j)
-                        {
-                            //neighbourdsCount = neighbourdsCount + 2;
-                            //Debug.Log(meshes[i].vertices[meshes[i].triangles[k]]);
-                            tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k]];
-                            tempArrayIndexes[tempNumber] = meshes[i].triangles[k];
-                            tempNumber++;
-                            //Debug.Log(meshes[i].vertices[meshes[i].triangles[k + 1]]);
-                            tempArrayCoordinates[tempNumber] = meshes[i].vertices[meshes[i].triangles[k + 1]];
-                            tempArrayIndexes[tempNumber] = meshes[i].triangles[k + 1];
-                            tempNumber++;
-                        }
+                        //tempNearVerticesCoordinates[j] = tempArrayCoordinates;
+                        //Debug.Log("Šale esančio viršūnės:" + neighbourdsCount);
+                        tempNearVerticesIndexes[j] = tempArrayIndexes;
                     }
-                    tempNearVerticesCoordinates[j] = tempArrayCoordinates;
-                    //Debug.Log("Šale esančio viršūnės:" + neighbourdsCount);
-                    tempNearVerticesIndexes[j] = tempArrayIndexes;
+                    //meshes[i].nearVerticesCoordinates = tempNearVerticesCoordinates;
+                    meshes[i].nearVerticesIndexes = tempNearVerticesIndexes;
                 }
-                meshes[i].nearVerticesCoordinates = tempNearVerticesCoordinates;
-                meshes[i].nearVerticesIndexes = tempNearVerticesIndexes;
             }
         }
     }
@@ -233,6 +236,7 @@ public class ObjectDeformation
         }
         //float test = Vector3.Distance(meshes[meshesIndex].vertices[verticeIndex], meshes[meshesIndex].nearVerticesCoordinates[verticeIndex][0]);
         meshes[meshesIndex].vertices[verticeIndex] += normalizedImpactVelocity;
+        Game.Instance.updateCurrentScore(1);
     }
 
 
@@ -346,6 +350,8 @@ public class ObjectDeformation
                     //Debug.Log(((trasnform.InverseTransformDirection(impactVelocity)))/10);
                     //meshes[meshID].vertices[i] += ((trasnform.InverseTransformDirection(impactVelocity)) / ((maxSpeed - Mathf.Abs(currentSpeed)) + 50));
                     meshes[meshID].vertices[i] += normalizedImpactVelocity;
+                    //Debug.Log((Mathf.RoundToInt(normalizedImpactVelocity.magnitude)));
+                    Game.Instance.updateCurrentScore(1);
                     //meshes[meshID].vertices[i] += (impactVelocity / 50);
                     //float kof = (currentSpeed / maxSpeed) + 0.001F;
                     //meshes[meshID].vertices[i] += (trasnform.InverseTransformDirection(impactVelocity)) * kof/100;

@@ -127,6 +127,7 @@ public class CarControl : MonoBehaviour
         if (!Game.Instance.getInGameMenuStatus())
         {
             ui.showSpeed(car.getCarSpeed(wheelRL.radius, wheelRL.rpm));
+            ui.showScore(Game.Instance.getCurrentScore());
             ui.showInGameControls();
         }
         if (Game.Instance.getInGameMenuStatus())

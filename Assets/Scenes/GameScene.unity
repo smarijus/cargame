@@ -1439,7 +1439,7 @@ GameObject:
   - 65: {fileID: 453239044}
   - 23: {fileID: 453239043}
   m_Layer: 0
-  m_Name: Wheel
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1954,7 +1954,7 @@ GameObject:
   - 65: {fileID: 920228453}
   - 23: {fileID: 920228452}
   m_Layer: 0
-  m_Name: Wheel
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2211,7 +2211,7 @@ GameObject:
   - 65: {fileID: 1047620034}
   - 23: {fileID: 1047620033}
   m_Layer: 0
-  m_Name: Wheel
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2280,7 +2280,7 @@ GameObject:
   - 65: {fileID: 1066413045}
   - 23: {fileID: 1066413044}
   m_Layer: 0
-  m_Name: Wheel
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2349,7 +2349,7 @@ GameObject:
   - 65: {fileID: 1095807994}
   - 23: {fileID: 1095807993}
   m_Layer: 0
-  m_Name: Wheel
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2571,7 +2571,7 @@ GameObject:
   - 65: {fileID: 1168171952}
   - 23: {fileID: 1168171951}
   m_Layer: 0
-  m_Name: Wheel
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3704,7 +3704,7 @@ GameObject:
   - 65: {fileID: 1699884408}
   - 23: {fileID: 1699884407}
   m_Layer: 0
-  m_Name: Wheel
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4129,7 +4129,7 @@ GameObject:
   - 65: {fileID: 2065404044}
   - 23: {fileID: 2065404043}
   m_Layer: 0
-  m_Name: Wheel
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

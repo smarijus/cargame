@@ -23,13 +23,19 @@ public class UserInterface
     float verticalCenter = Screen.height / 2;
 
     private string userName = "";
+    public bool accurateDeformation = false;// = Game.Instance.getAccurateDeformationModeStatus();
 
     // Funkcija atvaizduoja automobilio greitį
     // Parametrai:
     //              carSpeed - automobilio greitis.
     public void showSpeed(float carSpeed)
     {
-        GUI.Label(new Rect(Screen.width / 2, Screen.height - 50, 200, 100), "Automobio greitis: " + carSpeed.ToString());
+        GUI.Label(new Rect(Screen.width / 2, (Screen.height/20), 200, 100), "Automobio greitis: " + carSpeed.ToString());
+    }
+
+    public void showScore(int score)
+    {
+        GUI.Label(new Rect(Screen.width / 2, (Screen.height / 20) * 2, 200, 100), "Dabartiniai taškai: " + score.ToString());
     }
 
     private Rect getRectanglePositionAndSizeByPercentage(int widthPosition, int heightPosition,  int buttonWidth, int buttonHeight)
@@ -63,7 +69,7 @@ public class UserInterface
         GUI.Box(new Rect(menuBoxLeftPosition, Screen.height / 20, menuBoxWidth, (Screen.height / 10) * 2), "Vartotojo paskyra: ");
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 2, menuButtonWidth, menuButtonHeight), Game.Instance.getCurrentUser()))
         {
-            Game.Instance.setMenuItem(1);
+            Game.Instance.setMenuItem(6);
             //showProfileSelection();
         }
 
@@ -84,8 +90,8 @@ public class UserInterface
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 7, menuButtonWidth, menuButtonHeight), "Pradėti žaidimą"))
         {
-            Game.Instance.setMenuItem(5);
-            //Game.Instance.loadGameScene("GameScene");
+            //Game.Instance.setMenuItem(5);
+            Game.Instance.loadGameScene("GameScene");
         }
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 9, menuButtonWidth, menuButtonHeight), "Tęsti išsaugotą žaidimą"))
@@ -133,6 +139,7 @@ public class UserInterface
             if (GUI.Button(new Rect(menuButtonLeftPosition-menuBoxLeftPosition, 0 + ( ((menuButtonHeight + (Screen.height/20)) * i)), menuButtonWidth, menuButtonHeight), accounts[i]))
             {
                 Game.Instance.loadUserProfile(accounts[i]);
+                accurateDeformation = Game.Instance.getAccurateDeformationModeStatus();
                 Game.Instance.setMenuItem(0);
             }
         }
@@ -155,9 +162,9 @@ public class UserInterface
         }
         if (Game.Instance.getCurrentUser() != null)
         {
-            if (GUI.Button(new Rect(menuButtonLeftPosition, ((Screen.height / 20) * 17), menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
+            if (GUI.Button(new Rect(menuButtonLeftPosition, ((Screen.height / 20) * 17), menuButtonWidth, menuButtonHeight), "Atgal"))
             {
-                Game.Instance.setMenuItem(0);
+                Game.Instance.setMenuItem(6);
             }
         }
         else
@@ -195,6 +202,7 @@ public class UserInterface
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 7, menuButtonWidth, menuButtonHeight), "Įkrauti iš naujo"))
         {
             //game.restartLevel();
+            Game.Instance.updateUser();
             Game.Instance.restartLevel();
         }
 
@@ -202,13 +210,16 @@ public class UserInterface
         {
             // game.returnToMainMenu();
             //Game.Instance.setMenuItem(1);
+            Game.Instance.updateUser();
+            Game.Instance.setMenuItem(0);
             Game.Instance.returnToMainMenu();
         }
 
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 11, menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
         {
            // game.returnToMainMenu();
-            //Game.Instance.setMenuItem(1);
+            Game.Instance.updateUser();
+            Game.Instance.setMenuItem(0);
             Game.Instance.returnToMainMenu();
         }
 
@@ -216,6 +227,7 @@ public class UserInterface
         if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 13, menuButtonWidth, menuButtonHeight), "Išjungti žaidimą"))
         {
             //game.quitGame();
+            Game.Instance.updateUser();
             Game.Instance.quitGame();
         }
     }
@@ -385,6 +397,69 @@ public class UserInterface
             Game.Instance.setMenuItem(0);
         }
     }
+
+
+    // Funkcija atvaizduoja informaciją apie projektą.
+    public void showProfileOptions()
+    {
+        //float horizontalCenter = Screen.width / 2;
+        //float verticalCenter = Screen.height / 2;
+
+        //float left = horizontalCenter - 200;
+        //float top = verticalCenter - 200;
+        //float width = 400;
+        //float height = 250;
+        //string[] accounts = Game.Instance.getUsersList();
+        //GUI.Box(new Rect(menuBoxLeftPosition, Screen.height / 20, menuBoxWidth, (Screen.height / 20) * 13), "Paskyrų pasirinkimo langas");
+        //int topButton = 25;
+
+
+        //scrollPosition = GUI.BeginScrollView(new Rect(menuBoxLeftPosition, (Screen.height / 20) * 3, menuBoxWidth, (Screen.height / 20) * 10), scrollPosition, new Rect(0, 0, menuBoxWidth - 20, (menuButtonHeight + Screen.height / 20) * (accounts.Length + 1)));
+        //for (int i = 0; i < accounts.Length; i++)
+        //{
+        //    if (GUI.Button(new Rect(menuButtonLeftPosition - menuBoxLeftPosition, 0 + (((menuButtonHeight + (Screen.height / 20)) * i)), menuButtonWidth, menuButtonHeight), accounts[i]))
+        //    {
+        //        Game.Instance.loadUserProfile(accounts[i]);
+        //        Game.Instance.setMenuItem(0);
+        //    }
+        //}
+        //GUI.EndScrollView();
+
+        //for (int i=0; i<accounts.Length; i++)
+        //{
+        //    if (GUI.Button(new Rect(menuButtonLeftPosition, top + (topButton + (50 * i)), menuButtonWidth, menuButtonHeight), accounts[i]))
+        //    {
+        //        Game.Instance.loadUserProfile(accounts[i]);
+        //        Game.Instance.setMenuItem(0);
+        //    }
+        //}
+        
+        GUI.Box(new Rect(menuBoxLeftPosition, Screen.height / 20, menuBoxWidth, (Screen.height / 20) * 13), "Paskyros nustatymai");
+        GUI.Box(new Rect(menuBoxLeftPosition, (Screen.height / 20) * 2, menuBoxWidth, (Screen.height / 20) * 1), "Dartinis vartotojas: " +Game.Instance.getCurrentUser());
+        accurateDeformation = GUI.Toggle(new Rect(menuBoxLeftPosition, (Screen.height / 20) * 3, menuButtonWidth, (Screen.height / 20) * 1), accurateDeformation, "Detali automobilių deformacija");
+
+        GUI.Box(new Rect(menuBoxLeftPosition, (Screen.height / 20) * 4, menuBoxWidth, (Screen.height / 20) * 1), "Geriausias vartotojo rezultatas: " + Game.Instance.getUserHigscore());
+
+        GUI.Box(new Rect(menuBoxLeftPosition, (Screen.height / 20) * 14, menuBoxWidth, (Screen.height / 20) * 6), "");
+        if (GUI.Button(new Rect(menuButtonLeftPosition, (Screen.height / 20) * 15, menuButtonWidth, menuButtonHeight), "Keisti paskyrą"))
+        {
+            Game.Instance.setMenuItem(1);
+        }
+            if (GUI.Button(new Rect(menuButtonLeftPosition, ((Screen.height / 20) * 17), menuButtonWidth, menuButtonHeight), "Grįžti į pagrindinį meniu"))
+            {
+                if (accurateDeformation)
+                {
+                    Game.Instance.enableAccurateDeformationMode();
+                }
+                else
+                {
+                    Game.Instance.disableAccurateDeformationMode();
+                }
+                Game.Instance.updateUser();
+                Game.Instance.setMenuItem(0);
+            }
+    }
+
 
     //static string[] GetWords(string input)
     //{

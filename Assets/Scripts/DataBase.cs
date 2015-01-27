@@ -72,11 +72,13 @@ public class DataBase
     // Jei vartotojų lentelė neegizstuoja, funkcija sukuria naują lentelę.
     // Parametrai:
     //              carPosition - dabartinė automobilio pozicija;
-    public User CreatePerson(string userName)
+    public User CreateUser(string userName)
     {
         var u = new User
         {
 				UserName = userName,
+                AccurateDeformation = false,
+                HighScore = 0,
 		};
         //Debug.Log("Kuriamas naujas įrašas");
         try
@@ -93,11 +95,31 @@ public class DataBase
         //Debug.Log("Sukurit nepavyko");
         _connection.CreateTable<User>();
         _connection.Insert(u);
-        Debug.Log(u);
+        //Debug.Log(u);
         //Debug.Log("Įrašas sukurtas");
 		return u;
 	}
 
+    public User getUser(string userName)
+    {
+        var user = _connection.Table<User>().Where(x => x.UserName == userName).FirstOrDefault();
+        //Debug.Log(user.AccurateDeformation);
+        return user;
+    }
+
+    public void updateUser(string userName, bool accurateDeformation, int highScore)
+    {
+        var u = getUser(userName);
+        u.AccurateDeformation = accurateDeformation;
+        u.HighScore = highScore;
+        //Debug.Log(u.AccurateDeformation);
+        //var data = _connection.Delete(u);
+        var data = _connection.Update(u);
+        //Debug.Log(data);
+        //u = getUser(userName);
+        //Debug.Log(u.AccurateDeformation);
+        //return user;
+    }
     //private bool checkIfTableExist()
     //{
     //    try

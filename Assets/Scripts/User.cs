@@ -8,6 +8,8 @@ public class User
     public int ID { get; set; }
     //[PrimaryKey]
     public string UserName { get; set; }
+    public bool AccurateDeformation { get; set; }
+    public int HighScore { get; set; }
 
     //public override string ToString()
     //{
